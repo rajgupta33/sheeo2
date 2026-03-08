@@ -433,6 +433,7 @@ body::before {
     max-width: var(--container-max);
     margin: 0 auto;
     padding: 0 24px;
+    width: 100%;
 }
 
 .max-w-md {
@@ -495,6 +496,10 @@ body::before {
     justify-content: flex-end;
 }
 
+.gap-xs {
+    gap: 8px;
+}
+
 .gap-sm {
     gap: 16px;
 }
@@ -521,6 +526,30 @@ body::before {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
+}
+
+.rounded-lg {
+    border-radius: 16px;
+}
+
+.rounded-xl {
+    border-radius: 24px;
+}
+
+.mt-xs {
+    margin-top: 8px;
+}
+
+/* ig-feed: collapse to single column on mobile */
+@media (max-width: 768px) {
+    .ig-feed.grid-3 {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .ig-post {
+        min-height: 220px;
+    }
 }
 
 .relative {
@@ -758,6 +787,12 @@ body::before {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
 }
 
+@media (max-width: 768px) {
+    .navbar {
+        padding: 14px 0;
+    }
+}
+
 .nav-content {
     display: flex;
     justify-content: space-between;
@@ -772,6 +807,8 @@ body::before {
 .brand-logo {
     height: 72px;
     border-radius: 50%;
+    max-height: 72px;
+    width: auto;
 }
 
 .logo-circle {
@@ -832,6 +869,24 @@ body::before {
     font-size: 24px;
     color: var(--text-dark-blue);
     cursor: pointer;
+    padding: 8px;
+    line-height: 1;
+}
+
+@media (max-width: 768px) {
+    .menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hidden-mobile {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: block !important;
+    }
 }
 
 /* Hero */
@@ -1144,7 +1199,11 @@ body::before {
     overflow: hidden;
 }
 
-/* Responsive Adjustments */
+/* =============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================= */
+
+/* --- Tablet & below (1024px) --- */
 @media (max-width: 1024px) {
 
     .grid-2,
@@ -1193,14 +1252,6 @@ body::before {
         align-self: flex-end;
     }
 
-    .hidden-mobile {
-        display: none !important;
-    }
-
-    .mobile-only {
-        display: block;
-    }
-
     .reasons-list {
         margin-left: 0 !important;
     }
@@ -1210,23 +1261,86 @@ body::before {
     }
 }
 
+/* --- Mobile (768px) --- */
 @media (max-width: 768px) {
+
+    /* Show hamburger, hide desktop nav */
+    .menu-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hidden-mobile {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: block !important;
+    }
+
+    /* Logo size */
+    .brand-logo {
+        height: 52px;
+    }
+
+    /* Container */
+    .container {
+        padding: 0 16px;
+    }
+
+    /* Hero */
+    .hero {
+        min-height: auto;
+        padding-top: 0;
+    }
+
     .section-title {
-        font-size: 2.2rem;
+        font-size: clamp(1.8rem, 7vw, 2.4rem);
     }
 
     .hero-title {
-        padding-top: 40px;
+        font-size: clamp(1.8rem, 8vw, 2.4rem);
+        line-height: 1.25;
+        padding-top: 24px;
     }
 
+    .hero-desc {
+        font-size: 15px;
+        padding: 0 8px;
+    }
+
+    .hero-desc br {
+        display: none;
+    }
+
+    /* Reason numbers */
     .reason-num {
         font-size: 2.5rem;
         margin-right: 16px;
         min-width: 50px;
     }
 
+    /* Founder section */
+    .founder-section .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .founder-circle-img {
+        width: 260px;
+        height: 260px;
+        margin: 0 auto;
+    }
+
+    .founder-content {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        text-align: center;
+    }
+
     .founder-greeting {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         padding-left: 0 !important;
         margin-left: 0 !important;
         text-align: center;
@@ -1238,30 +1352,105 @@ body::before {
         text-align: center;
     }
 
-    .testimo-text {
-        padding-right: 0;
+    .founder-greeting-container {
+        justify-content: center;
+        padding-left: 0 !important;
     }
 
+    .founder-content .text-dark-blue {
+        padding-left: 0 !important;
+        text-align: left;
+    }
+
+    /* Events section */
+    .events-section .flex-between {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .event-row {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 16px 0;
+    }
+
+    .event-details {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100%;
+    }
+
+    .event-meta {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .event-date {
+        min-width: unset;
+    }
+
+    .date-num {
+        font-size: 3rem;
+    }
+
+    /* Partnership section */
+    .partnership-section .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .partner-left {
+        padding-right: 0 !important;
+    }
+
+    .partner-right {
+        padding-left: 0 !important;
+    }
+
+    /* Testimonial section */
+    .testimonial-section .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .testimo-text {
+        padding-right: 0 !important;
+    }
+
+    .testimo-video {
+        padding-left: 0 !important;
+    }
+
+    .testimo-video img {
+        height: 280px !important;
+    }
+
+    /* FAQs */
     .faqs-section h2 {
         margin-left: 0 !important;
         text-align: center;
-        font-size: 2.5rem !important;
+        font-size: 2.2rem !important;
     }
 
     .accordion-header {
         font-size: 1rem;
+        padding: 16px !important;
     }
 
     .accordion-content p {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
 
+    /* Footer */
     .footer-bottom-grid {
+        grid-template-columns: 1fr !important;
         gap: 32px;
     }
 
     .contact-col {
-        padding-left: 0;
+        padding-left: 0 !important;
         text-align: left !important;
     }
 
@@ -1278,6 +1467,183 @@ body::before {
     .footer-copyright .flex {
         justify-content: center;
         width: 100%;
+    }
+
+    /* IG Slider */
+    .ig-slider-container {
+        padding: 0 40px !important;
+    }
+
+    .ig-embed-wrapper {
+        max-width: 100% !important;
+        margin: 0 auto;
+    }
+
+    /* Newsletter form */
+    .newsletter-form {
+        flex-direction: column;
+        border-radius: 16px !important;
+        overflow: hidden;
+        padding: 0 !important;
+    }
+
+    .newsletter-form input {
+        padding: 14px 16px !important;
+        width: 100%;
+    }
+
+    .newsletter-form button {
+        width: 100%;
+        border-radius: 0 0 16px 16px !important;
+        padding: 12px !important;
+    }
+
+    /* Buttons */
+    .btn-lg {
+        padding: 14px 32px;
+        font-size: 12px;
+    }
+
+    /* Spacing tweaks */
+    .py-xxl {
+        padding-top: 56px;
+        padding-bottom: 56px;
+    }
+
+    .py-xl {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    /* Footer Instagram title */
+    .site-footer h2[style] {
+        font-size: 2rem !important;
+    }
+}
+
+/* --- Small phones (480px) --- */
+@media (max-width: 480px) {
+
+    .container {
+        padding: 0 12px;
+    }
+
+    .brand-logo {
+        height: 44px;
+    }
+
+    .hero-title {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+        line-height: 1.25;
+    }
+
+    .hero-desc {
+        font-size: 14px;
+    }
+
+    .section-title {
+        font-size: clamp(1.6rem, 7vw, 2rem);
+    }
+
+    .founder-circle-img {
+        width: 220px;
+        height: 220px;
+    }
+
+    .founder-greeting {
+        font-size: 1.8rem;
+    }
+
+    .greeting-handrawn {
+        font-size: clamp(2.5rem, 8vw, 3.5rem) !important;
+    }
+
+    .cards-scene {
+        gap: 16px;
+    }
+
+    .glass-card {
+        padding: 18px 16px 16px;
+    }
+
+    .glass-badge {
+        font-size: 1.1rem;
+        padding: 4px 16px;
+    }
+
+    .accordion-header {
+        font-size: 0.9rem;
+        padding: 14px 12px !important;
+    }
+
+    .accordion-content {
+        padding: 0 12px 14px !important;
+    }
+
+    .faqs-section h2 {
+        font-size: 2rem !important;
+    }
+
+    .date-num {
+        font-size: 2.5rem;
+    }
+
+    .event-title {
+        font-size: 1.1rem !important;
+    }
+
+    .ig-slider-container {
+        padding: 0 28px !important;
+    }
+
+    .ig-slider-btn {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .btn-lg {
+        padding: 12px 24px;
+        font-size: 11px;
+    }
+
+    .py-xxl {
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+}
+
+/* --- Very small phones (375px) --- */
+@media (max-width: 375px) {
+
+    .container {
+        padding: 0 10px;
+    }
+
+    .brand-logo {
+        height: 40px;
+    }
+
+    .hero-title {
+        font-size: clamp(1.4rem, 8vw, 2rem);
+        line-height: 1.25;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .founder-circle-img {
+        width: 190px;
+        height: 190px;
+    }
+
+    .accordion-header {
+        font-size: 0.85rem;
+        padding: 12px 10px !important;
+    }
+
+    .ig-slider-container {
+        padding: 0 24px !important;
     }
 }
 
@@ -2119,8 +2485,8 @@ body::before {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 12px;
-        padding: 0;
+        gap: 24px;
+        padding: 24px 0;
     }
 
     /* Reset margins & 3D tilts for clean mobile layout */
@@ -2144,8 +2510,8 @@ body::before {
     }
 
     .circle-wrap.xl {
-        width: 240px;
-        height: 240px;
+        width: 260px;
+        height: 260px;
     }
 
     .circle-wrap.md2 {
@@ -2162,7 +2528,8 @@ body::before {
 
     .circle-wrap.xl {
         flex-basis: 100%;
-        max-width: 260px;
+        max-width: 280px;
+        margin-bottom: 24px;
         order: -1;
     }
 
@@ -2204,26 +2571,27 @@ body::before {
     }
 
     .circle-wrap.sm .stat-num {
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
 
     .circle-wrap.md .stat-num {
-        font-size: 2.4rem;
+        font-size: 2rem;
     }
 
     .circle-wrap.xl .stat-num {
-        font-size: 3rem;
+        font-size: 2.6rem;
     }
 
     .circle-wrap.md2 .stat-num {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
     }
 
     .circle-wrap.sm .stat-label,
     .circle-wrap.md .stat-label,
     .circle-wrap.xl .stat-label,
     .circle-wrap.md2 .stat-label {
-        font-size: 0.6rem;
+        font-size: 0.65rem;
+        line-height: 1.25;
     }
 }
 

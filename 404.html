@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        var path = window.location.pathname;
+        if (path.endsWith(".html")) {
+            var clean = path.replace(".html", "/");
+            window.location.replace(clean);
+        } else {
+            // Default fallback if someone actually hits a true 404 not related to .html
+            window.location.replace("/");
+        }
+    </script>
+</head>
+
+<body>
+    <p>Redirecting to the correct page...</p>
+</body>
+
+</html>

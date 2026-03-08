@@ -58,4 +58,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in-left');
     animatedElements.forEach(el => observer.observe(el));
+
+    // Google Sheets Form Submissions
+    function bindGoogleSheetForm(formId) {
+        const form = document.getElementById(formId);
+        if (!form) return;
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = 'Submitting...';
+            submitBtn.disabled = true;
+
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzCOUt2dYnlUaKUsgpjohwOBrk1sX3gO6Gd_2WH5xsPSs2pfcYxiyTPWJ4y0Ora8xQ/exec';
+
+            const payload = {
+                firstName: form.firstName ? form.firstName.value : 'N/A',
+                lastName: form.lastName ? form.lastName.value : 'N/A',
+                contact: form.contact ? form.contact.value : 'N/A',
+                message: form.message ? form.message.value : 'N/A'
+            };
+
+            fetch(scriptURL, {
+                method: 'POST',
+                body: JSON.stringify(payload)
+            })
+                .then(() => {
+                    alert('Thank you! Your submission has been received.');
+                    form.reset();
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.disabled = false;
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert('Oops! Something went wrong. Please try again.');
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+        });
+    }
+
+    bindGoogleSheetForm('partner-form');
+
+    // Bind all newsletter forms dynamically since they appear in multiple places
+    document.querySelectorAll('.newsletter-form').forEach(form => {
+        if (!form.id) form.id = 'newsletter-form-' + Math.random().toString(36).substr(2, 9);
+        bindGoogleSheetForm(form.id);
+    });
 });
