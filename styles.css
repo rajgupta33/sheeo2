@@ -2299,7 +2299,16 @@ img {
     }
 
     .ig-slider-btn {
-        display: none !important;
+        display: flex !important;
+        background-color: var(--pink-dark) !important;
+        width: 36px !important;
+        height: 36px !important;
+        opacity: 0.9 !important;
+    }
+
+    .ig-slider-btn i {
+        width: 20px !important;
+        height: 20px !important;
     }
 
     .footer-bottom-grid {
