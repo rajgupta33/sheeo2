@@ -1,4 +1,4 @@
-﻿/* 
+/* 
    SheEO — Mobile-First Redesigned CSS
    Complete rewrite with clean responsive logic
    No duplicate media queries, no conflicting rules
@@ -2538,5 +2538,130 @@ img {
     .accordion-header {
         font-size: 0.82rem;
         padding: 11px 10px !important;
+    }
+}
+
+/* ================================================
+   DIRECTORY PAGE SPECIFIC STYLES
+   ================================================ */
+
+.directory-hero {
+    overflow: hidden;
+}
+
+.directory-hero-buttons {
+    margin-top: 32px;
+}
+
+.animate-fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.glow-effect {
+    box-shadow: 0 0 30px rgba(234, 72, 118, 0.3);
+}
+
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 45px rgba(234, 72, 118, 0.2);
+}
+
+.border-gold {
+    border: 1px solid #D4AF37;
+    border-top-width: 4px;
+}
+
+.founding-five-card {
+    width: 100%;
+    max-width: 300px;
+}
+
+.filter-pill {
+    padding: 8px 24px;
+    border-radius: 999px;
+    border: 1px solid var(--pink-dark);
+    background: transparent;
+    color: var(--text-dark-blue);
+    font-family: var(--font-inter);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-pill:hover, .filter-pill.active {
+    background: var(--text-rose);
+    color: white;
+    border-color: var(--text-rose);
+}
+
+.member-card .mc-img img {
+    border-bottom: 2px solid var(--pink-light);
+}
+
+.testimonials-dir {
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(253, 232, 237, 0.9) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(253, 232, 237, 0.7) 0%, transparent 40%);
+}
+
+
+
+@media (max-width: 768px) {
+    .hero-left, .hero-right, .wj-left, .wj-right {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .directory-hero .container {
+        padding-top: 100px !important;
+    }
+    .founding-five-card {
+        max-width: 100%;
+    }
+    .directory-hero-buttons {
+        flex-direction: column;
+    }
+    .directory-hero-buttons .btn {
+        width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    .directory-hero-buttons .btn:first-child {
+        margin-bottom: 16px;
+    }
+    .search-bar-wrapper {
+        flex-direction: column;
+        border-radius: 16px;
+        padding: 16px !important;
+    }
+    .search-bar-wrapper input {
+        text-align: center;
+        margin-bottom: 12px;
+        padding: 12px 0 !important;
+    }
+    .search-bar-wrapper .btn {
+        width: 100%;
+        margin-left: 0;
+    }
+    .benefits-strip .flex {
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+    }
+    .testimonial-quote-card {
+        padding: 24px !important;
     }
 }
