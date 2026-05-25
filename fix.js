@@ -12,18 +12,8 @@ function walkDir(dir) {
         } else if (file.endsWith('.html')) {
             let content = fs.readFileSync(fullPath, 'utf8');
             
-            // Add favicon if not present
-            if (!content.includes('href="/sh-logo.jpeg"')) {
-                content = content.replace('<head>', '<head>\n    <link rel="icon" type="image/jpeg" href="/sh-logo.jpeg">');
-            }
-            
             // Replace email
-            content = content.replace(/sadhna@sheeo-summit\.com/g, 'sadhna.attitudesmm@gmail.com');
-            
-            // If it is apply-directory/index.html, fix the section headings
-            if (fullPath.includes('apply-directory') && file === 'index.html') {
-                content = content.replace(/Section (\d) — /g, 'Section $1 - ');
-            }
+            content = content.replace(/sadhna\.attitudesmm@gmail\.com/g, 'sadhna@sheeo-summit.com');
             
             fs.writeFileSync(fullPath, content, 'utf8');
         }
