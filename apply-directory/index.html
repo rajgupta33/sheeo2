@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for SheEO Business Directory</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .form-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(215,150,170,0.15);
+            border: 1px solid var(--pink-light);
+        }
+        .form-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-blue);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--pink-light);
+            padding-bottom: 0.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        .form-label {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--dark-blue);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            box-sizing: border-box;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--rose);
+            box-shadow: 0 0 0 3px rgba(225, 42, 107, 0.1);
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .radio-group input, .checkbox-group input {
+            margin-top: 0.25rem;
+            accent-color: var(--rose);
+        }
+        .conditional-field {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--pink-soft);
+            border-radius: 8px;
+            border-left: 4px solid var(--rose);
+        }
+        .form-text {
+            display: block;
+            margin-top: 0.25rem;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+        @media (max-width: 768px) {
+            .form-hero h1 {
+                font-size: 2rem !important;
+            }
+            .grid-2 {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo-container">
+                <a href="/" style="text-decoration: none;">
+                    <img src="/sh-logo.jpeg" alt="SheEO Logo" class="brand-logo"
+                        onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';">
+                    <div id="text-logo" class="fallback-logo" style="display:none;">
+                        <div class="logo-circle">
+                            <span class="logo-bold">She<span class="italic text-rose">EO</span></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="nav-links hidden-mobile">
+                <a href="/about/" class="nav-link">About</a>
+                <div class="relative group">
+                    <button class="nav-link flex align-center gap-xs cursor-pointer border-none bg-transparent"
+                        style="font-family: inherit;">Offerings <i data-lucide="chevron-down"
+                            class="icon-xs"></i></button>
+                    <div class="group-hover-block absolute top-100 left-0 bg-white shadow-pink hidden pt-sm pb-sm"
+                        style="min-width: 220px; border-radius: 12px; z-index: 50; top: 100%;">
+                        <a href="/events/"
+                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
+                            style="text-decoration:none; font-weight:600;">Events</a>
+                        <a href="/network-marketing/"
+                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
+                            style="text-decoration:none; font-weight:600;">Network Marketing</a>
+                        <a href="/group-meetups/"
+                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
+                            style="text-decoration:none; font-weight:600;">Group Meetups</a>
+                        <a href="/business-support/"
+                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
+                            style="text-decoration:none; font-weight:600;">Business Support</a>
+                        <a href="/podcast-pr/"
+                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
+                            style="text-decoration:none; font-weight:600;">Podcast & PR</a>
+                        <a href="/collaborations/"
+                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
+                            style="text-decoration:none; font-weight:600;">Collaborations</a>
+                    </div>
+                </div>
+                <a href="/business-support/" class="nav-link">Business Support</a>
+                <a href="/directory/" class="nav-link">Business Directory</a>
+                <a href="/connect-with-us/" class="btn btn-primary btn-sm rounded-pill">Join Us</a>
+            </div>
+
+            <button id="mobile-menu-btn" class="menu-btn mobile-only">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden">
+            <div class="mobile-menu-content bg-cream px-lg py-xl text-center"
+                style="max-height: 90vh; overflow-y: auto;">
+                <a href="/about/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">About</a>
+                <a href="/events/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">Events</a>
+                <a href="/network-marketing/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">Network Marketing</a>
+                <a href="/group-meetups/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">Group Meetups</a>
+                <a href="/business-support/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">Business Support</a>
+                <a href="/podcast-pr/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">Podcast & PR</a>
+                <a href="/collaborations/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">Collaborations</a>
+                <a href="/directory/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">Business Directory</a>
+                <a href="/connect-with-us/" class="btn btn-primary-pink btn-lg rounded-pill mt-lg w-100">Join Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Form Header -->
+    <section class="form-hero bg-pink-soft pb-xl pt-xxl text-center border-b border-pink-dark">
+        <div class="container max-w-lg mx-auto pt-xl">
+            <h1 class="font-playfair text-4xl uppercase text-dark-blue mb-sm">Become Part of The SheEO Business Ecosystem</h1>
+            <p class="text-dark-blue font-inter text-md line-height-relaxed max-w-md mx-auto">
+                Complete the application below to showcase your business, grow your visibility, and connect with a powerful network of women entrepreneurs.
+            </p>
+        </div>
+    </section>
+
+    <!-- Application Form -->
+    <section class="py-xl bg-cream">
+        <div class="container max-w-md mx-auto">
+            <form action="https://script.google.com/macros/s/AKfycbyoJo5toQyo9-88osQ5iE0spt0ek51HwpEi2V6STUstduLQHMAtmfqVAZIktqX2RuAVEw/exec" method="POST" id="applicationForm">
+                <!-- SECTION 1 -->
+                <div class="form-section">
+                    <h3>Section 1 — Personal Details</h3>
+                    <div class="grid-2 gap-md">
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label class="form-label">Full Name *</label>
+                            <input type="text" class="form-control" name="Full_Name" required>
+                        </div>
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" name="Email_Address" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Mobile Number (with country code) *</label>
+                            <input type="tel" class="form-control" name="Mobile_Number" required>
+                        </div>
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label class="form-label">WhatsApp Number *</label>
+                            <input type="tel" class="form-control" name="WhatsApp_Number" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Current City *</label>
+                            <input type="text" class="form-control" name="Current_City" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2 -->
+                <div class="form-section">
+                    <h3>Section 2 — Business Details</h3>
+                    <div class="grid-2 gap-md">
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label class="form-label">Business Name</label>
+                            <input type="text" class="form-control" name="Business_Name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Business Category</label>
+                            <select class="form-control" name="Business_Category">
+                                <option value="" disabled selected>Select Category</option>
+                                <option>Coaching</option>
+                                <option>Business Consulting</option>
+                                <option>Marketing</option>
+                                <option>Real Estate</option>
+                                <option>Wellness</option>
+                                <option>Beauty</option>
+                                <option>Photography</option>
+                                <option>Events</option>
+                                <option>Finance</option>
+                                <option>Technology</option>
+                                <option>Art</option>
+                                <option>Fashion</option>
+                                <option>Education</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Business Website</label>
+                            <input type="url" class="form-control" name="Business_Website">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 3 -->
+                <div class="form-section">
+                    <h3>Section 3 — Business Profile</h3>
+                    <div class="form-group">
+                        <label class="form-label">Tell us about your business</label>
+                        <span class="form-text mb-sm">Describe your business in 100–250 words.</span>
+                        <textarea class="form-control" rows="4" name="Business_Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Services Offered</label>
+                        <textarea class="form-control" rows="3" placeholder="Business coaching, branding strategy, workshops..." name="Services_Offered"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Years in Business</label>
+                        <select class="form-control" name="Years_in_Business">
+                            <option value="" disabled selected>Select Duration</option>
+                            <option>Less than 1 year</option>
+                            <option>1–3 years</option>
+                            <option>3–5 years</option>
+                            <option>5+ years</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- SECTION 4 -->
+                <div class="form-section">
+                    <h3>Section 4 — Social Presence</h3>
+                    <div class="form-group">
+                        <label class="form-label">Instagram / LinkedIn URL</label>
+                        <input type="url" class="form-control" placeholder="https://..." name="Social_URL">
+                    </div>
+                </div>
+
+                <!-- SECTION 5 -->
+                <div class="form-section">
+                    <h3>Section 5 — Community Benefits</h3>
+                    <div class="form-group">
+                        <label class="form-label">Which opportunities are you interested in?</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="Community_Benefits" id="opp_referrals" value="Client Referrals">
+                            <label for="opp_referrals" class="text-dark-blue font-inter">Client Referrals</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="Community_Benefits" id="opp_events" value="Networking Events">
+                            <label for="opp_events" class="text-dark-blue font-inter">Networking Events</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="Community_Benefits" id="opp_social" value="Social Media Promotion">
+                            <label for="opp_social" class="text-dark-blue font-inter">Social Media Promotion</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="Community_Benefits" id="opp_podcast" value="Podcast Features">
+                            <label for="opp_podcast" class="text-dark-blue font-inter">Podcast Features</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="Community_Benefits" id="opp_collab" value="Collaboration Opportunities">
+                            <label for="opp_collab" class="text-dark-blue font-inter">Collaboration Opportunities</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="Community_Benefits" id="opp_sponsor" value="Sponsorship Opportunities">
+                            <label for="opp_sponsor" class="text-dark-blue font-inter">Sponsorship Opportunities</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="Community_Benefits" id="opp_speaking" value="Speaking Opportunities">
+                            <label for="opp_speaking" class="text-dark-blue font-inter">Speaking Opportunities</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 6 -->
+                <div class="form-section">
+                    <h3>Section 6 — Member Benefit Section</h3>
+                    <div class="form-group">
+                        <label class="form-label">As a preferred SheEO business member, are you willing to offer a special member benefit (10–15%) to fellow community members?</label>
+                        <div class="radio-group">
+                            <input type="radio" name="Member_Benefit" id="benefit_yes" value="Yes" onchange="toggleBenefitField(true)">
+                            <label for="benefit_yes" class="text-dark-blue font-inter">Yes</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="Member_Benefit" id="benefit_no" value="No" onchange="toggleBenefitField(false)">
+                            <label for="benefit_no" class="text-dark-blue font-inter">No</label>
+                        </div>
+                    </div>
+                    <div class="form-group conditional-field" id="benefit_description_field">
+                        <label class="form-label">Describe your offer</label>
+                        <textarea class="form-control" name="Benefit_Description" rows="2" placeholder="15% discount on branding packages."></textarea>
+                    </div>
+                </div>
+
+                <!-- SECTION 7 -->
+                <div class="form-section">
+                    <h3>Section 7 — Agreement</h3>
+                    <div class="form-group mb-0">
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="Agreement" id="agree_terms" value="Confirmed" required>
+                            <label for="agree_terms" class="text-dark-blue font-inter">I confirm the information is accurate, understand listings are subject to review, and agree to be contacted.</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-pink-soft p-md rounded-lg border border-pink-dark text-center mb-xl">
+                    <p class="text-dark-blue font-inter font-bold text-sm line-height-relaxed">After filling this form you will be redirected to WhatsApp for <span style="color: var(--rose); text-decoration: underline; font-weight: 800;">professional photo and trade/business license and documents upload.</span></p>
+                </div>
+
+                <div class="text-center mt-xl">
+                    <button type="submit" class="btn btn-primary-pink btn-lg rounded-pill shadow-pink uppercase tracking-wide font-bold" style="padding: 20px 48px; font-size:14px;">
+                        Submit Details & Send Licence and Professional Headshot on WhatsApp
+                    </button>
+                    <p class="text-dark-blue text-sm mt-md font-bold opacity-80">Applications are reviewed within 48–72 hours.</p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Global Footer -->
+    <footer class="site-footer bg-cream">
+        <!-- Small Luxury Footer Block -->
+        <div class="bg-pink-soft py-xl text-center border-b border-pink-light">
+            <div class="container max-w-lg mx-auto">
+                <i data-lucide="heart" class="text-rose icon-sm mb-sm"></i>
+                <h4 class="font-playfair text-xl text-dark-blue mb-xs">Built With Vision By SheEO Summit</h4>
+                <p class="text-rose text-xs uppercase tracking-wide font-bold">Empowering Women Through Visibility, Community & Collaboration.</p>
+            </div>
+        </div>
+
+        <div class="container text-center pt-xl mb-xl">
+            <p class="text-xs uppercase tracking-wide text-dark-blue font-bold mb-xs">Find us on IG</p>
+            <h2 class="font-playfair text-dark-blue mb-lg" style="font-size:3rem;"><a
+                    href="https://www.instagram.com/sheeosummit2025/" target="_blank"
+                    style="text-decoration:none; color:inherit;">@<span class="text-rose">SHEEOSUMMIT</span>2025</a>
+            </h2>
+
+            <div
+                class="footer-bottom-grid grid-2 text-left mt-xl pt-xl border-t border-pink-dark gap-md max-w-lg mx-auto">
+                <div class="newsletter-col">
+                    <h4 class="text-dark-blue font-inter font-bold text-lg mb-sm pr-md">Become A Member</h4>
+                    <a href="https://www.whatsapp.com/channel/0029VbBqRXi8V0twOPec2e3d" target="_blank"
+                        class="btn btn-primary-pink rounded-pill px-xl py-md font-bold tracking-wide mt-md inline-flex align-center gap-xs text-md"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-message-circle">
+                            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+                        </svg> Join our community</a>
+                </div>
+                <div class="contact-col pl-xl text-right">
+                    <h4 class="text-dark-blue font-inter font-bold text-md mb-sm">Still have a question?<br><a
+                            href="/connect-with-us/" class="text-rose hover-text-dark"
+                            style="text-decoration:none;">Contact Us!</a></h4>
+                    <div class="flex-center text-dark-blue justify-end mt-sm gap-md">
+                        <a href="mailto:sadhna.attitudesmm@gmail.com"
+                            class="text-rose text-sm font-bold hover-text-dark"
+                            style="text-decoration:none;">sadhna.attitudesmm@gmail.com</a>
+                        <a href="tel:+971507091969" class="text-rose text-sm font-bold hover-text-dark"
+                            style="text-decoration:none;">+971 50 7091969</a>
+                    </div>
+                    <div class="flex-center text-dark-blue justify-end mt-sm gap-md">
+                        <a href="https://www.instagram.com/sheeosummit2025/" target="_blank"
+                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="Instagram"><i
+                                data-lucide="instagram" class="icon-sm"></i></a>
+                        <a href="https://www.facebook.com/sadhnarishisharma/" target="_blank"
+                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="Facebook"><i
+                                data-lucide="facebook" class="icon-sm"></i></a>
+                        <a href="https://www.linkedin.com/in/sadhna-sharma-8767b817/" target="_blank"
+                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="LinkedIn"><i
+                                data-lucide="linkedin" class="icon-sm"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone=+971507091969" target="_blank"
+                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="WhatsApp">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-message-circle">
+                                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="footer-copyright flex-between text-xs text-dark-blue font-bold font-inter mt-xl pt-lg border-t border-pink-dark">
+                <div class="flex gap-lg">
+                    <a href="/privacy-policy/" class="hover-text-rose uppercase tracking-wide"
+                        style="text-decoration:none; color:inherit;">Privacy Policy</a>
+                    <a href="/terms-and-conditions/" class="hover-text-rose uppercase tracking-wide"
+                        style="text-decoration:none; color:inherit;">Terms & Conditions</a>
+                    <a href="/Business_License.pdf" target="_blank" class="hover-text-rose uppercase tracking-wide"
+                        style="text-decoration:none; color:inherit;">Business License</a>
+                </div>
+                <div class="tracking-wide">© 2026 SHEEO BUSINESS NETWORK DUBAI.<br>ALL RIGHTS RESERVED</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Icons
+            lucide.createIcons();
+
+            // Mobile Menu
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            if (btn && menu) {
+                btn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                });
+            }
+
+            // Navbar Scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+            
+            // Check URL params for pre-selecting type
+            const urlParams = new URLSearchParams(window.location.search);
+            const type = urlParams.get('type');
+            if (type === 'membership') {
+                // Feature removed
+            }
+
+            // Form Submission
+            const form = document.getElementById('applicationForm');
+            if (form) {
+                form.addEventListener('submit', e => {
+                    e.preventDefault();
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.textContent;
+                    submitBtn.textContent = 'Submitting...';
+                    submitBtn.disabled = true;
+
+                    const formData = new FormData(form);
+                    const searchParams = new URLSearchParams();
+                    for (const [key, value] of formData.entries()) {
+                        searchParams.append(key, value);
+                    }
+
+                    fetch(form.action, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body: searchParams
+                    })
+                    .then(() => {
+                        window.location.href = 'https://wa.me/971507091969?text=Hi%2C%20I%20have%20submitted%20my%20SheEO%20Business%20Directory%20Application.%20Here%20are%20my%20documents%3A';
+                    })
+                    .catch(error => {
+                        console.error('Error submitting form', error);
+                        alert('Something went wrong. Please try again.');
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    });
+                });
+            }
+        });
+
+        function toggleBenefitField(show) {
+            document.getElementById('benefit_description_field').style.display = show ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
