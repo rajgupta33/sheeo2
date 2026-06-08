@@ -887,6 +887,14 @@ img {
     display: none;
     align-items: center;
     justify-content: center;
+    z-index: 1005;
+    position: relative;
+}
+
+.menu-btn svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--text-dark-blue) !important;
 }
 
 /* Mobile Menu */
