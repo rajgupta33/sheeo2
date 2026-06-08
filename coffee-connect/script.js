@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize icons immediately
+    if (typeof lucide !== 'undefined') lucide.createIcons();
     
     // 1. Navbar & Mobile Menu Logic
     const navbar = document.querySelector('.navbar');
