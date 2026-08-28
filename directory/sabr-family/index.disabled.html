@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SABR Family | SheEO Premium Directory Profile</title>
+    <!-- Standard SheEO CSS for base nav/footer overrides if needed -->
+    <link rel="stylesheet" href="/styles.css">
+    
+    <!-- Luxury Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Scoped CSS for the SABR Luxury Editorial */
+        :root {
+            --lux-ivory: #FAF8F4;
+            --lux-beige: #F3EEE7;
+            --lux-stone: #D7CBBE;
+            --lux-charcoal: #111111;
+            --lux-pink: #F55B9B;
+            --lux-head: 'Cormorant Garamond', serif;
+            --lux-body: 'Inter', sans-serif;
+        }
+
+        body.lux-editorial {
+            background-color: var(--lux-ivory);
+            color: var(--lux-charcoal);
+            font-family: var(--lux-body);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .lux-editorial h1, .lux-editorial h2, .lux-editorial h3, .lux-editorial h4 {
+            font-family: var(--lux-head);
+            font-weight: 400;
+        }
+
+        /* Glassmorphism Navbar Override (active on this page) */
+        .lux-editorial .navbar {
+            background: rgba(250, 248, 244, 0.7) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border-bottom: 1px solid rgba(17, 17, 17, 0.05) !important;
+            height: 70px !important;
+            transition: all 0.3s ease;
+            box-shadow: none !important;
+        }
+        .lux-editorial .navbar .nav-link,
+        .lux-editorial .navbar .logo-bold {
+            color: var(--lux-charcoal) !important;
+        }
+        
+        .lux-editorial .menu-btn {
+            color: var(--lux-charcoal) !important;
+        }
+
+        /* Hero */
+        .lux-hero {
+            position: relative;
+            height: 100vh;
+            min-height: 800px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--lux-charcoal);
+        }
+        .lux-hero-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('assets/sabr_banner.png') center/cover;
+            opacity: 0.8;
+            transform: scale(1.05);
+            transition: transform 0.5s ease-out;
+            will-change: transform;
+        }
+        .lux-hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: var(--lux-ivory);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 80%;
+            padding: 6rem 2rem 4rem;
+        }
+        .lux-badge-premium {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            border: 1px solid rgba(250, 248, 244, 0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+        }
+        .lux-hero-center h1 {
+            font-size: clamp(4rem, 10vw, 8rem);
+            line-height: 1;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+        .lux-hero-center h2 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-style: italic;
+            opacity: 0.9;
+        }
+        .lux-hero-bottom {
+            max-width: 400px;
+        }
+        .lux-hero-bottom p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .lux-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--lux-pink);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(245, 91, 155, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+        .lux-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(245, 91, 155, 0.4);
+            color: white;
+        }
+
+        /* Utilities */
+        .fade-up { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .lux-section { padding: 8rem 10vw; }
+
+        /* About Asymmetrical */
+        .lux-about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            background-color: var(--lux-ivory);
+        }
+        .lux-about-text h3 { font-size: clamp(3rem, 5vw, 5rem); line-height: 1.1; margin-bottom: 2rem; }
+        .lux-about-text p { font-size: 1.25rem; line-height: 1.8; color: #444; }
+        .lux-about-img-container { width: 100%; aspect-ratio: 4/5; overflow: hidden; border-radius: 24px; }
+        .lux-img-hover { width: 100%; height: 100%; object-fit: cover; transition: transform 1.5s ease; }
+        .lux-about-img-container:hover .lux-img-hover { transform: scale(1.03); }
+
+        /* Premium Chips */
+        .lux-chips-container { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; padding: 4rem 10vw; background: var(--lux-beige); }
+        .lux-chip { font-family: var(--lux-body); font-size: 0.9rem; letter-spacing: 0.05em; padding: 0.8rem 1.5rem; border-radius: 50px; background: transparent; border: 1px solid var(--lux-stone); color: var(--lux-charcoal); }
+
+        /* Magazine Gallery */
+        .lux-gallery { padding: 8rem 10vw; background: var(--lux-ivory); }
+        .lux-gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem; }
+        .lux-gal-item { position: relative; overflow: hidden; border-radius: 24px; cursor: pointer; }
+        .lux-gal-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
+        .lux-gal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.5s ease; color: white; }
+        .lux-gal-item:hover img { transform: scale(1.03); }
+        .lux-gal-item:hover .lux-gal-overlay { opacity: 1; }
+        .lux-gal-overlay h4 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .lux-gal-overlay span { font-family: var(--lux-body); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.5rem; }
+        
+        .gal-large { grid-column: span 7; aspect-ratio: 4/5; }
+        .gal-small { grid-column: span 5; aspect-ratio: 3/4; align-self: end; }
+        .gal-wide { grid-column: span 12; aspect-ratio: 21/9; margin-top: 2rem; }
+
+        /* Why SheEO Loves */
+        .lux-quote-section { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding: 8rem 10vw; background: var(--lux-beige); align-items: center; }
+        .lux-quote { font-size: clamp(3rem, 5vw, 4.5rem); line-height: 1.2; position: relative; z-index: 1; }
+        .lux-quote::before { content: '"'; position: absolute; left: -3rem; top: -2rem; font-size: 8rem; color: var(--lux-stone); opacity: 0.3; z-index: -1; }
+        .lux-quote-p { font-size: 1.1rem; line-height: 1.8; color: #555; }
+
+        /* Apple Specs Benefits */
+        .lux-specs { padding: 8rem 10vw; max-width: 800px; margin: 0 auto; background: var(--lux-ivory); }
+        .lux-specs h3 { font-size: 2.5rem; margin-bottom: 4rem; text-align: center; }
+        .spec-row { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 0; border-bottom: 1px solid var(--lux-stone); }
+        .spec-row:last-child { border-bottom: none; }
+        .spec-title { font-family: var(--lux-head); font-size: 1.5rem; }
+        .spec-icon { color: var(--lux-pink); }
+
+        /* Social / Instagram Alternative */
+        .lux-social { padding: 8rem 10vw; background: var(--lux-beige); }
+        .lux-social h3 { font-size: 2.5rem; text-align: center; margin-bottom: 4rem; }
+        .lux-social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .lux-social-card { border-radius: 24px; overflow: hidden; position: relative; aspect-ratio: 1/1; cursor: pointer; }
+        .lux-social-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
+        .lux-social-card:hover img { transform: scale(1.05); }
+        .lux-social-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.5s ease; color: white; }
+        .lux-social-card:hover .lux-social-overlay { opacity: 1; }
+
+        /* CTA */
+        .lux-cta { padding: 10rem 10vw; text-align: center; background: var(--lux-charcoal); color: var(--lux-ivory); }
+        .lux-cta h2 { font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 1rem; }
+        .lux-cta p { font-family: var(--lux-body); font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.8; }
+        .lux-cta-sub { display: block; margin-top: 1.5rem; font-size: 0.8rem; color: var(--lux-stone); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; }
+        .lux-cta-sub:hover { color: var(--lux-ivory); }
+
+        /* Swipe hint + sticky bar — mobile only, hidden by default */
+        .lux-swipe-hint { display: none; }
+        .lux-sticky-cta { display: none; }
+
+        @keyframes luxScrollCue {
+            0%   { transform: translateY(0); opacity: 0; }
+            30%  { opacity: 1; }
+            100% { transform: translateY(14px); opacity: 0; }
+        }
+
+        /* ═══════════════════════════════════════════════
+           MOBILE — PREMIUM LAYER (≤ 768px)
+           ═══════════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            .lux-section { padding: 5rem 1.5rem; }
+
+            /* ── HERO ────────────────────────────────── */
+            .lux-hero {
+                height: auto;
+                min-height: calc(100vh - 72px);
+                min-height: calc(100svh - 72px);
+            }
+
+            .lux-hero-img {
+                background-position: 50% 30%;
+                transform: scale(1.05) !important;   /* parallax off on touch */
+            }
+
+            /* Cinematic scrim so the type always reads */
+            .lux-hero::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                z-index: 5;
+                background: linear-gradient(to bottom,
+                    rgba(17, 17, 17, 0.55) 0%,
+                    rgba(17, 17, 17, 0.18) 32%,
+                    rgba(17, 17, 17, 0.72) 74%,
+                    rgba(17, 17, 17, 0.94) 100%);
+                pointer-events: none;
+            }
+
+            .lux-hero-content {
+                height: auto;
+                justify-content: center;
+                gap: 2rem;
+                padding: 92px 1.5rem 104px;
+                width: 100%;
+            }
+
+            .lux-badge-premium {
+                font-size: 0.6rem;
+                letter-spacing: 0.24em;
+                padding: 0.45rem 1.1rem;
+                border-color: rgba(250, 248, 244, 0.45);
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+            }
+
+            .lux-hero-center h1 {
+                font-size: clamp(2.6rem, 12.2vw, 5rem);
+                line-height: 0.98;
+                letter-spacing: 0.04em;
+                margin-bottom: 0.75rem;
+                text-shadow: 0 2px 30px rgba(0, 0, 0, 0.4);
+            }
+
+            .lux-hero-center h2 {
+                position: relative;
+                font-size: clamp(1.15rem, 5.2vw, 1.9rem);
+                padding-top: 1.25rem;
+            }
+
+            .lux-hero-center h2::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 42px;
+                height: 1px;
+                background: var(--lux-pink);
+            }
+
+            .lux-hero-bottom {
+                max-width: 320px;
+                width: 100%;
+            }
+
+            .lux-hero-bottom p {
+                font-size: 0.95rem;
+                line-height: 1.7;
+                margin-bottom: 1.5rem;
+            }
+
+            .lux-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                min-height: 54px;
+                padding: 0.95rem 1.5rem;
+                font-size: 0.75rem;
+                letter-spacing: 0.12em;
+                background: linear-gradient(135deg, #F76FA9 0%, #E8407F 100%);
+                box-shadow: 0 10px 28px rgba(245, 91, 155, 0.38);
+            }
+
+            /* Animated scroll cue */
+            .lux-hero::after {
+                content: '';
+                position: absolute;
+                left: 50%;
+                bottom: 44px;
+                width: 1px;
+                height: 24px;
+                margin-left: -0.5px;
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), transparent);
+                animation: luxScrollCue 2.2s ease-in-out infinite;
+                z-index: 11;
+                pointer-events: none;
+            }
+
+            /* ── ABOUT ───────────────────────────────── */
+            .lux-about {
+                grid-template-columns: 1fr;
+                gap: 2.25rem;
+                padding: 4.5rem 1.5rem;
+            }
+
+            .lux-about-text h3 {
+                font-size: clamp(2rem, 8.6vw, 2.9rem);
+                line-height: 1.12;
+                margin-bottom: 1.25rem;
+            }
+
+            .lux-about-text p {
+                font-size: 1.02rem;
+                line-height: 1.8;
+            }
+
+            .lux-about-img-container {
+                border-radius: 20px;
+                box-shadow: 0 18px 44px rgba(17, 17, 17, 0.14);
+            }
+
+            /* ── CHIPS ───────────────────────────────── */
+            .lux-chips-container {
+                gap: 0.55rem;
+                padding: 2.75rem 1.25rem;
+            }
+
+            .lux-chip {
+                font-size: 0.68rem;
+                font-weight: 500;
+                letter-spacing: 0.09em;
+                text-transform: uppercase;
+                padding: 0.55rem 1rem;
+                background: rgba(255, 255, 255, 0.6);
+                border-color: rgba(17, 17, 17, 0.12);
+            }
+
+            /* ── GALLERY — snap carousel ─────────────── */
+            .lux-gallery { padding: 4.5rem 0 4rem; }
+
+            .lux-gallery-grid {
+                display: flex;
+                grid-template-columns: none;
+                gap: 0.85rem;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding: 0 1.5rem;
+            }
+
+            .lux-gallery-grid::-webkit-scrollbar { display: none; }
+
+            .gal-large, .gal-small, .gal-wide {
+                grid-column: auto;
+                flex: 0 0 78%;
+                aspect-ratio: 3/4;
+                margin-top: 0;
+                align-self: auto;
+                border-radius: 20px;
+                box-shadow: 0 18px 40px rgba(17, 17, 17, 0.16);
+                scroll-snap-align: center;
+            }
+
+            /* Overlays must be visible — there is no hover on touch */
+            .lux-gal-overlay {
+                opacity: 1;
+                background: linear-gradient(to top,
+                    rgba(0, 0, 0, 0.78) 0%,
+                    rgba(0, 0, 0, 0.12) 52%,
+                    transparent 100%);
+                align-items: flex-start;
+                justify-content: flex-end;
+                padding: 1.4rem;
+                text-align: left;
+            }
+
+            .lux-gal-overlay h4 { font-size: 1.5rem; margin-bottom: 0.35rem; }
+            .lux-gal-overlay span { font-size: 0.66rem; letter-spacing: 0.14em; opacity: 0.85; }
+
+            .lux-swipe-hint {
+                display: block;
+                margin: 1.5rem 1.5rem 0;
+                text-align: center;
+                font-family: var(--lux-body);
+                font-size: 0.62rem;
+                font-weight: 600;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--lux-pink);
+                opacity: 0.8;
+            }
+
+            /* ── QUOTE ───────────────────────────────── */
+            .lux-quote-section {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 4.5rem 1.5rem;
+            }
+
+            .lux-quote {
+                font-size: clamp(1.9rem, 8.4vw, 2.8rem);
+                line-height: 1.18;
+            }
+
+            .lux-quote::before {
+                left: -0.25rem;
+                top: -2rem;
+                font-size: 5rem;
+                opacity: 0.4;
+            }
+
+            .lux-quote-p { font-size: 1rem; line-height: 1.85; }
+
+            /* ── SPECS ───────────────────────────────── */
+            .lux-specs { padding: 4.5rem 1.5rem; }
+
+            .lux-specs h3 {
+                font-size: clamp(1.85rem, 8vw, 2.5rem);
+                margin-bottom: 2.25rem;
+            }
+
+            .lux-specs h3::after {
+                content: '';
+                display: block;
+                width: 40px;
+                height: 2px;
+                margin: 1rem auto 0;
+                border-radius: 2px;
+                background: var(--lux-pink);
+            }
+
+            .spec-row { padding: 1.15rem 0; }
+            .spec-title { font-size: 1.25rem; }
+
+            .spec-icon {
+                flex: 0 0 auto;
+                width: 26px;
+                height: 26px;
+                padding: 5px;
+                border-radius: 50%;
+                background: rgba(245, 91, 155, 0.1);
+            }
+
+            /* ── SOCIAL — magazine mosaic ────────────── */
+            .lux-social { padding: 4.5rem 1.5rem; }
+
+            .lux-social h3 {
+                font-size: clamp(1.85rem, 8vw, 2.5rem);
+                margin-bottom: 2.25rem;
+            }
+
+            .lux-social-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.85rem;
+            }
+
+            .lux-social-card {
+                border-radius: 18px;
+                box-shadow: 0 14px 32px rgba(17, 17, 17, 0.12);
+            }
+
+            .lux-social-card:first-child {
+                grid-column: span 2;
+                aspect-ratio: 4/3;
+            }
+
+            /* Always-on label instead of a hover overlay */
+            .lux-social-overlay {
+                opacity: 1;
+                background: linear-gradient(to top,
+                    rgba(0, 0, 0, 0.62) 0%,
+                    rgba(0, 0, 0, 0.05) 55%,
+                    transparent 100%);
+                justify-content: flex-end;
+                padding: 0.9rem;
+            }
+
+            .lux-social-overlay span { font-size: 0.58rem !important; letter-spacing: 0.12em !important; }
+
+            /* ── CTA ─────────────────────────────────── */
+            .lux-cta { padding: 5rem 1.5rem; }
+
+            .lux-cta h2 {
+                font-size: clamp(2.1rem, 9.5vw, 3.2rem);
+                line-height: 1.1;
+            }
+
+            .lux-cta p {
+                font-size: 1rem;
+                margin-bottom: 2.25rem;
+            }
+
+            .lux-cta .lux-btn {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .lux-cta-sub {
+                display: inline-block;
+                margin-top: 1.25rem;
+                padding: 0.85rem 1rem;
+                font-size: 0.66rem;
+            }
+
+            /* ── STICKY BRAND BAR ────────────────────── */
+            .lux-sticky-cta {
+                display: flex;
+                align-items: center;
+                gap: 0.85rem;
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 900;
+                padding: 0.7rem 1rem;
+                padding-bottom: calc(0.7rem + env(safe-area-inset-bottom, 0px));
+                background: rgba(250, 248, 244, 0.95);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                border-top: 1px solid rgba(17, 17, 17, 0.08);
+                box-shadow: 0 -8px 28px rgba(17, 17, 17, 0.08);
+            }
+
+            .lux-sticky-info {
+                display: flex;
+                flex-direction: column;
+                line-height: 1.25;
+                flex: 0 0 auto;
+            }
+
+            .lux-sticky-label {
+                font-size: 0.54rem;
+                font-weight: 600;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                color: var(--lux-pink);
+            }
+
+            .lux-sticky-name {
+                font-family: var(--lux-head);
+                font-size: 1.2rem;
+                letter-spacing: 0.04em;
+                color: var(--lux-charcoal);
+            }
+
+            .lux-sticky-cta .lux-btn {
+                flex: 1 1 auto;
+                width: auto;
+                min-height: 46px;
+                padding: 0.7rem 1rem;
+                font-size: 0.7rem;
+            }
+
+            /* Keep the WhatsApp bubble clear of the bar */
+            .whatsapp-float {
+                bottom: calc(86px + env(safe-area-inset-bottom, 0px)) !important;
+            }
+
+            /* Shared footer: the inline 3rem IG handle overflows narrow phones */
+            .site-footer h2.font-playfair {
+                font-size: clamp(1.5rem, 8vw, 3rem) !important;
+                line-height: 1.15;
+            }
+
+            body.lux-editorial {
+                padding-bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+            }
+        }
+
+        /* ═══════════════════════════════════════════════
+           SMALL PHONES (≤ 360px)
+           ═══════════════════════════════════════════════ */
+        @media (max-width: 360px) {
+            .lux-section { padding: 4rem 1.15rem; }
+            .lux-hero-content { padding: 84px 1.15rem 96px; gap: 1.5rem; }
+            .lux-hero-bottom p { font-size: 0.9rem; }
+            .lux-btn { font-size: 0.68rem; min-height: 50px; }
+            .lux-chip { font-size: 0.62rem; padding: 0.5rem 0.85rem; }
+            .gal-large, .gal-small, .gal-wide { flex-basis: 82%; }
+            .spec-title { font-size: 1.1rem; }
+            .lux-sticky-name { font-size: 1.05rem; }
+            .lux-sticky-cta .lux-btn { font-size: 0.64rem; }
+        }
+    </style>
+</head>
+<body class="lux-editorial">
+<nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo-container">
+                <a href="/" style="text-decoration: none;">
+                    <img src="/sh-logo.jpeg" alt="SheEO Logo" class="brand-logo"
+                        onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';">
+                </a>
+                <div id="text-logo" class="fallback-logo" style="display:none;">
+                    <div class="logo-circle">
+                        <span class="logo-bold">She<span class="italic text-rose">EO</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-links hidden-mobile">
+                <a href="/about/" class="nav-link">About</a>
+                <div class="relative group">
+                    <button class="nav-link flex align-center gap-xs cursor-pointer border-none bg-transparent"
+                        style="font-family: inherit;">Offerings <i data-lucide="chevron-down"
+                            class="icon-xs"></i></button>
+                    <div class="group-hover-block absolute top-100 left-0 bg-white shadow-pink hidden pt-sm pb-sm"
+                        style="min-width: 220px; border-radius: 12px; z-index: 50; top: 100%;">
+                        <a href="/events/"
+                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
+                            style="text-decoration:none; font-weight:600;">Events</a>
+                        <a href="/network-marketing/"
+                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
+                            style="text-decoration:none; font-weight:600;">Network Marketing</a>
+                        <a href="/group-meetups/"
+                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
+                            style="text-decoration:none; font-weight:600;">Group Meetups</a>
+                        <a href="/business-support/"
+                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
+                            style="text-decoration:none; font-weight:600;">Business Support</a>
+                        <a href="/podcast-pr/"
+                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
+                            style="text-decoration:none; font-weight:600;">Podcast & PR</a>
+                        <a href="/collaborations/"
+                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
+                            style="text-decoration:none; font-weight:600;">Collaborations</a>
+                    </div>
+                </div>
+                <a href="/business-support/" class="nav-link">Business Support</a>
+                <a href="/directory/" class="nav-link">Business Directory</a>
+                <a href="#join" class="btn btn-primary btn-sm rounded-pill">Join Us</a>
+            </div>
+
+            <button id="mobile-menu-btn" class="menu-btn mobile-only">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden">
+            <div class="mobile-menu-content bg-cream px-lg py-xl text-center"
+                style="max-height: 90vh; overflow-y: auto;">
+                <a href="/about/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">About</a>
+                <a href="/events/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">Events</a>
+                <a href="/network-marketing/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">Network Marketing</a>
+                <a href="/group-meetups/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">Group Meetups</a>
+                <a href="/business-support/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">Business Support</a>
+                <a href="/podcast-pr/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">Podcast & PR</a>
+                <a href="/collaborations/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">Collaborations</a>
+                <a href="/directory/"
+                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
+                    style="text-decoration:none;">Business Directory</a>
+                <a href="#join" class="btn btn-primary-pink btn-lg rounded-pill mt-lg w-100">Join Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="lux-hero">
+        <div class="lux-hero-img" id="parallax-bg"></div>
+        <div class="lux-hero-content">
+            <div class="lux-badge-premium fade-up">Premium Member</div>
+            <div class="lux-hero-center fade-up" style="transition-delay: 0.2s;">
+                <h1>SABR FAMILY</h1>
+                <h2>Wear the Wait.</h2>
+            </div>
+            <div class="lux-hero-bottom fade-up" style="transition-delay: 0.4s;">
+                <p>Purpose-led streetwear built for patient hearts.</p>
+                <a href="https://sabrfamily.com" target="_blank" class="lux-btn">
+                    Visit Website <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="lux-section lux-about">
+        <div class="lux-about-text fade-up">
+            <h3>Patience, purpose, and perseverance.</h3>
+            <p>SABR is a Dubai-born premium streetwear brand inspired by the journey every creator understands. It is a reminder to continue building even when progress is unseen.</p>
+        </div>
+        <div class="lux-about-img-container fade-up" style="transition-delay: 0.2s;">
+            <!-- Using founder image generated earlier -->
+            <img src="assets/sabr_founder_1784761108142.png" class="lux-img-hover" alt="SABR Editorial">
+        </div>
+    </section>
+
+    <!-- CHIPS -->
+    <section class="lux-chips-container">
+        <div class="lux-chip fade-up" style="transition-delay: 0.1s;">Dubai</div>
+        <div class="lux-chip fade-up" style="transition-delay: 0.2s;">Purpose-led Streetwear</div>
+        <div class="lux-chip fade-up" style="transition-delay: 0.3s;">Official Marketing Partner</div>
+        <div class="lux-chip fade-up" style="transition-delay: 0.4s;">Premium Member</div>
+    </section>
+
+    <!-- MAGAZINE GALLERY -->
+    <section class="lux-gallery">
+        <div class="lux-gallery-grid">
+            <div class="lux-gal-item gal-large fade-up" onclick="window.open('https://sabrfamily.com', '_blank')">
+                <img src="assets/sabr_col_onyx_1784761158956.png" alt="Onyx Collection">
+                <div class="lux-gal-overlay">
+                    <h4>Black Collection</h4>
+                    <span>View Collection <i data-lucide="arrow-right" style="width:14px; height:14px;"></i></span>
+                </div>
+            </div>
+            <div class="lux-gal-item gal-small fade-up" style="transition-delay: 0.2s;" onclick="window.open('https://sabrfamily.com', '_blank')">
+                <img src="assets/sabr_col_bone_1784761167803.png" alt="Bone Collection">
+                <div class="lux-gal-overlay">
+                    <h4>White Collection</h4>
+                    <span>View Collection <i data-lucide="arrow-right" style="width:14px; height:14px;"></i></span>
+                </div>
+            </div>
+            <div class="lux-gal-item gal-wide fade-up" onclick="window.open('https://sabrfamily.com', '_blank')">
+                <img src="assets/sabr_col_sand_1784761177939.png" alt="Sand Collection">
+                <div class="lux-gal-overlay">
+                    <h4>Sand Collection</h4>
+                    <span>View Collection <i data-lucide="arrow-right" style="width:14px; height:14px;"></i></span>
+                </div>
+            </div>
+        </div>
+        <p class="lux-swipe-hint">Swipe to view collections &rarr;</p>
+    </section>
+
+    <!-- WHY SHEEO LOVES -->
+    <section class="lux-quote-section">
+        <div class="lux-quote fade-up">
+            Every founder understands the season before success.
+        </div>
+        <div class="lux-quote-p fade-up" style="transition-delay: 0.2s;">
+            SABR turns patience into something visible. Through thoughtful design and meaningful storytelling, SABR reminds our community that success is rarely instant—it is earned.
+        </div>
+    </section>
+
+    <!-- LUXURY BENEFITS (APPLE STYLE) -->
+    <section class="lux-specs">
+        <h3 class="fade-up">Exclusive Benefits</h3>
+        <div class="spec-row fade-up" style="transition-delay: 0.1s;">
+            <span class="spec-title">Early Access</span>
+            <i data-lucide="check" class="spec-icon"></i>
+        </div>
+        <div class="spec-row fade-up" style="transition-delay: 0.2s;">
+            <span class="spec-title">Founder Community</span>
+            <i data-lucide="check" class="spec-icon"></i>
+        </div>
+        <div class="spec-row fade-up" style="transition-delay: 0.3s;">
+            <span class="spec-title">Exclusive Invitations</span>
+            <i data-lucide="check" class="spec-icon"></i>
+        </div>
+        <div class="spec-row fade-up" style="transition-delay: 0.4s;">
+            <span class="spec-title">Marketing Visibility</span>
+            <i data-lucide="check" class="spec-icon"></i>
+        </div>
+        <div class="spec-row fade-up" style="transition-delay: 0.5s;">
+            <span class="spec-title">Priority Support</span>
+            <i data-lucide="check" class="spec-icon"></i>
+        </div>
+    </section>
+
+    <!-- SOCIAL / INSTAGRAM ALTERNATIVE -->
+    <section class="lux-social">
+        <h3 class="fade-up">Latest from SheEO</h3>
+        <div class="lux-social-grid">
+            <div class="lux-social-card fade-up" style="transition-delay: 0.1s;" onclick="window.open('https://instagram.com/sheeosummit2026', '_blank')">
+                <img src="assets/sabr_gallery_1_1784761126336.png" alt="Editorial">
+                <div class="lux-social-overlay">
+                    <span style="font-family: var(--lux-body); text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.5rem;">Read on Instagram <i data-lucide="instagram" style="width:14px; height:14px;"></i></span>
+                </div>
+            </div>
+            <div class="lux-social-card fade-up" style="transition-delay: 0.2s;" onclick="window.open('https://instagram.com/sheeosummit2026', '_blank')">
+                <img src="assets/sabr_gallery_2_1784761135934.png" alt="Editorial">
+                <div class="lux-social-overlay">
+                    <span style="font-family: var(--lux-body); text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.5rem;">Read on Instagram <i data-lucide="instagram" style="width:14px; height:14px;"></i></span>
+                </div>
+            </div>
+            <div class="lux-social-card fade-up" style="transition-delay: 0.3s;" onclick="window.open('https://instagram.com/sheeosummit2026', '_blank')">
+                <img src="assets/sabr_gallery_3_1784761145310.png" alt="Editorial">
+                <div class="lux-social-overlay">
+                    <span style="font-family: var(--lux-body); text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.5rem;">Read on Instagram <i data-lucide="instagram" style="width:14px; height:14px;"></i></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="lux-cta">
+        <h2 class="fade-up">Ready to discover SABR?</h2>
+        <p class="fade-up" style="transition-delay: 0.1s;">Explore the premium collection designed for builders.</p>
+        <div class="fade-up" style="transition-delay: 0.2s;">
+            <a href="https://sabrfamily.com" target="_blank" class="lux-btn">
+                Visit Website <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
+            </a>
+        </div>
+        <div class="fade-up" style="transition-delay: 0.3s;">
+            <a href="/directory/" class="lux-cta-sub">Learn More About SheEO Premium</a>
+        </div>
+    </section>
+
+    <!-- Sticky brand bar (mobile only) -->
+    <div class="lux-sticky-cta">
+        <div class="lux-sticky-info">
+            <span class="lux-sticky-label">Premium Member</span>
+            <span class="lux-sticky-name">SABR Family</span>
+        </div>
+        <a href="https://sabrfamily.com" target="_blank" class="lux-btn">
+            Visit Website <i data-lucide="arrow-right" style="width:14px; height:14px;"></i>
+        </a>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Parallax hero — desktop only; on mobile it drags the image out of frame
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (window.matchMedia('(min-width: 769px)').matches && !prefersReducedMotion) {
+            window.addEventListener('scroll', () => {
+                const scrollPos = window.scrollY;
+                const bg = document.getElementById('parallax-bg');
+                if (bg) {
+                    // Ensure bg starts from current position and moves slowly
+                    bg.style.transform = `scale(1.05) translateY(${scrollPos * 0.3}px)`;
+                }
+            });
+        }
+    </script>
+<footer class="site-footer bg-cream">
+        <div class="container text-center mb-xl">
+            <p class="text-xs uppercase tracking-wide text-dark-blue font-bold mb-xs">Find us on IG</p>
+            <h2 class="font-playfair text-dark-blue mb-lg" style="font-size:3rem;"><a
+                    href="https://www.instagram.com/sheeosummit2026/" target="_blank"
+                    style="text-decoration:none; color:inherit;">@<span class="text-rose">SHEEOSUMMIT</span>2025</a>
+            </h2>
+
+            <div class="ig-slider-container relative mb-xl mx-auto" style="max-width: 1200px; padding: 0 50px;">
+                <button class="ig-slider-btn prev shadow-pink hover-opacity-100 flex-center"
+                    onclick="document.getElementById('ig-track').scrollBy({left: -350, behavior: 'smooth'})"
+                    style="position: absolute; top: 50%; left: -0px; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: #ebd8dd; border: none; z-index: 10; cursor: pointer;">
+                    <i data-lucide="chevron-left" class="icon-sm text-dark-blue"></i>
+                </button>
+
+                <div id="ig-track" class="ig-slider-track flex gap-md"
+                    style="overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none;">
+
+                    <div class="ig-slide"
+                        style="flex: 0 0 clamp(220px, 60vw, 350px); scroll-snap-align: start; display: flex; justify-content: center;">
+                        <div class="ig-embed-wrapper">
+                            <blockquote class="instagram-media"
+                                data-instgrm-permalink="https://www.instagram.com/reel/DVQ9cu0At34/?utm_source=ig_embed&amp;utm_campaign=loading"
+                                data-instgrm-version="14"
+                                style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                                <div style="padding:16px;"> <a
+                                        href="https://www.instagram.com/reel/DVQ9cu0At34/?utm_source=ig_embed&amp;utm_campaign=loading"
+                                        style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
+                                        target="_blank">
+                                        <div style=" display: flex; flex-direction: row; align-items: center;">
+                                            <div
+                                                style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
+                                            </div>
+                                            <div
+                                                style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
+                                                <div
+                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
+                                                </div>
+                                                <div
+                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="padding: 19% 0;"></div>
+                                        <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
+                                        <div style="padding-top: 8px;">
+                                            <div
+                                                style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
+                                                View this post on Instagram</div>
+                                        </div>
+                                        <div style="padding: 12.5% 0;"></div>
+                                        <div
+                                            style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
+                                            <div>
+                                                <div
+                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
+                                                </div>
+                                                <div
+                                                    style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
+                                                </div>
+                                                <div
+                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
+                                                </div>
+                                            </div>
+                                            <div style="margin-left: 8px;">
+                                                <div
+                                                    style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
+                                                </div>
+                                                <div
+                                                    style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
+                                                </div>
+                                            </div>
+                                            <div style="margin-left: auto;">
+                                                <div
+                                                    style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
+                                                </div>
+                                                <div
+                                                    style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
+                                                </div>
+                                                <div
+                                                    style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
+                                            <div
+                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
+                                            </div>
+                                            <div
+                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <p
+                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
+                                        <a href="https://www.instagram.com/reel/DVQ9cu0At34/?utm_source=ig_embed&amp;utm_campaign=loading"
+                                            style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
+                                            target="_blank">A post shared by Attitude of gratitude podcast
+                                            (@attitude_of_gratitude.ae)</a>
+                                    </p>
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+
+                    <div class="ig-slide"
+                        style="flex: 0 0 clamp(220px, 60vw, 350px); scroll-snap-align: start; display: flex; justify-content: center;">
+                        <div class="ig-embed-wrapper">
+                            <blockquote class="instagram-media"
+                                data-instgrm-permalink="https://www.instagram.com/reel/DUqinRAiS3Y/?utm_source=ig_embed&amp;utm_campaign=loading"
+                                data-instgrm-version="14"
+                                style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                                <div style="padding:16px;"> <a
+                                        href="https://www.instagram.com/reel/DUqinRAiS3Y/?utm_source=ig_embed&amp;utm_campaign=loading"
+                                        style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
+                                        target="_blank">
+                                        <div style=" display: flex; flex-direction: row; align-items: center;">
+                                            <div
+                                                style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
+                                            </div>
+                                            <div
+                                                style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
+                                                <div
+                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
+                                                </div>
+                                                <div
+                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="padding: 19% 0;"></div>
+                                        <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
+                                        <div style="padding-top: 8px;">
+                                            <div
+                                                style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
+                                                View this post on Instagram</div>
+                                        </div>
+                                        <div style="padding: 12.5% 0;"></div>
+                                        <div
+                                            style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
+                                            <div>
+                                                <div
+                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
+                                                </div>
+                                                <div
+                                                    style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
+                                                </div>
+                                                <div
+                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
+                                                </div>
+                                            </div>
+                                            <div style="margin-left: 8px;">
+                                                <div
+                                                    style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
+                                                </div>
+                                                <div
+                                                    style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
+                                                </div>
+                                            </div>
+                                            <div style="margin-left: auto;">
+                                                <div
+                                                    style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
+                                                </div>
+                                                <div
+                                                    style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
+                                                </div>
+                                                <div
+                                                    style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
+                                            <div
+                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
+                                            </div>
+                                            <div
+                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <p
+                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
+                                        <a href="https://www.instagram.com/reel/DUqinRAiS3Y/?utm_source=ig_embed&amp;utm_campaign=loading"
+                                            style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
+                                            target="_blank">A post shared by Attitude of gratitude podcast
+                                            (@attitude_of_gratitude.ae)</a>
+                                    </p>
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+
+                    <div class="ig-slide"
+                        style="flex: 0 0 clamp(220px, 60vw, 350px); scroll-snap-align: start; display: flex; justify-content: center;">
+                        <div class="ig-embed-wrapper">
+                            <blockquote class="instagram-media"
+                                data-instgrm-permalink="https://www.instagram.com/p/DUTjkHtFXGu/?utm_source=ig_embed&amp;utm_campaign=loading"
+                                data-instgrm-version="14"
+                                style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                                <div style="padding:16px;"> <a
+                                        href="https://www.instagram.com/p/DUTjkHtFXGu/?utm_source=ig_embed&amp;utm_campaign=loading"
+                                        style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
+                                        target="_blank">
+                                        <div style=" display: flex; flex-direction: row; align-items: center;">
+                                            <div
+                                                style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
+                                            </div>
+                                            <div
+                                                style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
+                                                <div
+                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
+                                                </div>
+                                                <div
+                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="padding: 19% 0;"></div>
+                                        <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
+                                        <div style="padding-top: 8px;">
+                                            <div
+                                                style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
+                                                View this post on Instagram</div>
+                                        </div>
+                                        <div style="padding: 12.5% 0;"></div>
+                                        <div
+                                            style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
+                                            <div>
+                                                <div
+                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
+                                                </div>
+                                                <div
+                                                    style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
+                                                </div>
+                                                <div
+                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
+                                                </div>
+                                            </div>
+                                            <div style="margin-left: 8px;">
+                                                <div
+                                                    style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
+                                                </div>
+                                                <div
+                                                    style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
+                                                </div>
+                                            </div>
+                                            <div style="margin-left: auto;">
+                                                <div
+                                                    style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
+                                                </div>
+                                                <div
+                                                    style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
+                                                </div>
+                                                <div
+                                                    style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
+                                            <div
+                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
+                                            </div>
+                                            <div
+                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <p
+                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
+                                        <a href="https://www.instagram.com/p/DUTjkHtFXGu/?utm_source=ig_embed&amp;utm_campaign=loading"
+                                            style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
+                                            target="_blank">A post shared by Attitude of gratitude podcast
+                                            (@attitude_of_gratitude.ae)</a>
+                                    </p>
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+
+                    <div class="ig-slide"
+                        style="flex: 0 0 clamp(220px, 60vw, 350px); scroll-snap-align: start; display: flex; justify-content: center;">
+                        <div class="ig-embed-wrapper">
+                            <blockquote class="instagram-media"
+                                data-instgrm-permalink="https://www.instagram.com/reel/DTssNzRjz2k/?utm_source=ig_embed&amp;utm_campaign=loading"
+                                data-instgrm-version="14"
+                                style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                                <div style="padding:16px;"> <a
+                                        href="https://www.instagram.com/reel/DTssNzRjz2k/?utm_source=ig_embed&amp;utm_campaign=loading"
+                                        style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
+                                        target="_blank">
+                                        <div style=" display: flex; flex-direction: row; align-items: center;">
+                                            <div
+                                                style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
+                                            </div>
+                                            <div
+                                                style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
+                                                <div
+                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
+                                                </div>
+                                                <div
+                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="padding: 19% 0;"></div>
+                                        <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
+                                        <div style="padding-top: 8px;">
+                                            <div
+                                                style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
+                                                View this post on Instagram</div>
+                                        </div>
+                                        <div style="padding: 12.5% 0;"></div>
+                                        <div
+                                            style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
+                                            <div>
+                                                <div
+                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
+                                                </div>
+                                                <div
+                                                    style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
+                                                </div>
+                                                <div
+                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
+                                                </div>
+                                            </div>
+                                            <div style="margin-left: 8px;">
+                                                <div
+                                                    style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
+                                                </div>
+                                                <div
+                                                    style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
+                                                </div>
+                                            </div>
+                                            <div style="margin-left: auto;">
+                                                <div
+                                                    style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
+                                                </div>
+                                                <div
+                                                    style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
+                                                </div>
+                                                <div
+                                                    style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
+                                            <div
+                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
+                                            </div>
+                                            <div
+                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <p
+                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
+                                        <a href="https://www.instagram.com/reel/DTssNzRjz2k/?utm_source=ig_embed&amp;utm_campaign=loading"
+                                            style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
+                                            target="_blank">A post shared by SheEo Summit (@sheeosummit2026)</a>
+                                    </p>
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="ig-slider-btn next shadow-pink hover-opacity-100 flex-center"
+                    onclick="document.getElementById('ig-track').scrollBy({left: 350, behavior: 'smooth'})"
+                    style="position: absolute; top: 50%; right: -0px; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: #ebd8dd; border: none; z-index: 10; cursor: pointer;">
+                    <i data-lucide="chevron-right" class="icon-sm text-dark-blue"></i>
+                </button>
+            </div>
+
+            <script async src="//www.instagram.com/embed.js"></script>
+
+            <div
+                class="footer-bottom-grid grid-2 text-left mt-xl pt-xl border-t border-pink-dark gap-md max-w-lg mx-auto">
+                <div class="newsletter-col">
+                    <h4 class="text-dark-blue font-inter font-bold text-lg mb-sm pr-md">Become A Member</h4>
+                    <a href="https://www.whatsapp.com/channel/0029VbBqRXi8V0twOPec2e3d" target="_blank"
+                        class="btn btn-primary-pink rounded-pill px-xl py-md font-bold tracking-wide mt-md inline-flex align-center gap-xs text-md"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-message-circle">
+                            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+                        </svg> Join our community</a>
+                </div>
+                <div class="contact-col pl-xl text-right">
+                    <h4 class="text-dark-blue font-inter font-bold text-md mb-sm">Still have a question?<br><a
+                            href="/connect-with-us/" class="text-rose hover-text-dark"
+                            style="text-decoration:none;">Contact Us!</a></h4>
+                    <div class="flex-center text-dark-blue justify-end mt-sm gap-md">
+                        <a href="mailto:sadhna@sheeo-summit.com"
+                            class="text-rose text-sm font-bold hover-text-dark"
+                            style="text-decoration:none;">sadhna@sheeo-summit.com</a>
+                        <a href="tel:+971507091969" class="text-rose text-sm font-bold hover-text-dark"
+                            style="text-decoration:none;">+971 50 7091969</a>
+                    </div>
+                    <div class="flex-center text-dark-blue justify-end mt-sm gap-md">
+                        <a href="https://www.instagram.com/sheeosummit2026/" target="_blank"
+                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="Instagram"><i
+                                data-lucide="instagram" class="icon-sm"></i></a>
+                        <a href="https://www.facebook.com/sadhnarishisharma/" target="_blank"
+                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="Facebook"><i
+                                data-lucide="facebook" class="icon-sm"></i></a>
+                        <a href="https://www.linkedin.com/in/sadhna-sharma-8767b817/" target="_blank"
+                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="LinkedIn"><i
+                                data-lucide="linkedin" class="icon-sm"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone=+971507091969" target="_blank"
+                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="WhatsApp">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-message-circle">
+                                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="footer-copyright flex-between text-xs text-dark-blue font-bold font-inter mt-xl pt-lg border-t border-pink-dark">
+                <div class="flex gap-lg">
+                    <a href="/privacy-policy/" class="hover-text-rose uppercase tracking-wide"
+                        style="text-decoration:none; color:inherit;">Privacy Policy</a>
+                    <a href="/terms-and-conditions/" class="hover-text-rose uppercase tracking-wide"
+                        style="text-decoration:none; color:inherit;">Terms & Conditions</a>
+                    <a href="/Business_License.pdf" target="_blank" class="hover-text-rose uppercase tracking-wide"
+                        style="text-decoration:none; color:inherit;">Business License</a>
+                </div>
+                <div class="tracking-wide">© 2026 SHEEO BUSINESS NETWORK DUBAI.<br>ALL RIGHTS RESERVED</div>
+            </div>
+        </div>
+    </footer>
+<script src="/script.js"></script>
+<!-- WhatsApp Floating Icon -->
+<a href="https://wa.me/971507091969" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+    </svg>
+</a>
+</body>
+</html>
+
+

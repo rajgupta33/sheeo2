@@ -1,0 +1,31 @@
+body[data-admin='true'] {
+  --portal-burgundy: #54243a;
+  --portal-burgundy-dark: #381525;
+  --portal-blush: #eadfe5;
+  --portal-blush-deep: #cbb6c1;
+}
+
+body[data-admin='true'] .portal-sidebar {
+  background: linear-gradient(180deg, #292027 0%, #171115 100%);
+}
+
+.admin-alert {
+  padding: 13px 15px;
+  border-left: 3px solid var(--portal-gold);
+  border-radius: 0 12px 12px 0;
+  color: var(--portal-muted);
+  background: #fff8eb;
+  font-size: 11px;
+}
+
+.queue-count {
+  min-width: 23px;
+  height: 23px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--portal-burgundy);
+  font-size: 10px;
+  font-weight: 700;
+}
