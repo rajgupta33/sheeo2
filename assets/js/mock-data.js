@@ -31,7 +31,7 @@ window.SHEEO_MOCK_DATA = {
   },
   pointTransactions: [
     { id: 'pt-5', created_at: '2026-08-20T09:30:00Z', description: '1-on-1 Member Meetup', transaction_type: 'meetup', points: 5, status: 'approved', source: 'Claim #1048' },
-    { id: 'pt-4', created_at: '2026-08-12T15:10:00Z', description: 'SheEO Coffee Connect Attendance', transaction_type: 'event', points: 5, status: 'approved', source: 'Event attendance' },
+    { id: 'pt-4', created_at: '2026-08-12T15:10:00Z', description: 'SheEO Coffee Meetup Attendance', transaction_type: 'event', points: 5, status: 'approved', source: 'Event attendance' },
     { id: 'pt-3', created_at: '2026-07-29T12:15:00Z', description: '1-on-1 Member Meetup', transaction_type: 'meetup', points: 5, status: 'approved', source: 'Claim #1022' },
     { id: 'pt-2', created_at: '2026-07-14T08:45:00Z', description: 'Founder Referral: Amina K.', transaction_type: 'referral', points: 20, status: 'approved', source: 'Referral #201' },
     { id: 'pt-1', created_at: '2026-01-01T07:00:00Z', description: 'Membership Activated', transaction_type: 'welcome', points: 50, status: 'approved', source: 'Membership 2026' }
@@ -65,7 +65,7 @@ window.SHEEO_MOCK_DATA = {
   ],
   events: [
     { id: 'event-401', title: 'SheEO Founder Breakfast', event_date: '2026-09-18', venue: 'Dubai', status: 'published', points_enabled: true, attendance_points: 5 },
-    { id: 'event-402', title: 'Coffee Connect', event_date: '2026-10-06', venue: 'Dubai', status: 'draft', points_enabled: true, attendance_points: 5 }
+    { id: 'event-402', title: 'SheEO Coffee Meetup', event_date: '2026-10-06', venue: 'Dubai', status: 'draft', points_enabled: true, attendance_points: 5 }
   ],
   auditLog: [
     { id: 'audit-1', actor: 'Sadhna Sharma', action: 'approve_point_claim', target: 'Claim #1048', created_at: '2026-08-20T09:30:00Z' },
