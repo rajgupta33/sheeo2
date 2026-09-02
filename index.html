@@ -5,6 +5,11 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        if (window.location.hostname === 'members.sheeo-summit.com') {
+            window.location.replace('/portal/' + window.location.search + window.location.hash);
+        }
+    </script>
     <title>SheEO Business Network Dubai</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,98 +19,14 @@
         href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
         rel="stylesheet">
     <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@1.39.0"></script>
     <link rel="stylesheet" href="/styles.css">
     <link rel="icon" type="image/jpeg" href="/sh-logo.jpeg">
+    <script defer src="/assets/js/global-shell.js"></script>
 </head>
 
 <body class="antialiased">
-    <!-- Navigatiopon -->
-    <nav class="navbar">
-        <div class="container nav-content">
-            <div class="logo-container">
-                <a href="/" style="text-decoration: none;">
-                    <img src="/sh-logo.jpeg" alt="SheEO Logo" class="brand-logo"
-                        onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';">
-                </a>
-                <div id="text-logo" class="fallback-logo" style="display:none;">
-                    <div class="logo-circle">
-                        <span class="logo-bold">She<span class="italic text-rose">EO</span></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-links hidden-mobile">
-                <a href="/about/" class="nav-link">About</a>
-                <div class="relative group">
-                    <button class="nav-link flex align-center gap-xs cursor-pointer border-none bg-transparent"
-                        style="font-family: inherit;">Offerings <i data-lucide="chevron-down"
-                            class="icon-xs"></i></button>
-                    <div class="group-hover-block absolute top-100 left-0 bg-white shadow-pink hidden pt-sm pb-sm"
-                        style="min-width: 220px; border-radius: 12px; z-index: 50; top: 100%;">
-                        <a href="/events/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Events</a>
-                        <a href="/network-marketing/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Network Marketing</a>
-                        <a href="/group-meetups/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Group Meetups</a>
-                        <a href="/business-support/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Business Support</a>
-                        <a href="/podcast-pr/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Podcast & PR</a>
-                        <a href="/collaborations/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Collaborations</a>
-                    </div>
-                </div>
-                <a href="/business-support/" class="nav-link">Business Support</a>
-                <a href="/directory/" class="nav-link">Business Directory</a>
-                <a href="#join" class="btn btn-primary btn-sm rounded-pill">Join Us</a>
-            </div>
-
-            <button id="mobile-menu-btn" class="menu-btn mobile-only">
-                <i data-lucide="menu"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu hidden">
-            <div class="mobile-menu-content bg-cream px-lg py-xl text-center"
-                style="max-height: 90vh; overflow-y: auto;">
-                <a href="/about/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">About</a>
-                <a href="/events/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Events</a>
-                <a href="/network-marketing/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Network Marketing</a>
-                <a href="/group-meetups/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Group Meetups</a>
-                <a href="/business-support/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Business Support</a>
-                <a href="/podcast-pr/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Podcast & PR</a>
-                <a href="/collaborations/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Collaborations</a>
-                <a href="/directory/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Business Directory</a>
-                <a href="#join" class="btn btn-primary-pink btn-lg rounded-pill mt-lg w-100">Join Us</a>
-            </div>
-        </div>
-    </nav>
-
+    <div data-global-header></div>
     <!-- Hero Section -->
     <section class="hero text-center relative">
         <div class="container relative z-10">
@@ -122,9 +43,12 @@
                 </p>
             </div>
 
-            <a href="#join"
-                class="btn btn-primary-pink btn-lg rounded-pill px-xl py-sm mt-sm tracking-wide shadow-pink">LEARN
-                MORE</a>
+            <div class="hero-auth-actions mt-sm">
+                <a href="/apply-directory/?type=membership"
+                    class="btn btn-primary-pink btn-lg rounded-pill px-xl py-sm tracking-wide shadow-pink">Apply to Join</a>
+                <a href="https://members.sheeo-summit.com/portal/"
+                    class="btn btn-primary btn-lg rounded-pill px-xl py-sm tracking-wide">Member Login</a>
+            </div>
 
 
         </div>
@@ -315,7 +239,7 @@
                     <h2 class="section-title uppercase text-dark-blue m-0">
                         OUR <span class="italic text-rose lowercase">next</span> EVENTS
                     </h2>
-                    <div class="absolute right-0" style="bottom: 100%; margin-right: -100px;">
+                    <div class="events-note absolute right-0" style="bottom: 100%; margin-right: -100px;">
                         <span class="font-caveat text-rose"
                             style="font-size:1.5rem; transform:rotate(-15deg); display:inline-block;">Don't miss out! <i
                                 data-lucide="arrow-down" class="inline-icon icon-xs"></i></span>
@@ -327,18 +251,18 @@
                 <!-- Event 1 -->
                 <div class="event-row flex-between py-md border-b border-pink-dark">
                     <div class="event-date text-rose font-playfair flex flex-col align-center min-w-100 justify-center">
-                        <span class="date-num" style="font-size: 2.5rem; line-height: 1;">24</span>
-                        <span class="date-month uppercase font-inter font-bold text-xs tracking-wide" style="margin-top: 4px;">JUN</span>
+                        <span class="date-num" style="font-size: 2.5rem; line-height: 1;">09</span>
+                        <span class="date-month uppercase font-inter font-bold text-xs tracking-wide" style="margin-top: 4px;">SEP</span>
                     </div>
                     <div class="event-details flex-grow pl-xl pr-md">
                         <div class="flex-between align-center w-100 mb-xs">
-                            <h4 class="event-title text-rose font-playfair italic text-xl m-0 font-normal">SheEO Coffee Connect</h4>
+                            <h4 class="event-title text-rose font-playfair italic text-xl m-0 font-normal">SheEO Coffee Meetup</h4>
                             <span class="badge uppercase tracking-wide bg-pink-light text-rose text-xs font-bold px-sm py-xs rounded-pill">Open</span>
                         </div>
-                        <div class="text-dark-blue font-bold tracking-wide text-sm mb-sm">Sip, Simplify & Glow: Premium Coffee Meetup</div>
+                        <div class="text-dark-blue font-bold tracking-wide text-sm mb-sm">Business conversations &amp; a reflective session with Meher Rupa</div>
                         <div class="event-meta flex gap-md text-sm text-dark-blue font-bold tracking-wide flex-wrap">
-                            <span><i data-lucide="calendar" class="icon-xs inline-icon text-dark-blue"></i> 24 June 2026, 11 AM</span>
-                            <span><i data-lucide="map-pin" class="icon-xs inline-icon text-dark-blue"></i> Mercure Barsha Heights</span>
+                            <span><i data-lucide="calendar" class="icon-xs inline-icon text-dark-blue"></i> 9 September 2026, 9:30 AM</span>
+                            <span><i data-lucide="map-pin" class="icon-xs inline-icon text-dark-blue"></i> Mercure Dubai Barsha Heights</span>
                         </div>
                     </div>
                     <a href="/coffee-connect/" class="btn-circle-outline"><i data-lucide="arrow-right" class="icon-sm"></i></a>
@@ -638,461 +562,12 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="site-footer bg-cream">
-        <div class="container text-center mb-xl">
-            <p class="text-xs uppercase tracking-wide text-dark-blue font-bold mb-xs">Find us on IG</p>
-            <h2 class="font-playfair text-dark-blue mb-lg" style="font-size:3rem;"><a
-                    href="https://www.instagram.com/sheeosummit2026/" target="_blank"
-                    style="text-decoration:none; color:inherit;">@<span class="text-rose">SHEEOSUMMIT</span>2025</a>
-            </h2>
-
-            <div class="ig-slider-container relative mb-xl mx-auto" style="max-width: 1200px; padding: 0 50px;">
-                <button class="ig-slider-btn prev shadow-pink hover-opacity-100 flex-center"
-                    onclick="document.getElementById('ig-track').scrollBy({left: -350, behavior: 'smooth'})"
-                    style="position: absolute; top: 50%; left: -0px; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: #ebd8dd; border: none; z-index: 10; cursor: pointer;">
-                    <i data-lucide="chevron-left" class="icon-sm text-dark-blue"></i>
-                </button>
-
-                <div id="ig-track" class="ig-slider-track flex gap-md"
-                    style="overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none;">
-
-                    <div class="ig-slide"
-                        style="flex: 0 0 clamp(220px, 60vw, 350px); scroll-snap-align: start; display: flex; justify-content: center;">
-                        <div class="ig-embed-wrapper">
-                            <blockquote class="instagram-media"
-                                data-instgrm-permalink="https://www.instagram.com/reel/DVQ9cu0At34/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                data-instgrm-version="14"
-                                style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-                                <div style="padding:16px;"> <a
-                                        href="https://www.instagram.com/reel/DVQ9cu0At34/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                        style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
-                                        target="_blank">
-                                        <div style=" display: flex; flex-direction: row; align-items: center;">
-                                            <div
-                                                style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
-                                            </div>
-                                            <div
-                                                style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="padding: 19% 0;"></div>
-                                        <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
-                                        <div style="padding-top: 8px;">
-                                            <div
-                                                style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
-                                                View this post on Instagram</div>
-                                        </div>
-                                        <div style="padding: 12.5% 0;"></div>
-                                        <div
-                                            style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-                                            <div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: 8px;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: auto;">
-                                                <div
-                                                    style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
-                                            </div>
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <p
-                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
-                                        <a href="https://www.instagram.com/reel/DVQ9cu0At34/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                            style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
-                                            target="_blank">A post shared by Attitude of gratitude podcast
-                                            (@attitude_of_gratitude.ae)</a>
-                                    </p>
-                                </div>
-                            </blockquote>
-                        </div>
-                    </div>
-
-                    <div class="ig-slide"
-                        style="flex: 0 0 clamp(220px, 60vw, 350px); scroll-snap-align: start; display: flex; justify-content: center;">
-                        <div class="ig-embed-wrapper">
-                            <blockquote class="instagram-media"
-                                data-instgrm-permalink="https://www.instagram.com/reel/DUqinRAiS3Y/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                data-instgrm-version="14"
-                                style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-                                <div style="padding:16px;"> <a
-                                        href="https://www.instagram.com/reel/DUqinRAiS3Y/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                        style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
-                                        target="_blank">
-                                        <div style=" display: flex; flex-direction: row; align-items: center;">
-                                            <div
-                                                style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
-                                            </div>
-                                            <div
-                                                style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="padding: 19% 0;"></div>
-                                        <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
-                                        <div style="padding-top: 8px;">
-                                            <div
-                                                style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
-                                                View this post on Instagram</div>
-                                        </div>
-                                        <div style="padding: 12.5% 0;"></div>
-                                        <div
-                                            style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-                                            <div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: 8px;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: auto;">
-                                                <div
-                                                    style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
-                                            </div>
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <p
-                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
-                                        <a href="https://www.instagram.com/reel/DUqinRAiS3Y/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                            style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
-                                            target="_blank">A post shared by Attitude of gratitude podcast
-                                            (@attitude_of_gratitude.ae)</a>
-                                    </p>
-                                </div>
-                            </blockquote>
-                        </div>
-                    </div>
-
-                    <div class="ig-slide"
-                        style="flex: 0 0 clamp(220px, 60vw, 350px); scroll-snap-align: start; display: flex; justify-content: center;">
-                        <div class="ig-embed-wrapper">
-                            <blockquote class="instagram-media"
-                                data-instgrm-permalink="https://www.instagram.com/p/DUTjkHtFXGu/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                data-instgrm-version="14"
-                                style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-                                <div style="padding:16px;"> <a
-                                        href="https://www.instagram.com/p/DUTjkHtFXGu/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                        style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
-                                        target="_blank">
-                                        <div style=" display: flex; flex-direction: row; align-items: center;">
-                                            <div
-                                                style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
-                                            </div>
-                                            <div
-                                                style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="padding: 19% 0;"></div>
-                                        <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
-                                        <div style="padding-top: 8px;">
-                                            <div
-                                                style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
-                                                View this post on Instagram</div>
-                                        </div>
-                                        <div style="padding: 12.5% 0;"></div>
-                                        <div
-                                            style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-                                            <div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: 8px;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: auto;">
-                                                <div
-                                                    style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
-                                            </div>
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <p
-                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
-                                        <a href="https://www.instagram.com/p/DUTjkHtFXGu/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                            style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
-                                            target="_blank">A post shared by Attitude of gratitude podcast
-                                            (@attitude_of_gratitude.ae)</a>
-                                    </p>
-                                </div>
-                            </blockquote>
-                        </div>
-                    </div>
-
-                    <div class="ig-slide"
-                        style="flex: 0 0 clamp(220px, 60vw, 350px); scroll-snap-align: start; display: flex; justify-content: center;">
-                        <div class="ig-embed-wrapper">
-                            <blockquote class="instagram-media"
-                                data-instgrm-permalink="https://www.instagram.com/reel/DTssNzRjz2k/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                data-instgrm-version="14"
-                                style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-                                <div style="padding:16px;"> <a
-                                        href="https://www.instagram.com/reel/DTssNzRjz2k/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                        style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
-                                        target="_blank">
-                                        <div style=" display: flex; flex-direction: row; align-items: center;">
-                                            <div
-                                                style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
-                                            </div>
-                                            <div
-                                                style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="padding: 19% 0;"></div>
-                                        <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
-                                        <div style="padding-top: 8px;">
-                                            <div
-                                                style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
-                                                View this post on Instagram</div>
-                                        </div>
-                                        <div style="padding: 12.5% 0;"></div>
-                                        <div
-                                            style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-                                            <div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: 8px;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: auto;">
-                                                <div
-                                                    style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
-                                            </div>
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <p
-                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
-                                        <a href="https://www.instagram.com/reel/DTssNzRjz2k/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                            style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
-                                            target="_blank">A post shared by SheEo Summit (@sheeosummit2026)</a>
-                                    </p>
-                                </div>
-                            </blockquote>
-                        </div>
-                    </div>
-
-                </div>
-
-                <button class="ig-slider-btn next shadow-pink hover-opacity-100 flex-center"
-                    onclick="document.getElementById('ig-track').scrollBy({left: 350, behavior: 'smooth'})"
-                    style="position: absolute; top: 50%; right: -0px; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: #ebd8dd; border: none; z-index: 10; cursor: pointer;">
-                    <i data-lucide="chevron-right" class="icon-sm text-dark-blue"></i>
-                </button>
-            </div>
-
-            <script async src="//www.instagram.com/embed.js"></script>
-
-            <div
-                class="footer-bottom-grid grid-2 text-left mt-xl pt-xl border-t border-pink-dark gap-md max-w-lg mx-auto">
-                <div class="newsletter-col">
-                    <h4 class="text-dark-blue font-inter font-bold text-lg mb-sm pr-md">Become A Member</h4>
-                    <a href="https://www.whatsapp.com/channel/0029VbBqRXi8V0twOPec2e3d" target="_blank"
-                        class="btn btn-primary-pink rounded-pill px-xl py-md font-bold tracking-wide mt-md inline-flex align-center gap-xs text-md"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-message-circle">
-                            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
-                        </svg> Join our community</a>
-                </div>
-                <div class="contact-col pl-xl text-right">
-                    <h4 class="text-dark-blue font-inter font-bold text-md mb-sm">Still have a question?<br><a
-                            href="/connect-with-us/" class="text-rose hover-text-dark"
-                            style="text-decoration:none;">Contact Us!</a></h4>
-                    <div class="flex-center text-dark-blue justify-end mt-sm gap-md">
-                        <a href="mailto:sadhna@sheeo-summit.com"
-                            class="text-rose text-sm font-bold hover-text-dark"
-                            style="text-decoration:none;">sadhna@sheeo-summit.com</a>
-                        <a href="tel:+971507091969" class="text-rose text-sm font-bold hover-text-dark"
-                            style="text-decoration:none;">+971 50 7091969</a>
-                    </div>
-                    <div class="flex-center text-dark-blue justify-end mt-sm gap-md">
-                        <a href="https://www.instagram.com/sheeosummit2026/" target="_blank"
-                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="Instagram"><i
-                                data-lucide="instagram" class="icon-sm"></i></a>
-                        <a href="https://www.facebook.com/sadhnarishisharma/" target="_blank"
-                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="Facebook"><i
-                                data-lucide="facebook" class="icon-sm"></i></a>
-                        <a href="https://www.linkedin.com/in/sadhna-sharma-8767b817/" target="_blank"
-                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="LinkedIn"><i
-                                data-lucide="linkedin" class="icon-sm"></i></a>
-                        <a href="https://api.whatsapp.com/send?phone=+971507091969" target="_blank"
-                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="WhatsApp">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-message-circle">
-                                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="footer-copyright flex-between text-xs text-dark-blue font-bold font-inter mt-xl pt-lg border-t border-pink-dark">
-                <div class="flex gap-lg">
-                    <a href="/privacy-policy/" class="hover-text-rose uppercase tracking-wide"
-                        style="text-decoration:none; color:inherit;">Privacy Policy</a>
-                    <a href="/terms-and-conditions/" class="hover-text-rose uppercase tracking-wide"
-                        style="text-decoration:none; color:inherit;">Terms & Conditions</a>
-                    <a href="/Business_License.pdf" target="_blank" class="hover-text-rose uppercase tracking-wide"
-                        style="text-decoration:none; color:inherit;">Business License</a>
-                </div>
-                <div class="tracking-wide">© 2026 SHEEO BUSINESS NETWORK DUBAI.<br>ALL RIGHTS RESERVED</div>
-            </div>
-        </div>
-    </footer>
-
+    <div data-global-footer></div>
     <!-- Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Icons
             lucide.createIcons();
-
-            // Mobile Menu
-            const btn = document.getElementById('mobile-menu-btn');
-            const menu = document.getElementById('mobile-menu');
-            if (btn && menu) {
-                btn.addEventListener('click', () => {
-                    menu.classList.toggle('hidden');
-                });
-            }
 
             // Accordion
             const items = document.querySelectorAll('.accordion-item');
@@ -1130,15 +605,6 @@
                 });
             });
 
-            // Navbar Scroll
-            window.addEventListener('scroll', () => {
-                const nav = document.querySelector('.navbar');
-                if (window.scrollY > 50) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
-                }
-            });
         });
 
         // 3D Glassmorphism Cards Script
@@ -1182,7 +648,7 @@
             cards.forEach(c => obs.observe(c));
         }
 
-        /* â”€â”€ Stats Section Count-up â”€â”€ */
+        /* Stats section count-up */
         function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
 
         function countUp(el, target, suffix, duration = 1600, delay = 0) {
@@ -1225,7 +691,7 @@
             statsNums.forEach(n => statsObs.observe(n));
         }
 
-        /* â”€â”€ Interactive mouse-follow tilt (desktop) for Stats â”€â”€ */
+        /* Interactive mouse-follow tilt (desktop) for stats */
         document.querySelectorAll('.circle-wrap').forEach(wrap => {
             wrap.addEventListener('mousemove', e => {
                 if (window.innerWidth < 640) return;
@@ -1248,12 +714,6 @@
         });
     </script>
     <script src="/script.js"></script>
-<!-- WhatsApp Floating Icon -->
-<a href="https://wa.me/971507091969" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-    </svg>
-</a>
 </body>
 
 </html>

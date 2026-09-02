@@ -1,802 +1,97 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SheEO Business Directory</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
-        rel="stylesheet">
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="icon" type="image/jpeg" href="/sh-logo.jpeg">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Discover verified women-owned businesses and connect with trusted founders inside the SheEO ecosystem.">
+  <meta name="theme-color" content="#fff9f5">
+  <title>Women-Owned Business Directory | SheEO</title>
+  <link rel="canonical" href="https://sheeo-summit.com/directory/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/jpeg" href="/sh-logo.jpeg">
+  <script src="https://unpkg.com/lucide@1.39.0"></script>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/assets/css/sheeo-editorial.css">
+  <link rel="stylesheet" href="/assets/css/directory-redesign.css?v=3">
+  <script defer src="/assets/js/global-shell.js"></script>
+  <script defer src="/assets/js/directory-redesign.js"></script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"CollectionPage","name":"SheEO Women-Owned Business Directory","url":"https://sheeo-summit.com/directory/","description":"A curated directory of verified women-owned businesses in the SheEO ecosystem."}
+  </script>
 </head>
+<body class="editorial-page directory-page">
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
-<body class="antialiased">
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container nav-content">
-            <div class="logo-container">
-                <a href="/" style="text-decoration: none;">
-                    <img src="/sh-logo.jpeg" alt="SheEO Logo" class="brand-logo"
-                        onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';">
-                    <div id="text-logo" class="fallback-logo" style="display:none;">
-                        <div class="logo-circle">
-                            <span class="logo-bold">She<span class="italic text-rose">EO</span></span>
-                        </div>
-                    </div>
-                </a>
-            </div>
+  <div data-global-header></div>
 
-            <div class="nav-links hidden-mobile">
-                <a href="/about/" class="nav-link">About</a>
-                <div class="relative group">
-                    <button class="nav-link flex align-center gap-xs cursor-pointer border-none bg-transparent"
-                        style="font-family: inherit;">Offerings <i data-lucide="chevron-down"
-                            class="icon-xs"></i></button>
-                    <div class="group-hover-block absolute top-100 left-0 bg-white shadow-pink hidden pt-sm pb-sm"
-                        style="min-width: 220px; border-radius: 12px; z-index: 50; top: 100%;">
-                        <a href="/events/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Events</a>
-                        <a href="/network-marketing/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Network Marketing</a>
-                        <a href="/group-meetups/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Group Meetups</a>
-                        <a href="/business-support/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Business Support</a>
-                        <a href="/podcast-pr/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Podcast & PR</a>
-                        <a href="/collaborations/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Collaborations</a>
-                    </div>
-                </div>
-                <a href="/business-support/" class="nav-link">Business Support</a>
-                <a href="/directory/" class="nav-link">Business Directory</a>
-                <a href="/connect-with-us/" class="btn btn-primary btn-sm rounded-pill">Join Us</a>
-            </div>
-
-            <button id="mobile-menu-btn" class="menu-btn mobile-only">
-                <i data-lucide="menu"></i>
-            </button>
+  <main id="main-content">
+    <section class="directory-hero" aria-labelledby="directory-title">
+      <div class="sheeo-container directory-hero__grid">
+        <div class="directory-hero__copy">
+          <p class="eyebrow">The SheEO business directory</p>
+          <h1 class="editorial-title" id="directory-title">Discover women-owned businesses inside the <em>SheEO</em> ecosystem</h1>
+          <p>Discover verified women-led businesses, connect with trusted founders, and grow inside a supportive ecosystem built to elevate and empower.</p>
+          <div class="trust-row" aria-label="Directory benefits">
+            <div class="trust-item"><span>✓</span><span>Verified<br>businesses</span></div><div class="trust-item"><span>✓</span><span>Premium community<br>network</span></div><div class="trust-item"><span>✓</span><span>Exclusive member<br>benefits</span></div><div class="trust-item"><span>✓</span><span>Trusted founder<br>ecosystem</span></div>
+          </div>
+          <div class="hero-actions"><a class="sheeo-button sheeo-button--primary" href="/apply-directory/" data-analytics="join_directory_click">Join directory</a><a class="sheeo-button sheeo-button--outline" href="/apply-directory/?type=membership" data-analytics="apply_membership_click">Apply for membership</a></div>
         </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu hidden">
-            <div class="mobile-menu-content bg-cream px-lg py-xl text-center"
-                style="max-height: 90vh; overflow-y: auto;">
-                <a href="/about/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">About</a>
-                <a href="/events/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Events</a>
-                <a href="/network-marketing/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Network Marketing</a>
-                <a href="/group-meetups/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Group Meetups</a>
-                <a href="/business-support/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Business Support</a>
-                <a href="/podcast-pr/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Podcast & PR</a>
-                <a href="/collaborations/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Collaborations</a>
-                <a href="/directory/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Business Directory</a>
-                <a href="/connect-with-us/" class="btn btn-primary-pink btn-lg rounded-pill mt-lg w-100">Join Us</a>
-            </div>
+        <div class="ecosystem-collage" aria-label="SheEO founder community">
+          <img class="collage-portrait" src="/founder-sadhna.jpg" alt="Sadhna Sharma"><img class="collage-portrait" src="/sheeo-member/nitasha.jpeg" alt="Nitasha Saxena"><img class="collage-portrait" src="/sheeo-member/mehak.jpeg" alt="Mehak Marwaha"><img class="collage-portrait" src="/sheeo-member/meher rupaa.jpeg" alt="Meher Rupa"><img class="collage-portrait" src="/sheeo-member/rashimonga.jpeg" alt="Rashi Monga"><img class="collage-portrait" src="/sheeo-member/RAINA DESAI.jpeg" alt="Raina Desai Lalchand">
+          <div class="ecosystem-card" aria-hidden="true"><span class="ecosystem-card__crown">♕</span><strong>SheEO<br>Ecosystem</strong><small>Empowering women founders.<br>Elevating businesses.<br>Creating global impact.</small></div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="directory-hero relative pb-xl pt-xxl">
-        <!-- Atmospheric layers scoped to this section -->
-        <div class="atmospheric-layers absolute top-0 left-0 w-100 h-100 pointer-events-none"
-            style="z-index: 0; background: radial-gradient(ellipse 70% 55% at 15% 5%, rgba(250,205,218,0.75) 0%, transparent 65%), radial-gradient(ellipse 55% 65% at 85% 90%, rgba(215,150,170,0.55) 0%, transparent 65%);">
-        </div>
-
-        <div class="container grid-2 align-center max-w-lg mx-auto pt-xl relative z-10">
-            <div class="hero-left pr-lg animate-fade-up">
-                <h1 class="font-playfair text-4xl uppercase text-dark-blue line-height-tight mb-md" style="font-size: clamp(2rem, 5vw, 3.5rem);">
-                    Discover Women-Owned Businesses Inside The <span class="italic text-rose lowercase">SheEO</span> Ecosystem
-                </h1>
-                <p class="text-dark-blue font-inter mb-sm line-height-relaxed text-md">
-                    Connecting visionary women entrepreneurs, experts, creators, and service providers through one powerful community-driven business directory.
-                </p>
-                <p class="text-dark-blue font-inter mb-lg line-height-relaxed font-bold">
-                    Find trusted coaches, consultants, wellness experts, artists, designers, business strategists, and inspiring founders — all in one place.
-                </p>
-
-                <div class="hero-benefits mb-lg">
-                    <div class="flex align-center gap-sm mb-xs"><i data-lucide="sparkles" class="icon-sm text-rose"></i> <span class="font-bold text-dark-blue tracking-wide text-sm uppercase">Verified Businesses</span></div>
-                    <div class="flex align-center gap-sm mb-xs"><i data-lucide="sparkles" class="icon-sm text-rose"></i> <span class="font-bold text-dark-blue tracking-wide text-sm uppercase">Premium Community Network</span></div>
-                    <div class="flex align-center gap-sm mb-xs"><i data-lucide="sparkles" class="icon-sm text-rose"></i> <span class="font-bold text-dark-blue tracking-wide text-sm uppercase">Exclusive Member Benefits</span></div>
-                    <div class="flex align-center gap-sm mb-xs"><i data-lucide="sparkles" class="icon-sm text-rose"></i> <span class="font-bold text-dark-blue tracking-wide text-sm uppercase">Trusted Founder Ecosystem</span></div>
-                </div>
-
-                <div class="flex gap-md flex-wrap mt-md directory-hero-buttons">
-                    <div class="flex flex-col align-start" style="flex: 1; min-width: 250px;">
-                        <a href="/apply-directory/?type=join" class="btn btn-primary-pink btn-lg rounded-pill shadow-pink mb-xs text-center w-100">Join Directory</a>
-                        <span class="text-xs text-dark-blue opacity-80 font-inter font-bold" style="max-width: 280px; text-align: left;">Become discoverable inside the SheEO ecosystem.</span>
-                    </div>
-                    <div class="flex flex-col align-start" style="flex: 1; min-width: 250px;">
-                        <a href="/apply-directory/?type=membership" class="btn btn-primary btn-lg rounded-pill mb-xs text-center w-100">Apply For Membership</a>
-                        <span class="text-xs text-dark-blue opacity-80 font-inter font-bold" style="max-width: 280px; text-align: left;">Apply to become a verified SheEO business member.</span>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-right relative pl-md animate-fade-up" style="animation-delay: 0.2s;">
-                <div class="collage-wrapper relative">
-                    <img src="/hero-collage.png" alt="Founder Collage" class="rounded-xl shadow-pink glow-effect" style="width:100%; border: 6px solid var(--pink-light);">
-                </div>
-            </div>
-        </div>
+      </div>
     </section>
 
-    <!-- Founding Members Spotlight -->
-    <section class="founding-five py-xl relative overflow-hidden bg-cream border-t border-pink-dark">
-        <div class="container text-center max-w-lg mx-auto relative z-10">
-            <div class="flex-center mb-sm animate-fade-up">
-                <i data-lucide="crown" class="text-rose icon-lg"></i>
-            </div>
-            <h2 class="section-title uppercase text-dark-blue mb-sm animate-fade-up" style="animation-delay: 0.1s;">
-                Meet Our <span class="italic text-rose lowercase">Founding Members</span>
-            </h2>
-            <p class="text-dark-blue mb-xl max-w-md mx-auto line-height-relaxed animate-fade-up" style="animation-delay: 0.2s;">
-                The first visionary businesses shaping the SheEO Summit ecosystem.<br><br>
-                These premium founding members receive priority visibility, direct referrals, exclusive branding opportunities, and elevated community recognition.
-            </p>
-
-            <div class="founding-grid flex gap-md justify-center flex-wrap animate-fade-up" style="animation-delay: 0.3s;">
-                
-                <!-- Founding Card 1 - Sadhna -->
-                <div class="founding-five-card bg-white p-lg rounded-xl shadow-pink hover-lift border-gold flex flex-col h-100" style="flex: 1 1 250px; max-width: 300px;">
-                    <div class="ff-image-wrap mb-md mx-auto relative" style="width:120px; height:120px;">
-                        <img src="/founder-sadhna.jpg" alt="Sadhna Sharma" class="rounded-pill object-cover w-100 h-100 shadow-pink" style="border: 3px solid #D4AF37;">
-                        <div class="absolute bg-white rounded-pill flex-center" style="width:32px; height:32px; bottom:-10px; right:10px; border:2px solid #D4AF37;">
-                            <i data-lucide="crown" class="icon-xs" style="color:#D4AF37;"></i>
-                        </div>
-                    </div>
-                    <h3 class="font-playfair text-xl text-dark-blue mb-xs">Sadhna Sharma</h3>
-                    <p class="text-rose text-xs uppercase tracking-wide font-bold mb-md">Business Growth Strategist</p>
-                    
-                    <div class="flex justify-center gap-xs mb-md flex-wrap">
-                        <span class="badge uppercase tracking-wide bg-pink-light text-rose text-xs font-bold px-sm py-xs rounded-pill flex align-center gap-xs"><i data-lucide="check-circle" class="icon-xs"></i> Verified</span>
-                        <span class="badge uppercase tracking-wide text-xs font-bold px-sm py-xs rounded-pill flex align-center gap-xs" style="background:#fdf2ce; color:#b08d20;"><i data-lucide="crown" class="icon-xs"></i> Founding Members</span>
-                    </div>
-
-                    <div class="flex flex-col gap-sm mt-auto w-100">
-                        <a href="/sheeo-member/sadhna-sharma/" class="btn btn-primary btn-sm rounded-pill w-100">View Profile</a>
-                        <a href="https://wa.me/971507091969" class="btn btn-circle-outline mx-auto" style="width: 100%; border-radius: 999px; text-transform:uppercase; font-size:11px; letter-spacing:0.1em; height:auto; padding:10px 24px; font-weight:800;"><i data-lucide="message-circle" class="icon-sm inline-icon mr-sm"></i> WhatsApp</a>
-                    </div>
-                </div>
-
-                <!-- Founding Card 2 -->
-                <div class="founding-five-card bg-white p-lg rounded-xl shadow-pink hover-lift border-gold flex flex-col h-100" style="flex: 1 1 250px; max-width: 300px;">
-                    <div class="ff-image-wrap mb-md mx-auto relative flex-center bg-pink-soft overflow-hidden" style="width:120px; height:120px; border-radius: 50%;">
-                        <img src="/sheeo-member/nitasha.jpeg" alt="Nitasha Saxena" style="width: 100%; height: 100%; object-fit: cover;">
-                        <div class="absolute bg-white rounded-pill flex-center" style="width:32px; height:32px; bottom:-10px; right:10px; border:2px solid #D4AF37; z-index: 10;">
-                            <i data-lucide="crown" class="icon-xs" style="color:#D4AF37;"></i>
-                        </div>
-                    </div>
-                    <h3 class="font-playfair text-xl text-dark-blue mb-xs">Nitasha Saxena</h3>
-                    <p class="text-rose text-xs uppercase tracking-wide font-bold mb-md">MINDFUL BEAUTY EDUCATOR</p>
-                    
-                    <div class="flex justify-center gap-xs mb-md flex-wrap">
-                        <span class="badge uppercase tracking-wide bg-pink-light text-rose text-xs font-bold px-sm py-xs rounded-pill flex align-center gap-xs"><i data-lucide="check-circle" class="icon-xs"></i> Verified</span>
-                        <span class="badge uppercase tracking-wide text-xs font-bold px-sm py-xs rounded-pill flex align-center gap-xs" style="background:#fdf2ce; color:#b08d20;"><i data-lucide="crown" class="icon-xs"></i> Founding Members</span>
-                    </div>
-
-                    <div class="flex flex-col gap-sm mt-auto w-100">
-                        <a href="/sheeo-member/nitasha-saxena/" class="btn btn-primary btn-sm rounded-pill w-100">View Profile</a>
-                        <a href="https://wa.me/971505155759" class="btn btn-circle-outline mx-auto" style="width: 100%; border-radius: 999px; text-transform:uppercase; font-size:11px; letter-spacing:0.1em; height:auto; padding:10px 24px; font-weight:800;"><i data-lucide="message-circle" class="icon-sm inline-icon mr-sm"></i> WhatsApp</a>
-                    </div>
-                </div>
-
-                <!-- Founding Card 4 -->
-                <div class="founding-five-card bg-white p-lg rounded-xl shadow-pink hover-lift border-gold flex flex-col h-100" style="flex: 1 1 250px; max-width: 300px;">
-                    <div class="ff-image-wrap mb-md mx-auto relative flex-center bg-pink-soft overflow-hidden" style="width:120px; height:120px; border-radius: 50%;">
-                        <img src="/sheeo-member/mehak.jpeg" alt="Mehak Marwaha" style="width: 100%; height: 100%; object-fit: cover;">
-                        <div class="absolute bg-white rounded-pill flex-center" style="width:32px; height:32px; bottom:-10px; right:10px; border:2px solid #D4AF37; z-index: 10;">
-                            <i data-lucide="crown" class="icon-xs" style="color:#D4AF37;"></i>
-                        </div>
-                    </div>
-                    <h3 class="font-playfair text-xl text-dark-blue mb-xs">Mehak Marwaha</h3>
-                    <p class="text-rose text-xs uppercase tracking-wide font-bold mb-md" style="line-height: 1.4;">HOLISTIC CLARITY COACH</p>
-                    
-                    <div class="flex justify-center gap-xs mb-md flex-wrap">
-                        <span class="badge uppercase tracking-wide bg-pink-light text-rose text-xs font-bold px-sm py-xs rounded-pill flex align-center gap-xs"><i data-lucide="check-circle" class="icon-xs"></i> Verified</span>
-                        <span class="badge uppercase tracking-wide text-xs font-bold px-sm py-xs rounded-pill flex align-center gap-xs" style="background:#fdf2ce; color:#b08d20;"><i data-lucide="crown" class="icon-xs"></i> Founding Members</span>
-                    </div>
-
-                    <div class="flex flex-col gap-sm mt-auto w-100">
-                        <a href="/sheeo-member/mehak-marwaha/" class="btn btn-primary btn-sm rounded-pill w-100">View Profile</a>
-                        <a href="https://wa.me/971562046096" class="btn btn-circle-outline mx-auto" style="width: 100%; border-radius: 999px; text-transform:uppercase; font-size:11px; letter-spacing:0.1em; height:auto; padding:10px 24px; font-weight:800;"><i data-lucide="message-circle" class="icon-sm inline-icon mr-sm"></i> WhatsApp</a>
-                    </div>
-                </div>
-
-                <!-- Founding Card 5 -->
-                <div class="founding-five-card bg-white p-lg rounded-xl shadow-pink hover-lift border-gold flex flex-col h-100" style="flex: 1 1 250px; max-width: 300px;">
-                    <div class="ff-image-wrap mb-md mx-auto relative flex-center bg-pink-soft overflow-hidden" style="width:120px; height:120px; border-radius: 50%;">
-                        <img src="/sheeo-member/meher rupaa.jpeg" alt="Meher Rupa" style="width: 100%; height: 100%; object-fit: cover;">
-                        <div class="absolute bg-white rounded-pill flex-center" style="width:32px; height:32px; bottom:-10px; right:10px; border:2px solid #D4AF37; z-index: 10;">
-                            <i data-lucide="crown" class="icon-xs" style="color:#D4AF37;"></i>
-                        </div>
-                    </div>
-                    <h3 class="font-playfair text-xl text-dark-blue mb-xs">Meher Rupa</h3>
-                    <p class="text-rose text-xs uppercase tracking-wide font-bold mb-md" style="line-height: 1.4;">BUSINESS & PERSONAL TRANSFORMATION COACH</p>
-                    
-                    <div class="flex justify-center gap-xs mb-md flex-wrap">
-                        <span class="badge uppercase tracking-wide bg-pink-light text-rose text-xs font-bold px-sm py-xs rounded-pill flex align-center gap-xs"><i data-lucide="check-circle" class="icon-xs"></i> Verified</span>
-                        <span class="badge uppercase tracking-wide text-xs font-bold px-sm py-xs rounded-pill flex align-center gap-xs" style="background:#fdf2ce; color:#b08d20;"><i data-lucide="crown" class="icon-xs"></i> Founding Members</span>
-                    </div>
-
-                    <div class="flex flex-col gap-sm mt-auto w-100">
-                        <a href="/sheeo-member/meher-rupa/" class="btn btn-primary btn-sm rounded-pill w-100">View Profile</a>
-                        <a href="https://wa.me/971503967022" class="btn btn-circle-outline mx-auto" style="width: 100%; border-radius: 999px; text-transform:uppercase; font-size:11px; letter-spacing:0.1em; height:auto; padding:10px 24px; font-weight:800;"><i data-lucide="message-circle" class="icon-sm inline-icon mr-sm"></i> WhatsApp</a>
-                    </div>
-                </div>
-
-                <!-- Founding Card 6 -->
-                <div class="founding-five-card bg-white p-lg rounded-xl shadow-pink hover-lift border-gold flex flex-col h-100" style="flex: 1 1 250px; max-width: 300px;">
-                    <div class="ff-image-wrap mb-md mx-auto relative flex-center bg-pink-soft overflow-hidden" style="width:120px; height:120px; border-radius: 50%;">
-                        <img src="/sheeo-member/rashimonga.jpeg" alt="Rashi" style="width: 100%; height: 100%; object-fit: cover;">
-                        <div class="absolute bg-white rounded-pill flex-center" style="width:32px; height:32px; bottom:-10px; right:10px; border:2px solid #D4AF37; z-index: 10;">
-                            <i data-lucide="crown" class="icon-xs" style="color:#D4AF37;"></i>
-                        </div>
-                    </div>
-                    <h3 class="font-playfair text-xl text-dark-blue mb-xs">Rashi</h3>
-                    <p class="text-rose text-xs uppercase tracking-wide font-bold mb-md" style="line-height: 1.4;">FOUNDER, MOHAUL & MILAGRO STUDIO</p>
-                    
-                    <div class="flex justify-center gap-xs mb-md flex-wrap">
-                        <span class="badge uppercase tracking-wide bg-pink-light text-rose text-xs font-bold px-sm py-xs rounded-pill flex align-center gap-xs"><i data-lucide="check-circle" class="icon-xs"></i> Verified</span>
-                        <span class="badge uppercase tracking-wide text-xs font-bold px-sm py-xs rounded-pill flex align-center gap-xs" style="background:#fdf2ce; color:#b08d20;"><i data-lucide="crown" class="icon-xs"></i> Founding Members</span>
-                    </div>
-
-                    <div class="flex flex-col gap-sm mt-auto w-100">
-                        <a href="/sheeo-member/rashi/" class="btn btn-primary btn-sm rounded-pill w-100">View Profile</a>
-                        <a href="https://wa.me/971552803777" class="btn btn-circle-outline mx-auto" style="width: 100%; border-radius: 999px; text-transform:uppercase; font-size:11px; letter-spacing:0.1em; height:auto; padding:10px 24px; font-weight:800;"><i data-lucide="message-circle" class="icon-sm inline-icon mr-sm"></i> WhatsApp</a>
-                    </div>
-                </div>
-
-                <!-- Founding Card 7 -->
-                <div class="founding-five-card bg-white p-lg rounded-xl shadow-pink hover-lift border-gold flex flex-col h-100" style="flex: 1 1 250px; max-width: 300px;">
-                    <div class="ff-image-wrap mb-md mx-auto relative flex-center bg-pink-soft overflow-hidden" style="width:120px; height:120px; border-radius: 50%;">
-                        <img src="/sheeo-member/RAINA DESAI.jpeg" alt="Raina Desai Lalchand" style="width: 100%; height: 100%; object-fit: cover;">
-                        <div class="absolute bg-white rounded-pill flex-center" style="width:32px; height:32px; bottom:-10px; right:10px; border:2px solid #D4AF37; z-index: 10;">
-                            <i data-lucide="crown" class="icon-xs" style="color:#D4AF37;"></i>
-                        </div>
-                    </div>
-                    <h3 class="font-playfair text-xl text-dark-blue mb-xs">Raina Desai Lalchand</h3>
-                    <p class="text-rose text-xs uppercase tracking-wide font-bold mb-md" style="line-height: 1.4;">MARKETPLACE GROWTH STRATEGIST & E-COMMERCE ENABLER</p>
-                    
-                    <div class="flex justify-center gap-xs mb-md flex-wrap">
-                        <span class="badge uppercase tracking-wide bg-pink-light text-rose text-xs font-bold px-sm py-xs rounded-pill flex align-center gap-xs"><i data-lucide="check-circle" class="icon-xs"></i> Verified</span>
-                        <span class="badge uppercase tracking-wide text-xs font-bold px-sm py-xs rounded-pill flex align-center gap-xs" style="background:#fdf2ce; color:#b08d20;"><i data-lucide="crown" class="icon-xs"></i> Founding Members</span>
-                    </div>
-
-                    <div class="flex flex-col gap-sm mt-auto w-100">
-                        <a href="/sheeo-member/raina/" class="btn btn-primary btn-sm rounded-pill w-100">View Profile</a>
-                        <a href="https://wa.me/971557854534" class="btn btn-circle-outline mx-auto" style="width: 100%; border-radius: 999px; text-transform:uppercase; font-size:11px; letter-spacing:0.1em; height:auto; padding:10px 24px; font-weight:800;"><i data-lucide="message-circle" class="icon-sm inline-icon mr-sm"></i> WhatsApp</a>
-                    </div>
-                </div>
-
-            </div>
+    <section class="founders-section" aria-labelledby="founders-title">
+      <div class="sheeo-container">
+        <div class="section-heading"><p class="eyebrow">♕</p><h2 class="section-title" id="founders-title">Meet our <em>founding members</em></h2><p class="section-intro">Visionary women building, leading and inspiring change across industries.</p></div>
+        <div class="founder-rail">
+          <article class="founder-card"><div class="founder-card__photo-wrap"><img class="founder-card__photo" src="/founder-sadhna.jpg" alt="Sadhna Sharma"><span class="verified-dot" aria-label="Verified">✓</span></div><h3>Sadhna Sharma</h3><p>Business Growth Strategist</p><a href="/sheeo-member/sadhna-sharma/">View profile →</a></article>
+          <article class="founder-card"><div class="founder-card__photo-wrap"><img class="founder-card__photo" src="/sheeo-member/nitasha.jpeg" alt="Nitasha Saxena"><span class="verified-dot" aria-label="Verified">✓</span></div><h3>Nitasha Saxena</h3><p>Mindful Beauty Educator</p><a href="/sheeo-member/nitasha-saxena/">View profile →</a></article>
+          <article class="founder-card"><div class="founder-card__photo-wrap"><img class="founder-card__photo" src="/sheeo-member/mehak.jpeg" alt="Mehak Marwaha"><span class="verified-dot" aria-label="Verified">✓</span></div><h3>Mehak Marwaha</h3><p>Holistic Clarity Coach</p><a href="/sheeo-member/mehak-marwaha/">View profile →</a></article>
+          <article class="founder-card"><div class="founder-card__photo-wrap"><img class="founder-card__photo" src="/sheeo-member/meher rupaa.jpeg" alt="Meher Rupa"><span class="verified-dot" aria-label="Verified">✓</span></div><h3>Meher Rupa</h3><p>Business &amp; Personal Transformation Coach</p><a href="/sheeo-member/meher-rupa/">View profile →</a></article>
+          <article class="founder-card"><div class="founder-card__photo-wrap"><img class="founder-card__photo" src="/sheeo-member/rashimonga.jpeg" alt="Rashi"><span class="verified-dot" aria-label="Verified">✓</span></div><h3>Rashi</h3><p>Founder, Mohaul &amp; Milagro Studio</p><a href="/sheeo-member/rashi/">View profile →</a></article>
+          <article class="founder-card"><div class="founder-card__photo-wrap"><img class="founder-card__photo" src="/sheeo-member/RAINA DESAI.jpeg" alt="Raina Desai Lalchand"><span class="verified-dot" aria-label="Verified">✓</span></div><h3>Raina Desai Lalchand</h3><p>Marketplace Growth Strategist &amp; E-Commerce Enabler</p><a href="/sheeo-member/raina/">View profile →</a></article>
         </div>
+      </div>
     </section>
 
-    <!-- Search + Filter Bar -->
-    <section id="featured-members" class="search-filter-section py-lg bg-pink-light relative sticky-search" style="z-index: 90;">
-        <div class="container max-w-lg mx-auto text-center">
-            <h2 class="font-playfair text-3xl uppercase text-dark-blue mb-sm">Find The Perfect Business Match</h2>
-            <p class="text-dark-blue font-inter mb-lg max-w-md mx-auto">
-                Search trusted women-led businesses inside the SheEO ecosystem and connect directly with experts aligned with your needs.
-            </p>
-
-            <div class="search-bar-wrapper bg-white rounded-pill shadow-pink flex align-center px-lg py-sm mb-lg mx-auto" style="max-width: 600px; border: 2px solid var(--pink-border);">
-                <i data-lucide="search" class="text-rose icon-md mr-sm"></i>
-                <input type="text" placeholder="Search by category, city, or services..." class="w-100 border-none outline-none text-dark-blue font-inter text-md bg-transparent" style="padding: 10px 0;">
-                <button class="btn btn-primary-pink btn-sm rounded-pill ml-sm">Search</button>
-            </div>
-
-            <div class="filter-pills flex justify-center gap-sm flex-wrap">
-                <button class="filter-pill active">All</button>
-                <button class="filter-pill">Coaches</button>
-                <button class="filter-pill">Consultants</button>
-                <button class="filter-pill">Wellness</button>
-                <button class="filter-pill">Beauty</button>
-                <button class="filter-pill">Designers</button>
-                <button class="filter-pill">Marketing</button>
-                <button class="filter-pill">Artists</button>
-                <button class="filter-pill">Real Estate</button>
-                <button class="filter-pill">Finance</button>
-            </div>
+    <section class="premium-spotlight" aria-labelledby="spotlight-title" data-premium-spotlight>
+      <div class="sheeo-container premium-spotlight__card">
+        <img class="premium-spotlight__media" src="/assets/images/sabr/desert-ivory-front.jpg" alt="SABR Desert Ivory T-shirt photographed in the dunes" loading="lazy">
+        <div class="premium-spotlight__content">
+          <div class="premium-badge"><span>♕</span><strong>SheEO<br>Premium Brand</strong></div><p class="eyebrow">SheEO premium brand spotlight</p><h2 class="sabr-wordmark" id="spotlight-title">SABR · <small lang="ar" dir="rtl">صبر</small></h2><p class="sabr-tagline">WEAR THE WAIT</p><p><strong>Luxury Modest Streetwear · Dubai, UAE</strong></p><p class="spotlight-description">A UAE-born luxury label rooted in heritage, creating limited pieces inspired by the colours, landscapes and spirit of the Emirates.</p>
+          <ul class="attribute-list" aria-label="SABR attributes"><li>◉ UAE Born</li><li>♢ Limited Releases</li><li>✦ Heritage Inspired</li><li>✓ Verified · UAE</li></ul>
+          <div class="spotlight-actions"><a class="sheeo-button sheeo-button--primary" href="/sheeo-member/sabr/" data-analytics="premium_spotlight_click">Explore SABR</a><a class="sheeo-button sheeo-button--outline" href="https://sabrfamily.com/" target="_blank" rel="noopener" data-analytics="external_brand_click">Visit brand ↗</a></div>
         </div>
+      </div>
     </section>
 
-    <!-- Featured Members Grid -->
-    <section class="featured-members bg-cream py-xl relative">
-        <div class="container max-w-lg mx-auto">
-            <div class="members-grid grid-3">
-                
-                <!-- Member Card 1 -->
-                <div class="member-card bg-white rounded-xl shadow-pink overflow-hidden hover-lift flex flex-col h-100">
-                    <div class="mc-img relative">
-                        <img src="/founder-sadhna.jpg" alt="Sadhna Sharma" class="w-100 object-cover" style="height: 200px;">
-                        <div class="absolute top-0 right-0 m-sm">
-                            <span class="bg-white text-dark-blue rounded-pill px-sm py-xs text-xs font-bold flex align-center shadow-pink"><i data-lucide="check-circle" class="icon-xs text-rose inline-icon"></i> SheEO Verified</span>
-                        </div>
-                    </div>
-                    <div class="mc-content p-md flex-grow flex flex-col">
-                        <h3 class="font-playfair text-xl text-dark-blue mb-xs">Sadhna Sharma</h3>
-                        <p class="text-rose text-xs uppercase tracking-wide font-bold mb-sm">Business Growth Strategist</p>
-                        <p class="text-dark-blue text-sm mb-md flex-grow line-height-relaxed">Helping women entrepreneurs build clarity, confidence, and scalable business systems.</p>
-                        
-                        <div class="flex align-center gap-sm mb-md bg-pink-soft p-sm rounded-lg border border-pink-dark">
-                            <i data-lucide="gift" class="text-rose icon-sm"></i>
-                            <span class="text-xs font-bold text-dark-blue uppercase tracking-wide">15% Member Benefit Available</span>
-                        </div>
-
-                        <div class="flex-between align-center border-t border-pink-light pt-md mt-auto">
-                            <div class="social-icons flex gap-xs">
-                                <a href="#" class="text-rose hover-text-dark opacity-80 hover-opacity-100"><i data-lucide="instagram" class="icon-xs"></i></a>
-                                <a href="#" class="text-rose hover-text-dark opacity-80 hover-opacity-100"><i data-lucide="linkedin" class="icon-xs"></i></a>
-                                <a href="#" class="text-rose hover-text-dark opacity-80 hover-opacity-100"><i data-lucide="globe" class="icon-xs"></i></a>
-                            </div>
-                            <a href="#" class="btn btn-primary btn-sm rounded-pill">View Profile</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Member Card 2 -->
-                <div class="member-card bg-white rounded-xl shadow-pink overflow-hidden hover-lift flex flex-col h-100">
-                    <div class="mc-img relative">
-                        <img src="/sheeo-member/mehak.jpeg" alt="Mehak Marwaha" class="w-100 object-cover" style="height: 200px; object-position: top;">
-                        <div class="absolute top-0 right-0 m-sm">
-                            <span class="bg-white text-dark-blue rounded-pill px-sm py-xs text-xs font-bold flex align-center shadow-pink"><i data-lucide="check-circle" class="icon-xs text-rose inline-icon"></i> SheEO Verified</span>
-                        </div>
-                    </div>
-                    <div class="mc-content p-md flex-grow flex flex-col">
-                        <h3 class="font-playfair text-xl text-dark-blue mb-xs">Mehak Marwaha</h3>
-                        <p class="text-rose text-xs uppercase tracking-wide font-bold mb-sm">Holistic Clarity Coach</p>
-                        <p class="text-dark-blue text-sm mb-md flex-grow line-height-relaxed">Helping students, women, and professionals gain clarity, confidence, and direction.</p>
-                        
-                        <div class="flex align-center gap-sm mb-md bg-pink-soft p-sm rounded-lg border border-pink-dark">
-                            <i data-lucide="gift" class="text-rose icon-sm"></i>
-                            <span class="text-xs font-bold text-dark-blue uppercase tracking-wide">10% Member Benefit Available</span>
-                        </div>
-
-                        <div class="flex-between align-center border-t border-pink-light pt-md mt-auto">
-                            <div class="social-icons flex gap-xs">
-                                <a href="https://www.instagram.com/ekaa_radiance/" target="_blank" class="text-rose hover-text-dark opacity-80 hover-opacity-100"><i data-lucide="instagram" class="icon-xs"></i></a>
-                                <a href="http://www.ekaa.me" target="_blank" class="text-rose hover-text-dark opacity-80 hover-opacity-100"><i data-lucide="globe" class="icon-xs"></i></a>
-                                <a href="https://wa.me/971562046096" target="_blank" class="text-rose hover-text-dark opacity-80 hover-opacity-100"><i data-lucide="message-circle" class="icon-xs"></i></a>
-                            </div>
-                            <a href="/sheeo-member/mehak-marwaha/" class="btn btn-primary btn-sm rounded-pill">View Profile</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Member Card 3 -->
-                <div class="member-card bg-white rounded-xl shadow-pink overflow-hidden hover-lift flex flex-col h-100">
-                    <div class="mc-img relative">
-                        <img src="/sheeo-member/nitasha.jpeg" alt="Nitasha Saxena" class="w-100 object-cover" style="height: 200px; object-position: top;">
-                        <div class="absolute top-0 right-0 m-sm">
-                            <span class="bg-white text-dark-blue rounded-pill px-sm py-xs text-xs font-bold flex align-center shadow-pink"><i data-lucide="check-circle" class="icon-xs text-rose inline-icon"></i> SheEO Verified</span>
-                        </div>
-                    </div>
-                    <div class="mc-content p-md flex-grow flex flex-col">
-                        <h3 class="font-playfair text-xl text-dark-blue mb-xs">Nitasha Saxena</h3>
-                        <p class="text-rose text-xs uppercase tracking-wide font-bold mb-sm">Mindful Beauty Educator</p>
-                        <p class="text-dark-blue text-sm mb-md flex-grow line-height-relaxed">Helping teens, tweens, and women develop confidence through age-appropriate makeup and skincare knowledge.</p>
-                        
-                        <div class="flex align-center gap-sm mb-md bg-pink-soft p-sm rounded-lg border border-pink-dark">
-                            <i data-lucide="gift" class="text-rose icon-sm"></i>
-                            <span class="text-xs font-bold text-dark-blue uppercase tracking-wide">10% - 15% Member Benefit Available</span>
-                        </div>
-
-                        <div class="flex-between align-center border-t border-pink-light pt-md mt-auto">
-                            <div class="social-icons flex gap-xs">
-                                <a href="https://www.instagram.com/nitashas_makeupworkshops/" target="_blank" class="text-rose hover-text-dark opacity-80 hover-opacity-100"><i data-lucide="instagram" class="icon-xs"></i></a>
-                                <a href="http://www.mindfulmakeup.me" target="_blank" class="text-rose hover-text-dark opacity-80 hover-opacity-100"><i data-lucide="globe" class="icon-xs"></i></a>
-                                <a href="https://wa.me/971505155759" target="_blank" class="text-rose hover-text-dark opacity-80 hover-opacity-100"><i data-lucide="message-circle" class="icon-xs"></i></a>
-                            </div>
-                            <a href="/sheeo-member/nitasha-saxena/" class="btn btn-primary btn-sm rounded-pill">View Profile</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Member Card 5 -->
-                <div class="member-card bg-white rounded-xl shadow-pink overflow-hidden hover-lift flex flex-col h-100">
-                    <div class="mc-img relative">
-                        <img src="/sheeo-member/rashimonga.jpeg" alt="Rashi" class="w-100 object-cover" style="height: 200px; object-position: top;">
-                        <div class="absolute top-0 right-0 m-sm">
-                            <span class="bg-white text-dark-blue rounded-pill px-sm py-xs text-xs font-bold flex align-center shadow-pink"><i data-lucide="check-circle" class="icon-xs text-rose inline-icon"></i> SheEO Verified</span>
-                        </div>
-                    </div>
-                    <div class="mc-content p-md flex-grow flex flex-col">
-                        <h3 class="font-playfair text-xl text-dark-blue mb-xs">Rashi</h3>
-                        <p class="text-rose text-xs uppercase tracking-wide font-bold mb-sm" style="line-height: 1.4;">Founder, Mohaul & Milagro Studio</p>
-                        <p class="text-dark-blue text-sm mb-md flex-grow line-height-relaxed">Luxury handcrafted candles, bespoke gifting experiences, and fashion-forward lifestyle products designed for intentional living.</p>
-                        
-                        <div class="flex align-center gap-sm mb-md bg-pink-soft p-sm rounded-lg border border-pink-dark">
-                            <i data-lucide="gift" class="text-rose icon-sm"></i>
-                            <span class="text-xs font-bold text-dark-blue uppercase tracking-wide">Member Benefit Available</span>
-                        </div>
-
-                        <div class="flex-between align-center border-t border-pink-light pt-md mt-auto">
-                            <div class="social-icons flex gap-xs">
-                                <a href="https://www.instagram.com/mohaulbymbr/" target="_blank" class="text-rose hover-text-dark opacity-80 hover-opacity-100"><i data-lucide="instagram" class="icon-xs"></i></a>
-                                <a href="https://wa.me/971552803777" target="_blank" class="text-rose hover-text-dark opacity-80 hover-opacity-100"><i data-lucide="message-circle" class="icon-xs"></i></a>
-                            </div>
-                            <a href="/sheeo-member/rashi/" class="btn btn-primary btn-sm rounded-pill">View Profile</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Member Card 6 -->
-                <div class="member-card bg-white rounded-xl shadow-pink overflow-hidden hover-lift flex flex-col h-100">
-                    <div class="mc-img relative">
-                        <img src="/sheeo-member/RAINA DESAI.jpeg" alt="Raina Desai Lalchand" class="w-100 object-cover" style="height: 200px; object-position: top;">
-                        <div class="absolute top-0 right-0 m-sm">
-                            <span class="bg-white text-dark-blue rounded-pill px-sm py-xs text-xs font-bold flex align-center shadow-pink"><i data-lucide="check-circle" class="icon-xs text-rose inline-icon"></i> SheEO Verified</span>
-                        </div>
-                    </div>
-                    <div class="mc-content p-md flex-grow flex flex-col">
-                        <h3 class="font-playfair text-xl text-dark-blue mb-xs">Raina Desai Lalchand</h3>
-                        <p class="text-rose text-xs uppercase tracking-wide font-bold mb-sm" style="line-height: 1.4;">Marketplace Growth Strategist & E-Commerce Enabler</p>
-                        <p class="text-dark-blue text-sm mb-md flex-grow line-height-relaxed">Helping businesses launch, scale, and grow through e-commerce, marketplace expansion, digital marketing, and online business solutions.</p>
-                        
-                        <div class="flex align-center gap-sm mb-md bg-pink-soft p-sm rounded-lg border border-pink-dark">
-                            <i data-lucide="gift" class="text-rose icon-sm"></i>
-                            <span class="text-xs font-bold text-dark-blue uppercase tracking-wide">Member Benefit Available</span>
-                        </div>
-
-                        <div class="flex-between align-center border-t border-pink-light pt-md mt-auto">
-                            <div class="social-icons flex gap-xs">
-                                <a href="http://www.emarkiz.com" target="_blank" class="text-rose hover-text-dark opacity-80 hover-opacity-100"><i data-lucide="globe" class="icon-xs"></i></a>
-                                <a href="https://wa.me/971557854534" target="_blank" class="text-rose hover-text-dark opacity-80 hover-opacity-100"><i data-lucide="message-circle" class="icon-xs"></i></a>
-                            </div>
-                            <a href="/sheeo-member/raina/" class="btn btn-primary btn-sm rounded-pill">View Profile</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            
-            <div class="text-center mt-xl">
-                <button class="btn btn-primary-pink btn-lg rounded-pill shadow-pink">Load More Businesses</button>
-            </div>
-        </div>
+    <section class="directory-search-section" id="browse" aria-labelledby="search-title">
+      <div class="sheeo-container">
+        <div class="directory-search-title"><p class="eyebrow">Browse the ecosystem</p><h2 class="section-title" id="search-title">Find the perfect business match</h2></div>
+        <form class="search-form" id="directory-search-form" role="search"><label class="search-field-wrap"><span aria-hidden="true">⌕</span><span class="visually-hidden">Search directory</span><input class="search-field" id="directory-search" name="q" type="search" autocomplete="off" placeholder="Search by business, founder, category or service…"></label><button class="sheeo-button sheeo-button--primary" type="submit">Search</button></form>
+        <div class="category-rail" id="category-filters" aria-label="Filter businesses by category"></div><p class="results-meta" id="result-count" aria-live="polite"></p><div class="business-grid" id="directory-results"></div>
+      </div>
     </section>
 
-    <!-- Why Join The Directory -->
-    <section class="why-join bg-pink-soft py-xl relative">
-        <div class="container grid-2 align-center max-w-lg mx-auto">
-            <div class="wj-left pr-lg animate-fade-up">
-                <p class="section-tag mb-xs text-rose uppercase tracking-wide font-bold text-xs">For Founders</p>
-                <h2 class="section-title uppercase text-dark-blue mb-md">Why Join The SheEO Business Directory?</h2>
-                <div class="flex flex-col gap-sm">
-                    <div class="flex align-start gap-md mb-sm">
-                        <div class="bg-white p-sm rounded-circle shadow-pink text-rose flex-center" style="width:40px; height:40px; flex-shrink:0;"><i data-lucide="search" class="icon-sm"></i></div>
-                        <div>
-                            <h4 class="font-bold text-dark-blue mb-xs">Get Discovered</h4>
-                            <p class="text-sm text-dark-blue">By potential clients actively seeking women-led services.</p>
-                        </div>
-                    </div>
-                    <div class="flex align-start gap-md mb-sm">
-                        <div class="bg-white p-sm rounded-circle shadow-pink text-rose flex-center" style="width:40px; height:40px; flex-shrink:0;"><i data-lucide="eye" class="icon-sm"></i></div>
-                        <div>
-                            <h4 class="font-bold text-dark-blue mb-xs">Premium Visibility</h4>
-                            <p class="text-sm text-dark-blue">Receive elevated exposure across the SheEO ecosystem.</p>
-                        </div>
-                    </div>
-                    <div class="flex align-start gap-md mb-sm">
-                        <div class="bg-white p-sm rounded-circle shadow-pink text-rose flex-center" style="width:40px; height:40px; flex-shrink:0;"><i data-lucide="users" class="icon-sm"></i></div>
-                        <div>
-                            <h4 class="font-bold text-dark-blue mb-xs">Build Trust</h4>
-                            <p class="text-sm text-dark-blue">Align your brand with our highly trusted network.</p>
-                        </div>
-                    </div>
-                    <div class="flex align-start gap-md mb-sm">
-                        <div class="bg-white p-sm rounded-circle shadow-pink text-rose flex-center" style="width:40px; height:40px; flex-shrink:0;"><i data-lucide="share-2" class="icon-sm"></i></div>
-                        <div>
-                            <h4 class="font-bold text-dark-blue mb-xs">Direct Referrals</h4>
-                            <p class="text-sm text-dark-blue">Get community recommendations and organic referrals.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="wj-right pl-lg animate-fade-up" style="animation-delay: 0.2s;">
-                <div class="bg-white p-xl rounded-xl shadow-pink border border-pink-dark">
-                    <h3 class="font-playfair text-2xl text-dark-blue mb-md text-center">Become part of a powerful women entrepreneur movement.</h3>
-                    <ul class="text-sm text-dark-blue flex flex-col gap-sm mb-lg" style="list-style:none; padding:0;">
-                        <li class="flex align-center gap-sm"><i data-lucide="check" class="text-rose icon-sm"></i> Access exclusive networking opportunities</li>
-                        <li class="flex align-center gap-sm"><i data-lucide="check" class="text-rose icon-sm"></i> Promote on our social platforms</li>
-                        <li class="flex align-center gap-sm"><i data-lucide="check" class="text-rose icon-sm"></i> Event branding options</li>
-                    </ul>
-                    <a href="/apply-directory/" class="btn btn-primary-pink btn-lg rounded-pill w-100 shadow-pink text-center">Apply Now</a>
-                </div>
-            </div>
-        </div>
+    <section class="why-section" aria-labelledby="why-title">
+      <div class="sheeo-container why-grid">
+        <div><p class="eyebrow">Built for founder-led growth</p><h2 class="section-title" id="why-title">Why join <em>the SheEO</em> business directory?</h2><div class="benefit-grid">
+          <article class="benefit-item"><span class="benefit-item__icon">✦</span><div><h3>Get discovered</h3><p>Increase visibility and connect with the right audience.</p></div></article><article class="benefit-item"><span class="benefit-item__icon">♕</span><div><h3>Premium visibility</h3><p>Stand out with premium features and brand exposure.</p></div></article><article class="benefit-item"><span class="benefit-item__icon">✓</span><div><h3>Build trust</h3><p>Verified members build confidence and credibility.</p></div></article><article class="benefit-item"><span class="benefit-item__icon">∞</span><div><h3>Grow together</h3><p>Meet collaborators, partners and customers in the ecosystem.</p></div></article>
+        </div></div>
+        <aside class="join-card"><span class="join-card__crown">♕</span><h3>Join the SheEO ecosystem</h3><p>Be part of a powerful network of women entrepreneurs and leaders supporting each other to grow, thrive and create impact.</p><a class="sheeo-button sheeo-button--primary" href="/apply-directory/?type=membership" data-analytics="apply_membership_click">Apply for membership</a></aside>
+      </div>
     </section>
 
-    <!-- Member Benefits Strip -->
-    <section class="benefits-strip bg-dark-blue py-md overflow-hidden">
-        <div class="container text-center">
-            <div class="flex justify-center gap-xl flex-wrap">
-                <div class="flex align-center gap-sm text-white uppercase tracking-wide font-bold text-xs"><i data-lucide="check-circle" class="text-rose icon-sm"></i> Verified Visibility</div>
-                <div class="flex align-center gap-sm text-white uppercase tracking-wide font-bold text-xs"><i data-lucide="check-circle" class="text-rose icon-sm"></i> Direct Referrals</div>
-                <div class="flex align-center gap-sm text-white uppercase tracking-wide font-bold text-xs"><i data-lucide="check-circle" class="text-rose icon-sm"></i> Social Promotions</div>
-                <div class="flex align-center gap-sm text-white uppercase tracking-wide font-bold text-xs"><i data-lucide="check-circle" class="text-rose icon-sm"></i> Event Branding</div>
-                <div class="flex align-center gap-sm text-white uppercase tracking-wide font-bold text-xs"><i data-lucide="check-circle" class="text-rose icon-sm"></i> Premium Community Access</div>
-            </div>
-        </div>
-    </section>
+    <section class="testimonial-section" aria-labelledby="testimonial-title"><div class="sheeo-container"><div class="section-heading"><p class="eyebrow">♕</p><h2 class="section-title" id="testimonial-title">What our founders say</h2></div><figure class="testimonial-card"><blockquote>Being part of SheEO has opened doors to collaboration, visibility and meaningful connections. The support from this community is unmatched.</blockquote><figcaption class="testimonial-person"><img src="/sheeo-member/nitasha.jpeg" alt=""><span><strong>Nitasha Saxena</strong><small>Founder, Mindful Make-Up</small></span></figcaption></figure></div></section>
 
-    <!-- Testimonials -->
-    <section class="testimonials-dir py-xxl bg-cream relative">
-        <div class="container max-w-lg mx-auto text-center">
-            <h2 class="section-title uppercase text-dark-blue mb-xl">What Our Founders Say</h2>
-            
-            <div class="testimonial-quote-card bg-white p-xl rounded-xl shadow-pink max-w-md mx-auto relative hover-lift">
-                <div class="quote-mark text-rose font-playfair absolute" style="font-size:8rem; top:-40px; left:20px; opacity:0.1; line-height:1;">"</div>
-                <p class="font-inter text-md text-dark-blue line-height-relaxed font-bold italic mb-lg relative z-10">
-                    "Being part of SheEO Summit has expanded my visibility, network, and confidence as a founder. The community genuinely supports women-led businesses and the directory has brought me several high-quality leads."
-                </p>
-                <div class="flex align-center justify-center gap-md">
-                    <img src="/founder-sadhna.jpg" class="rounded-pill object-cover" style="width:60px; height:60px; border: 2px solid var(--pink-dark);" alt="Founder">
-                    <div class="text-left">
-                        <h5 class="font-playfair text-lg text-dark-blue mb-0">Sarah Jenkins</h5>
-                        <p class="text-xs uppercase tracking-wide text-rose font-bold">Founding Member</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section class="directory-final-cta" aria-labelledby="final-cta-title"><div class="sheeo-container directory-final-cta__inner"><div><h2 id="final-cta-title">Ready to position your brand inside the SheEO ecosystem?</h2><p>Join a trusted community of women entrepreneurs and put your business in front of collaborators, partners and customers.</p></div><div class="directory-final-cta__actions"><a class="sheeo-button sheeo-button--light" href="/apply-directory/" data-analytics="join_directory_click">Join directory</a><a class="sheeo-button sheeo-button--outline" href="/apply-directory/?type=membership" data-analytics="apply_membership_click">Apply for membership</a></div></div></section>
+  </main>
 
-    <!-- Join CTA -->
-    <section class="join-cta py-xxl relative overflow-hidden" style="background: linear-gradient(135deg, var(--rose-dark) 0%, var(--text-rose) 100%);">
-        <div class="bokeh absolute top-0 left-0 w-100 h-100 pointer-events-none" aria-hidden="true" style="z-index: 0;">
-            <span style="background: rgba(255,255,255,0.1);"></span>
-            <span style="background: rgba(255,255,255,0.1);"></span>
-            <span style="background: rgba(255,255,255,0.1);"></span>
-        </div>
-        <div class="container text-center max-w-md mx-auto relative z-10">
-            <h2 class="font-playfair text-4xl text-white mb-md line-height-tight">Ready To Position Your Brand Inside The SheEO Ecosystem?</h2>
-            <p class="text-white font-inter text-md mb-lg line-height-relaxed opacity-80">
-                Become part of an exclusive network of visionary women entrepreneurs and get your business discovered through our premium founder directory.
-            </p>
-            <div class="bg-white p-sm rounded-pill inline-flex align-center gap-sm mb-lg shadow-pink mx-auto">
-                <div class="bg-pink-soft rounded-pill px-sm py-xs"><span class="text-rose text-xs font-bold uppercase tracking-wide">🚨 Alert</span></div>
-                <span class="text-dark-blue text-sm font-bold pr-sm">Limited Founding Visibility Spots Available</span>
-            </div>
-            <br>
-            <a href="/apply-directory/?type=membership" class="btn bg-white text-rose btn-lg rounded-pill shadow-pink hover-lift uppercase tracking-wide font-bold" style="padding: 20px 48px; font-size:14px;">Apply For Membership</a>
-        </div>
-    </section>
-
-    <!-- Footer CTA & Global Footer -->
-    <footer class="site-footer bg-cream">
-        <!-- Small Luxury Footer Block -->
-        <div class="bg-pink-soft py-xl text-center border-b border-pink-light">
-            <div class="container max-w-lg mx-auto">
-                <i data-lucide="heart" class="text-rose icon-sm mb-sm"></i>
-                <h4 class="font-playfair text-xl text-dark-blue mb-xs">Built With Vision By SheEO Summit</h4>
-                <p class="text-rose text-xs uppercase tracking-wide font-bold">Empowering Women Through Visibility, Community & Collaboration.</p>
-            </div>
-        </div>
-
-        <div class="container text-center pt-xl mb-xl">
-            <p class="text-xs uppercase tracking-wide text-dark-blue font-bold mb-xs">Find us on IG</p>
-            <h2 class="font-playfair text-dark-blue mb-lg" style="font-size:3rem;"><a
-                    href="https://www.instagram.com/sheeosummit2026/" target="_blank"
-                    style="text-decoration:none; color:inherit;">@<span class="text-rose">SHEEOSUMMIT</span>2025</a>
-            </h2>
-
-            <div
-                class="footer-bottom-grid grid-2 text-left mt-xl pt-xl border-t border-pink-dark gap-md max-w-lg mx-auto">
-                <div class="newsletter-col">
-                    <h4 class="text-dark-blue font-inter font-bold text-lg mb-sm pr-md">Become A Member</h4>
-                    <a href="https://www.whatsapp.com/channel/0029VbBqRXi8V0twOPec2e3d" target="_blank"
-                        class="btn btn-primary-pink rounded-pill px-xl py-md font-bold tracking-wide mt-md inline-flex align-center gap-xs text-md"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-message-circle">
-                            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
-                        </svg> Join our community</a>
-                </div>
-                <div class="contact-col pl-xl text-right">
-                    <h4 class="text-dark-blue font-inter font-bold text-md mb-sm">Still have a question?<br><a
-                            href="/connect-with-us/" class="text-rose hover-text-dark"
-                            style="text-decoration:none;">Contact Us!</a></h4>
-                    <div class="flex-center text-dark-blue justify-end mt-sm gap-md">
-                        <a href="mailto:sadhna@sheeo-summit.com"
-                            class="text-rose text-sm font-bold hover-text-dark"
-                            style="text-decoration:none;">sadhna@sheeo-summit.com</a>
-                        <a href="tel:+971507091969" class="text-rose text-sm font-bold hover-text-dark"
-                            style="text-decoration:none;">+971 50 7091969</a>
-                    </div>
-                    <div class="flex-center text-dark-blue justify-end mt-sm gap-md">
-                        <a href="https://www.instagram.com/sheeosummit2026/" target="_blank"
-                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="Instagram"><i
-                                data-lucide="instagram" class="icon-sm"></i></a>
-                        <a href="https://www.facebook.com/sadhnarishisharma/" target="_blank"
-                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="Facebook"><i
-                                data-lucide="facebook" class="icon-sm"></i></a>
-                        <a href="https://www.linkedin.com/in/sadhna-sharma-8767b817/" target="_blank"
-                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="LinkedIn"><i
-                                data-lucide="linkedin" class="icon-sm"></i></a>
-                        <a href="https://api.whatsapp.com/send?phone=+971507091969" target="_blank"
-                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="WhatsApp">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-message-circle">
-                                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="footer-copyright flex-between text-xs text-dark-blue font-bold font-inter mt-xl pt-lg border-t border-pink-dark">
-                <div class="flex gap-lg">
-                    <a href="/privacy-policy/" class="hover-text-rose uppercase tracking-wide"
-                        style="text-decoration:none; color:inherit;">Privacy Policy</a>
-                    <a href="/terms-and-conditions/" class="hover-text-rose uppercase tracking-wide"
-                        style="text-decoration:none; color:inherit;">Terms & Conditions</a>
-                    <a href="/Business_License.pdf" target="_blank" class="hover-text-rose uppercase tracking-wide"
-                        style="text-decoration:none; color:inherit;">Business License</a>
-                </div>
-                <div class="tracking-wide">© 2026 SHEEO BUSINESS NETWORK DUBAI.<br>ALL RIGHTS RESERVED</div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Icons
-            lucide.createIcons();
-
-            // Mobile Menu
-            const btn = document.getElementById('mobile-menu-btn');
-            const menu = document.getElementById('mobile-menu');
-            if (btn && menu) {
-                btn.addEventListener('click', () => {
-                    menu.classList.toggle('hidden');
-                });
-            }
-
-            // Navbar Scroll
-            window.addEventListener('scroll', () => {
-                const nav = document.querySelector('.navbar');
-                if (window.scrollY > 50) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
-                }
-            });
-            
-            // Featured Members Filtering & Load More
-            const searchInput = document.querySelector('.search-bar-wrapper input');
-            const searchBtn = document.querySelector('.search-bar-wrapper button');
-            const pills = document.querySelectorAll('.filter-pill');
-            const memberCards = document.querySelectorAll('.members-grid .member-card');
-            const loadMoreBtn = document.querySelector('.featured-members .text-center .btn-primary-pink');
-            
-            let currentFilter = 'All';
-            let searchQuery = '';
-            let visibleCount = 6; // Start by showing up to 6 cards
-            
-            function filterCards() {
-                let matchCount = 0;
-                
-                memberCards.forEach((card) => {
-                    const textContent = card.textContent.toLowerCase();
-                    
-                    let matchesPill = false;
-                    const fLower = currentFilter.toLowerCase();
-                    
-                    if (currentFilter === 'All') {
-                        matchesPill = true;
-                    } else if (fLower === 'coaches' && textContent.includes('coach')) {
-                        matchesPill = true;
-                    } else if (fLower === 'consultants' && (textContent.includes('consultant') || textContent.includes('strategist'))) {
-                        matchesPill = true;
-                    } else if (fLower === 'wellness' && (textContent.includes('wellness') || textContent.includes('holistic') || textContent.includes('healing'))) {
-                        matchesPill = true;
-                    } else if (fLower === 'beauty' && (textContent.includes('beauty') || textContent.includes('makeup') || textContent.includes('skin'))) {
-                        matchesPill = true;
-                    } else if (textContent.includes(fLower) || textContent.includes(fLower.slice(0, -1))) { 
-                        // fallback including naive singularization like Designer -> design
-                        matchesPill = true;
-                    }
-                    
-                    const matchesSearch = searchQuery === '' || textContent.includes(searchQuery);
-                    
-                    if (matchesSearch && matchesPill) {
-                        if (matchCount < visibleCount) {
-                            card.style.display = 'flex';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                        matchCount++;
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-                
-                if (loadMoreBtn) {
-                    if (matchCount > visibleCount) {
-                        loadMoreBtn.style.display = 'inline-block';
-                    } else {
-                        loadMoreBtn.style.display = 'none';
-                    }
-                }
-            }
-
-            if (searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    searchQuery = e.target.value.toLowerCase().trim();
-                    visibleCount = 6;
-                    filterCards();
-                });
-            }
-            
-            if (searchBtn) {
-                searchBtn.addEventListener('click', () => {
-                    filterCards();
-                });
-            }
-            
-            if (pills) {
-                pills.forEach(pill => {
-                    pill.addEventListener('click', () => {
-                        pills.forEach(p => p.classList.remove('active'));
-                        pill.classList.add('active');
-                        currentFilter = pill.textContent;
-                        visibleCount = 6;
-                        filterCards();
-                    });
-                });
-            }
-            
-            if (loadMoreBtn) {
-                loadMoreBtn.addEventListener('click', () => {
-                    visibleCount += 6;
-                    filterCards();
-                });
-            }
-            
-            // Initial run to set up button state
-            filterCards();
-        });
-    </script>
-<!-- WhatsApp Floating Icon -->
-<a href="https://wa.me/971507091969" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-    </svg>
-</a>
+  <div data-global-footer></div>
 </body>
 </html>
-
-

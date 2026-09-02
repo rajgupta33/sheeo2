@@ -50,7 +50,7 @@ window.SHEEO_MOCK_DATA = {
     { id: 'reward-reel', name: 'Instagram Reel Feature', reward_type: 'instagram_reel', points_cost: 100, description: 'A dedicated Reel feature introducing your founder story and business to the SheEO audience.', active: true, icon: 'clapperboard' }
   ],
   redemptions: [
-    { id: 'redemption-48', reward_name: '50% Event Access', points_cost: 100, status: 'fulfilled', requested_at: '2025-10-02T10:00:00Z', fulfilled_at: '2025-10-06T10:00:00Z' }
+    { id: 'redemption-48', member_name: 'Sadhna Sharma', reward_name: '50% Event Access', points_cost: 100, status: 'fulfilled', requested_at: '2025-10-02T10:00:00Z', fulfilled_at: '2025-10-06T10:00:00Z' }
   ],
   members: [
     { id: 'user-sadhna', full_name: 'Sadhna Sharma', business_name: 'SheEO Summit', title: 'Founder & Community Builder', city: 'Dubai', category: 'Community', services: ['Business Networking', 'Founder Visibility'], profile_photo_path: '/founder-sadhna.jpg', website: 'https://sheeo-summit.com', directory_visible: true, status: 'active' },

@@ -6,6 +6,8 @@ This directory contains the credential-independent Phase 0 member and admin port
 
 Serve the repository root with any static HTTP server and open `/portal/login.html`. While `MOCK_MODE` is `true`, any non-empty email/password combination opens a demo active-member session. Mock state lives only in JavaScript memory and resets on page reload.
 
+Production uses `https://members.sheeo-summit.com/portal/`. See [DEPLOYMENT.md](DEPLOYMENT.md) for the required hosting, DNS, Supabase redirect, PWA and end-to-end checks.
+
 ## Connect Supabase
 
 1. Apply both version-controlled migrations in filename order. They create the schema/RLS/Storage foundation first and the protected workflows second.

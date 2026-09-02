@@ -1,25 +1,26 @@
 (function () {
   const U = window.SheeoUtils;
+  const R = window.SheeoRoutes;
 
   const memberNavigation = [
-    ['dashboard', 'Dashboard', 'layout-dashboard', '/portal/dashboard.html'],
-    ['points', 'My Points', 'sparkles', '/portal/points.html'],
-    ['earn-points', 'Earn Points', 'badge-plus', '/portal/earn-points.html'],
-    ['directory', 'Member Directory', 'users', '/portal/directory.html'],
-    ['profile', 'My Profile', 'circle-user-round', '/portal/profile.html'],
-    ['refer', 'Refer a Founder', 'send', '/portal/refer.html'],
-    ['rewards', 'Rewards', 'gift', '/portal/rewards.html'],
-    ['membership', 'Membership', 'gem', '/portal/membership.html']
+    ['dashboard', 'Dashboard', 'layout-dashboard', R.portal('dashboard.html')],
+    ['points', 'My Points', 'sparkles', R.portal('points.html')],
+    ['earn-points', 'Earn Points', 'badge-plus', R.portal('earn-points.html')],
+    ['directory', 'Member Directory', 'users', R.portal('directory.html')],
+    ['profile', 'My Profile', 'circle-user-round', R.portal('profile.html')],
+    ['refer', 'Refer a Founder', 'send', R.portal('refer.html')],
+    ['rewards', 'Rewards', 'gift', R.portal('rewards.html')],
+    ['membership', 'Membership', 'gem', R.portal('membership.html')]
   ];
 
   const adminNavigation = [
-    ['admin-dashboard', 'Overview', 'layout-dashboard', '/portal/admin/index.html'],
-    ['admin-members', 'Members', 'users', '/portal/admin/members.html'],
-    ['admin-claims', 'Point Claims', 'badge-check', '/portal/admin/claims.html'],
-    ['admin-referrals', 'Referrals', 'send', '/portal/admin/referrals.html'],
-    ['admin-rewards', 'Rewards', 'gift', '/portal/admin/rewards.html'],
-    ['admin-events', 'Events', 'calendar-days', '/portal/admin/events.html'],
-    ['admin-audit', 'Audit Log', 'scroll-text', '/portal/admin/audit.html']
+    ['admin-dashboard', 'Overview', 'layout-dashboard', R.portal('admin/index.html')],
+    ['admin-members', 'Members', 'users', R.portal('admin/members.html')],
+    ['admin-claims', 'Point Claims', 'badge-check', R.portal('admin/claims.html')],
+    ['admin-referrals', 'Referrals', 'send', R.portal('admin/referrals.html')],
+    ['admin-rewards', 'Rewards', 'gift', R.portal('admin/rewards.html')],
+    ['admin-events', 'Events', 'calendar-days', R.portal('admin/events.html')],
+    ['admin-audit', 'Audit Log', 'scroll-text', R.portal('admin/audit.html')]
   ];
 
   const pageMeta = {
@@ -67,21 +68,22 @@
       document.getElementById('portal-root').innerHTML = `
         <div class="portal-shell">
           <aside class="portal-sidebar" aria-label="${this.isAdmin ? 'Admin' : 'Member'} navigation">
-            <a class="portal-brand" href="${this.isAdmin ? '/portal/admin/index.html' : '/portal/dashboard.html'}">
+            <a class="portal-brand" href="${this.isAdmin ? R.portal('admin/index.html') : R.portal('dashboard.html')}">
               <img src="/sh-logo.jpeg" alt="SheEO">
               <span><strong>SheEO</strong><small>${this.isAdmin ? 'Admin Portal' : 'Member Portal'}</small></span>
             </a>
             <nav class="portal-nav">
               <p class="portal-nav-label">${this.isAdmin ? 'Operations' : 'Membership'}</p>
               ${renderNav(navigation, this.page)}
-              ${this.isAdmin ? `<p class="portal-nav-label">Account</p><a href="/portal/dashboard.html"><i data-lucide="arrow-left"></i><span>Member view</span></a>` : (this.session.admin_role ? `<p class="portal-nav-label">Team</p><a href="/portal/admin/index.html"><i data-lucide="shield-check"></i><span>Admin portal</span></a>` : '')}
+              ${this.isAdmin ? `<p class="portal-nav-label">Account</p><a href="${R.portal('dashboard.html')}"><i data-lucide="arrow-left"></i><span>Member view</span></a>` : (this.session.admin_role ? `<p class="portal-nav-label">Team</p><a href="${R.portal('admin/index.html')}"><i data-lucide="shield-check"></i><span>Admin portal</span></a>` : '')}
             </nav>
             <div class="portal-sidebar-foot">
               <div class="portal-user">
-                <div class="portal-avatar">${profile.profile_photo_path ? `<img src="${U.escapeHtml(profile.profile_photo_path)}" alt="">` : U.initials(profile.full_name)}</div>
+                <div class="portal-avatar">${profile.profile_photo_url || profile.profile_photo_path ? `<img src="${U.escapeHtml(profile.profile_photo_url || profile.profile_photo_path)}" alt="">` : U.initials(profile.full_name)}</div>
                 <div><strong>${U.escapeHtml(profile.full_name || 'SheEO Member')}</strong><small>${U.escapeHtml(profile.business_name || this.session.user.email)}</small></div>
               </div>
               <button class="portal-button secondary small" data-action="logout" style="width:100%; margin-top:14px; color:#fff; border-color:rgba(255,255,255,.25)"><i data-lucide="log-out"></i> Sign out</button>
+              <button class="portal-install-link" type="button" data-pwa-install data-action="install" ${window.SheeoPwa?.canInstall ? '' : 'hidden'}><i data-lucide="download"></i> Install member app</button>
             </div>
           </aside>
           <button class="mobile-overlay" aria-label="Close navigation" data-action="close-nav"></button>
@@ -102,11 +104,24 @@
           </main>
         </div>`;
 
+      // Keep the page behind the mobile drawer from scrolling while it is open.
+      const setNav = (open) => {
+        document.body.classList.toggle('portal-nav-open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      };
+
       document.addEventListener('click', (event) => {
         const action = event.target.closest('[data-action]')?.dataset.action;
-        if (action === 'open-nav') document.body.classList.add('portal-nav-open');
-        if (action === 'close-nav') document.body.classList.remove('portal-nav-open');
+        if (action === 'open-nav') setNav(true);
+        if (action === 'close-nav') setNav(false);
         if (action === 'logout') window.SheeoAuth.logout();
+      });
+
+      document.querySelector('.portal-nav')?.addEventListener('click', (event) => {
+        if (event.target.closest('a')) setNav(false);
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') setNav(false);
       });
 
       U.renderIcons();

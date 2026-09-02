@@ -1,843 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SheEO Coffee Connect | Exclusive Women's Networking</title>
-    <meta name="description" content="Join a curated circle of founders, coaches, consultants, creators, and professionals for meaningful conversations and a transformational clarity session.">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="styles.css">
-    <!-- Stripe payment link -->
-    <script src="script.js?v=2" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SheEO Coffee Meetup with Meher Rupa | 9 September 2026</title>
+  <meta name="description" content="Join SheEO for an intimate coffee meetup in Dubai with meaningful business conversations and a special reflective session with Meher Rupa.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SheEO Coffee Meetup with Meher Rupa">
+  <meta property="og:description" content="Coffee, business conversations and meaningful connections in Dubai on 9 September 2026.">
+  <meta property="og:url" content="https://sheeo-summit.com/coffee-connect/">
+  <meta property="og:image" content="https://sheeo-summit.com/assets/images/sheeo-coffee-meetup-og.png">
+  <meta property="og:image:width" content="1731">
+  <meta property="og:image:height" content="909">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SheEO Coffee Meetup with Meher Rupa">
+  <meta name="twitter:description" content="Coffee, business conversations and meaningful connections in Dubai on 9 September 2026.">
+  <meta name="twitter:image" content="https://sheeo-summit.com/assets/images/sheeo-coffee-meetup-og.png">
+  <link rel="icon" type="image/jpeg" href="/sh-logo.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@1.39.0"></script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="styles.css?v=3">
+  <script src="script.js?v=3" defer></script>
+  <script src="/assets/js/global-shell.js" defer></script>
 </head>
 <body>
+  <div data-global-header></div>
 
-    <!-- Sticky Mobile CTA -->
-    <div id="sticky-cta" class="sticky-cta">
-        <a href="https://buy.stripe.com/7sYfZj1OP3tEeMN7K977O0D" class="btn btn-primary btn-full" target="_blank" rel="noopener noreferrer">Reserve My Seat Now</a>
-    </div>
-
-    <nav class="navbar">
-        <div class="container nav-content">
-            <div class="logo-container">
-                <a href="/" style="text-decoration: none;">
-                    <img src="/sh-logo.jpeg" alt="SheEO Logo" class="brand-logo"
-                        onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';">
-                </a>
-                <div id="text-logo" class="fallback-logo" style="display:none;">
-                    <div class="logo-circle">
-                        <span class="logo-bold">She<span class="italic text-rose">EO</span></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-links hidden-mobile">
-                <a href="/about/" class="nav-link">About</a>
-                <div class="relative group">
-                    <button class="nav-link flex align-center gap-xs cursor-pointer border-none bg-transparent"
-                        style="font-family: inherit;">Offerings <i data-lucide="chevron-down"
-                            class="icon-xs"></i></button>
-                    <div class="group-hover-block absolute top-100 left-0 bg-white shadow-pink hidden pt-sm pb-sm"
-                        style="min-width: 220px; border-radius: 12px; z-index: 50; top: 100%;">
-                        <a href="/events/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Events</a>
-                        <a href="/network-marketing/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Network Marketing</a>
-                        <a href="/group-meetups/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Group Meetups</a>
-                        <a href="/business-support/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Business Support</a>
-                        <a href="/podcast-pr/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Podcast & PR</a>
-                        <a href="/collaborations/"
-                            class="block px-md py-xs text-dark-blue text-sm hover-text-rose hover-bg-pink-light"
-                            style="text-decoration:none; font-weight:600;">Collaborations</a>
-                    </div>
-                </div>
-                <a href="/business-support/" class="nav-link">Business Support</a>
-                <a href="/directory/" class="nav-link">Business Directory</a>
-                <a href="#join" class="btn btn-primary btn-sm rounded-pill">Join Us</a>
-            </div>
-
-            <button id="mobile-menu-btn" class="menu-btn mobile-only">
-                <i data-lucide="menu"></i>
-            </button>
+  <main class="coffee-page">
+    <section class="cp-hero" id="top">
+      <picture class="cp-hero__media">
+        <source media="(max-width: 700px)" srcset="mobile bg.png">
+        <img src="desktop bg.png" alt="Coffee, roses and a notebook overlooking the Dubai skyline">
+      </picture>
+      <div class="cp-shell cp-hero__layout">
+        <div class="cp-hero__copy cp-reveal is-visible">
+          <p class="cp-eyebrow"><i data-lucide="coffee"></i> SheEO Coffee Meetup</p>
+          <h1>Connect deeper <em>over coffee</em> with SheEO</h1>
+          <p class="cp-hero__intro">A curated business gathering for women in Dubai who value meaningful conversations, genuine connections and fresh perspectives.</p>
+          <p class="cp-hero__body">Step away from crowded networking rooms and into a more intentional experience—where conversations have time to develop.</p>
+          <div class="cp-actions">
+            <a class="cp-button cp-button--solid" href="https://buy.stripe.com/dRm7sN3WX3tEawxe8x77O0O" target="_blank" rel="noopener noreferrer">Reserve your seat</a>
+            <a class="cp-button cp-button--outline" href="#experience">Discover the experience</a>
+          </div>
+          <div class="cp-hero__meta" aria-label="Event details">
+            <span><i data-lucide="calendar-days"></i> Wednesday, 9 September 2026</span>
+            <span><i data-lucide="map-pin"></i> Mercure Dubai Barsha Heights</span>
+          </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu hidden">
-            <div class="mobile-menu-content bg-cream px-lg py-xl text-center"
-                style="max-height: 90vh; overflow-y: auto;">
-                <a href="/about/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">About</a>
-                <a href="/events/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Events</a>
-                <a href="/network-marketing/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Network Marketing</a>
-                <a href="/group-meetups/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Group Meetups</a>
-                <a href="/business-support/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Business Support</a>
-                <a href="/podcast-pr/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Podcast & PR</a>
-                <a href="/collaborations/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Collaborations</a>
-                <a href="/directory/"
-                    class="mobile-link block py-sm uppercase tracking-wide font-bold text-dark-blue border-b border-pink-light"
-                    style="text-decoration:none;">Business Directory</a>
-                <a href="#join" class="btn btn-primary-pink btn-lg rounded-pill mt-lg w-100">Join Us</a>
-            </div>
+        <div class="cp-countdown cp-reveal is-visible" aria-label="Countdown to the meetup">
+          <p class="cp-countdown__label">Seats are limited</p>
+          <div class="cp-countdown__grid" id="countdown">
+            <div><strong id="days">00</strong><span>Days</span></div>
+            <div><strong id="hours">00</strong><span>Hours</span></div>
+            <div><strong id="minutes">00</strong><span>Minutes</span></div>
+            <div><strong id="seconds">00</strong><span>Seconds</span></div>
+          </div>
+          <p class="cp-countdown__note">Registration closes once the room reaches capacity.</p>
         </div>
-    </nav>
-
-    <!-- SECTION 1 — HERO -->
-    <section class="hero section-padding">
-        <div class="hero-bg"></div>
-        <div class="container hero-content">
-            <h1 class="hero-title">Sip, Simplify & Glow: The Premium Coffee Meetup For Women Entrepreneurs.</h1>
-            
-            <div class="hero-details">
-                <span class="detail-item"><i class="icon-calendar"></i> <strong>24 June 2026, 11:00 AM - 1:00 PM</strong></span>
-                <span class="detail-item"><i class="icon-location"></i> <strong>Mercure Barsha Heights, Ashoka Mixolounge</strong></span>
-                <span class="detail-item price-badge">Your Investment: <strong class="highlight-price">Only AED 99</strong></span>
-            </div>
-
-            <!-- Countdown Timer -->
-            <div class="countdown-card fade-in-up">
-                <div class="countdown-header">
-                    <span class="fomo-fire">🔥 ONLY 5 SPOTS REMAINING</span>
-                    <span class="countdown-title">🕒 REGISTRATION CLOSES IN:</span>
-                </div>
-                <div class="countdown-timer" id="countdown">
-                    <div class="time-box"><span id="days">00</span><small>DAYS</small></div>
-                    <span class="colon">:</span>
-                    <div class="time-box"><span id="hours">00</span><small>HOURS</small></div>
-                    <span class="colon">:</span>
-                    <div class="time-box"><span id="minutes">00</span><small>MINUTES</small></div>
-                    <span class="colon">:</span>
-                    <div class="time-box"><span id="seconds">00</span><small>SECONDS</small></div>
-                </div>
-                <p class="countdown-footer">The room will fill. The conversations will happen. <strong>The only question is... will you be in the room?</strong></p>
-            </div>
-
-            <div class="hero-actions">
-                <a href="https://buy.stripe.com/7sYfZj1OP3tEeMN7K977O0D" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Reserve My Seat</a>
-            </div>
-            
-            <div class="bonus-bar">
-                <span>🎤 <strong>Get a podcast slot at half price!</strong> Exclusive offer for SheEO Members.</span>
-            </div>
-        </div>
+      </div>
     </section>
 
-    <!-- SECTION 2 — WHY THIS IS DIFFERENT -->
-    <section class="different section-padding bg-cream">
-        <div class="container text-center fade-in-up">
-            <h2 class="section-title">Not Another Networking Event.</h2>
-            <p class="section-subtitle">Most networking events leave you with a stack of business cards.<br><strong>SheEO Coffee Connect leaves you with clarity, connections, and opportunities.</strong></p>
-            <p class="section-text">You'll spend your morning with growth-focused women who genuinely want to collaborate, support, and grow together.</p>
-
-            <div class="grid-3 cards-wrapper">
-                <div class="premium-card">
-                    <div class="card-icon">☕</div>
-                    <h3>Coffee</h3>
-                    <p>Relaxed conversations in a welcoming atmosphere. No awkward pitch rounds.</p>
-                </div>
-                <div class="premium-card">
-                    <div class="card-icon">🤝</div>
-                    <h3>Connections</h3>
-                    <p>Meaningful introductions designed to spark genuine collaboration.</p>
-                </div>
-                <div class="premium-card">
-                    <div class="card-icon">✨</div>
-                    <h3>Clarity</h3>
-                    <p>Personalized insights to transform your business trajectory.</p>
-                </div>
-            </div>
-        </div>
+    <section class="cp-value-strip" aria-label="Why attend">
+      <div class="cp-shell cp-value-strip__grid">
+        <article><span class="cp-icon"><i data-lucide="users"></i></span><div><strong>Intimate room</strong><p>Quality interaction</p></div></article>
+        <article><span class="cp-icon"><i data-lucide="messages-square"></i></span><div><strong>Real conversations</strong><p>Beyond small talk</p></div></article>
+        <article><span class="cp-icon"><i data-lucide="handshake"></i></span><div><strong>Business connections</strong><p>Relationships that grow</p></div></article>
+        <article><span class="cp-icon"><i data-lucide="sparkles"></i></span><div><strong>Fresh perspective</strong><p>Ideas and possibility</p></div></article>
+      </div>
     </section>
 
-    <!-- SECTION 3 — WHAT YOU'LL EXPERIENCE -->
-    <section class="experience section-padding">
-        <div class="container fade-in-up text-center">
-            <h2 class="section-title">What You'll Experience</h2>
-            
-
-            <div class="timeline" style="text-align: left;">
-                <div class="timeline-item">
-                    <div class="time">11:00 AM</div>
-                    <div class="content">
-                        <h4>Welcome Coffee & Introductions</h4>
-                        <p>Meet fellow entrepreneurs, founders and professionals.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">11:20 AM</div>
-                    <div class="content">
-                        <h4>Curated Networking Conversations</h4>
-                        <p>Guided networking designed to create genuine connections.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">11:50 AM</div>
-                    <div class="content">
-                        <h4>Mindful Makeup with Nitasha</h4>
-                        <p>Skin-first beauty, ingredient awareness, and everyday essentials.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">12:20 PM</div>
-                    <div class="content">
-                        <h4>Open Networking & Collaboration</h4>
-                        <p>Collaborations, referrals and conversations.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">1:00 PM</div>
-                    <div class="content">
-                        <h4>Closing</h4>
-                        <p>Official end of the event.</p>
-                    </div>
-                </div>
-            </div>
+    <section class="cp-section cp-section--cream" id="experience">
+      <div class="cp-shell">
+        <header class="cp-heading cp-reveal">
+          <p class="cp-eyebrow">Why this room is different</p>
+          <h2>More than <em>coffee.</em><br>Meaningful <em>connections.</em></h2>
+          <p>No crowded ballroom. No rushed introductions. No pressure to pitch. This is an intentional space to talk, listen and discover who is worth continuing the conversation with.</p>
+        </header>
+        <div class="cp-feature-grid">
+          <article class="cp-feature-card cp-reveal">
+            <span class="cp-icon"><i data-lucide="sparkles"></i></span>
+            <h3>Authentic conversations</h3>
+            <p>Small, intentional circles where real conversations have room to develop.</p>
+          </article>
+          <article class="cp-feature-card cp-reveal">
+            <span class="cp-icon"><i data-lucide="heart-handshake"></i></span>
+            <h3>Supportive connections</h3>
+            <p>Meet ambitious women who understand building, leading and growing.</p>
+          </article>
+          <article class="cp-feature-card cp-reveal">
+            <span class="cp-icon"><i data-lucide="chart-no-axes-combined"></i></span>
+            <h3>Business growth</h3>
+            <p>Discover collaborations, referrals and opportunities through genuine relationships.</p>
+          </article>
+          <article class="cp-feature-card cp-reveal">
+            <span class="cp-icon"><i data-lucide="coffee"></i></span>
+            <h3>Curated experience</h3>
+            <p>A thoughtful environment shaped around conversation, hospitality and connection.</p>
+          </article>
+          <article class="cp-feature-card cp-reveal">
+            <span class="cp-icon"><i data-lucide="badge-check"></i></span>
+            <h3>Leave with clarity</h3>
+            <p>Return with fresh perspective, meaningful contacts and a clearer next move.</p>
+          </article>
         </div>
+      </div>
     </section>
 
-    <!-- SECTION 4 — THE SECRET SAUCE -->
-    <section class="secret-sauce section-padding bg-cream">
-        <div class="container fade-in-up">
-            <div class="split-layout">
-                <div class="content-side">
-                    <h2 class="section-title">Mindful Makeup With Nitasha.</h2>
-                    <p class="section-subtitle">Most women use makeup every day. Few truly understand what's inside it.</p>
-                    <p>Join Nitasha Saxena, founder of Mindful Makeup, for an eye-opening conversation about beauty, skincare awareness, and conscious product choices.</p>
-                    <p>You'll leave with practical insights you can immediately apply to your routine.</p>
-                    <ul class="bullet-list">
-                        <li><strong>Skin-First Routine:</strong> Build a foundation for healthy skin.</li>
-                        <li><strong>Ingredient Awareness:</strong> Make healthier product choices.</li>
-                        <li><strong>Confidence:</strong> Simplify your essentials.</li>
-                    </ul>
-                </div>
-                <div class="image-side grid-graphic">
-                    <div class="beauty-graphic-box" style="padding: 30px; display: flex; align-items: center; justify-content: center;">
-                        <div style="font-size: 2rem; color: #c9a45c; font-family: 'Playfair Display', serif; text-align: center;">Mindful Beauty<br>& Skincare</div>
-                    </div>
-                    <p class="grid-caption">Every woman leaves with practical beauty awareness.</p>
-                </div>
-            </div>
+    <section class="cp-section cp-section--pink" aria-labelledby="meher-title">
+      <div class="cp-shell cp-session">
+        <div class="cp-session__portrait cp-reveal">
+          <img src="/sheeo-member/meher%20rupaa.jpeg" alt="Meher Rupa">
+          <span class="cp-session__badge">Special reflective session</span>
         </div>
+        <div class="cp-session__copy cp-reveal">
+          <p class="cp-eyebrow">A special experience with</p>
+          <h2 id="meher-title">Meher Rupa</h2>
+          <p class="cp-session__lead">Alongside the business meetup, guests will experience a reflective conversation with Meher Rupa—designed to add depth to an already meaningful room.</p>
+          <div class="cp-session__themes">
+            <article class="cp-theme-card">
+              <span>01</span>
+              <h3>Internal conflict</h3>
+              <p>Recognise the internal patterns and competing thoughts that may be holding you back.</p>
+            </article>
+            <article class="cp-theme-card">
+              <span>02</span>
+              <h3>Unconscious guidance</h3>
+              <p>Explore the signals, instincts and inner knowing beneath everyday decisions.</p>
+            </article>
+            <article class="cp-theme-card">
+              <span>03</span>
+              <h3>Clarity</h3>
+              <p>Create greater alignment between where you are today and where you want to move next.</p>
+            </article>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- SECTION 5 — MEET YOUR HOSTS -->
-    <section class="hosts section-padding">
-        <div class="container text-center fade-in-up">
-            <h2 class="section-title">Meet The Women Leading Your Morning</h2>
-            <div class="grid-2 hosts-wrapper">
-                <div class="host-card">
-                    <div class="host-image-wrapper">
-                        <img src="sadhna.jpg" alt="Sadhna Sharma" class="host-photo">
-                    </div>
-                    <h3>Sadhna Sharma</h3>
-                    <p class="host-title">Founder, SheEO Summit</p>
-                    <p class="host-bio">Building one of Dubai's most authentic communities for women entrepreneurs. Passionate about creating powerful spaces for real connections.</p>
-                </div>
-                <div class="host-card">
-                    <div class="host-image-wrapper">
-                        <img src="nitasha.jpg" alt="Nitasha Saxena" class="host-photo" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Nitasha+Saxena&background=ebd8dd&color=1e293b&size=500';">
-                    </div>
-                    <h3>Nitasha Saxena</h3>
-                    <p class="host-title">Founder, Mindful Makeup</p>
-                    <p class="host-bio">Makeup Coach & Skin Educator helping women make informed beauty decisions through practical education and mindful beauty practices.</p>
-                </div>
-            </div>
+    <section class="cp-section cp-section--cream" id="details">
+      <div class="cp-shell cp-event">
+        <div class="cp-event__copy cp-reveal">
+          <p class="cp-eyebrow">Save your seat</p>
+          <h2>Wednesday,<br>9 September 2026</h2>
+          <div class="cp-event__list">
+            <div><i data-lucide="calendar-days"></i><p><strong>Date</strong><span>Wednesday, 9 September 2026</span></p></div>
+            <div><i data-lucide="clock-3"></i><p><strong>Time</strong><span>9:30 AM – 12:00 PM</span></p></div>
+            <div><i data-lucide="map-pin"></i><p><strong>Venue</strong><span>Mercure Dubai Barsha Heights, Sheikh Zayed Road, Dubai</span></p></div>
+            <div><i data-lucide="sparkles"></i><p><strong>Experience</strong><span>SheEO Coffee Meetup + special session with Meher Rupa</span></p></div>
+          </div>
+          <a class="cp-button cp-button--solid" href="https://buy.stripe.com/dRm7sN3WX3tEawxe8x77O0O" target="_blank" rel="noopener noreferrer">Reserve your seat</a>
+          <p class="cp-event__availability">Limited · Curated · Advance registration required</p>
         </div>
+        <div class="cp-event__visual cp-reveal" aria-hidden="true">
+          <img src="desktop bg.png" alt="">
+        </div>
+      </div>
     </section>
 
-    <!-- SECTION 6 — WHO SHOULD ATTEND -->
-    <section class="who-should-attend section-padding bg-cream">
-        <div class="container text-center fade-in-up">
-            <h2 class="section-title">This event is perfect for:</h2>
-            <div class="icon-grid">
-                <div class="icon-item"><span>✅</span> Women Entrepreneurs</div>
-                <div class="icon-item"><span>✅</span> Coaches</div>
-                <div class="icon-item"><span>✅</span> Consultants</div>
-                <div class="icon-item"><span>✅</span> Creators</div>
-                <div class="icon-item"><span>✅</span> Business Owners</div>
-                <div class="icon-item"><span>✅</span> Freelancers</div>
-                <div class="icon-item"><span>✅</span> Professionals Seeking Growth</div>
-            </div>
+    <section class="cp-section cp-section--pink" aria-labelledby="audience-title">
+      <div class="cp-shell">
+        <header class="cp-heading cp-reveal">
+          <p class="cp-eyebrow">Curated for women who</p>
+          <h2 id="audience-title">Lead. Build. Connect. <em>Grow.</em></h2>
+        </header>
+        <div class="cp-audience-grid">
+          <article class="cp-audience-card cp-reveal"><i data-lucide="briefcase-business"></i><h3>Entrepreneurs</h3><p>Building businesses beyond their existing circle.</p></article>
+          <article class="cp-audience-card cp-reveal"><i data-lucide="star"></i><h3>Business leaders</h3><p>Leading teams, organisations and ideas.</p></article>
+          <article class="cp-audience-card cp-reveal"><i data-lucide="user-round-check"></i><h3>Professionals</h3><p>Expanding their network and perspective.</p></article>
+          <article class="cp-audience-card cp-reveal"><i data-lucide="palette"></i><h3>Consultants & creatives</h3><p>Seeking referrals and collaborations.</p></article>
+          <article class="cp-audience-card cp-reveal"><i data-lucide="users-round"></i><h3>Change-makers</h3><p>Creating meaningful impact in community.</p></article>
+          <article class="cp-audience-card cp-reveal"><i data-lucide="gem"></i><h3>Visionaries</h3><p>Thinking about what comes next.</p></article>
         </div>
+        <div class="cp-quote cp-reveal">
+          <i data-lucide="quote"></i>
+          <blockquote>“The right conversation can change everything. Coffee is simply where it begins.”</blockquote>
+          <p>One conversation may introduce a collaborator, client, partner, mentor—or simply a completely different perspective. That is why SheEO keeps the room intentional.</p>
+        </div>
+      </div>
     </section>
 
-    <!-- SECTION 7 — WHAT PAST ATTENDEES SAY -->
-    <section class="testimonials section-padding dark-bg">
-        <div class="container text-center fade-in-up">
-            <div class="stars">★★★★★</div>
-            <blockquote class="premium-quote">
-                "An incredible morning. The curated connections and mindful conversations were exactly what I needed to elevate my approach to both business and self-care."
-            </blockquote>
-            <p class="quote-author">— SheEO Coffee Connect Attendee</p>
+    <section class="cp-section cp-section--cream" id="faq">
+      <div class="cp-shell">
+        <header class="cp-heading cp-reveal">
+          <p class="cp-eyebrow">Good to know</p>
+          <h2>Frequently asked questions</h2>
+        </header>
+        <div class="cp-faq cp-reveal">
+          <article class="cp-faq__item">
+            <button class="cp-faq__question" type="button" aria-expanded="false" aria-controls="faq-a1">Who can attend the SheEO Coffee Meetup?<span aria-hidden="true">+</span></button>
+            <div class="cp-faq__answer" id="faq-a1"><div><p>The meetup is designed for women entrepreneurs, professionals, business leaders, consultants, creatives and ambitious women interested in meaningful business and professional connections.</p></div></div>
+          </article>
+          <article class="cp-faq__item">
+            <button class="cp-faq__question" type="button" aria-expanded="false" aria-controls="faq-a2">Do I need to be an existing SheEO member?<span aria-hidden="true">+</span></button>
+            <div class="cp-faq__answer" id="faq-a2"><div><p>No. Existing SheEO community members and new guests can attend, subject to availability.</p></div></div>
+          </article>
+          <article class="cp-faq__item">
+            <button class="cp-faq__question" type="button" aria-expanded="false" aria-controls="faq-a3">Is this a large networking event?<span aria-hidden="true">+</span></button>
+            <div class="cp-faq__answer" id="faq-a3"><div><p>No. The Coffee Meetup is intentionally kept intimate so guests can have genuine conversations rather than simply exchange introductions.</p></div></div>
+          </article>
+          <article class="cp-faq__item">
+            <button class="cp-faq__question" type="button" aria-expanded="false" aria-controls="faq-a4">What should I expect from the meetup?<span aria-hidden="true">+</span></button>
+            <div class="cp-faq__answer" id="faq-a4"><div><p>Expect an elegant and relaxed business environment, meaningful conversations, networking opportunities and a special experiential session with Meher Rupa.</p></div></div>
+          </article>
+          <article class="cp-faq__item">
+            <button class="cp-faq__question" type="button" aria-expanded="false" aria-controls="faq-a5">Can I attend alone?<span aria-hidden="true">+</span></button>
+            <div class="cp-faq__answer" id="faq-a5"><div><p>Absolutely. Many guests arrive independently, and the format is designed to make meeting and speaking with other attendees comfortable.</p></div></div>
+          </article>
+          <article class="cp-faq__item">
+            <button class="cp-faq__question" type="button" aria-expanded="false" aria-controls="faq-a6">What should I bring?<span aria-hidden="true">+</span></button>
+            <div class="cp-faq__answer" id="faq-a6"><div><p>Bring your digital contact details or business cards and come prepared to share what you do, who you would like to meet and the opportunities you are exploring.</p></div></div>
+          </article>
+          <article class="cp-faq__item">
+            <button class="cp-faq__question" type="button" aria-expanded="false" aria-controls="faq-a7">How do I reserve my seat?<span aria-hidden="true">+</span></button>
+            <div class="cp-faq__answer" id="faq-a7"><div><p>Choose Reserve Your Seat and complete your registration. Attendance is limited, so advance booking is recommended.</p></div></div>
+          </article>
         </div>
+      </div>
     </section>
 
-    <!-- SECTION 8 — LIMITED SEATS -->
-    <section class="limited-seats section-padding dark-bg-alt">
-        <div class="container text-center fade-in-up">
-            <h2 class="section-title gold-text">This Is Intentionally Kept Small.</h2>
-            <p class="section-text large-text">We don't believe in crowded networking events.</p>
-            <p class="section-text">Every SheEO Coffee Connect is curated to ensure meaningful conversations, genuine connections, and real opportunities.</p>
-            <p class="section-text highlight-text">Once seats are filled, registrations close.</p>
-        </div>
+    <section class="cp-final" aria-labelledby="final-title">
+      <div class="cp-shell cp-reveal">
+        <p class="cp-eyebrow">Be at the table</p>
+        <h2 id="final-title">Coffee. Connection. <em>Clarity.</em></h2>
+        <p class="cp-final__lead">A smaller room. Better conversations. Women worth knowing. Join a carefully selected group for a morning designed to go deeper.</p>
+        <a class="cp-button cp-button--solid" href="https://buy.stripe.com/dRm7sN3WX3tEawxe8x77O0O" target="_blank" rel="noopener noreferrer">Reserve your seat</a>
+        <p class="cp-final__meta">Wednesday, 9 September 2026 · Mercure Dubai Barsha Heights</p>
+      </div>
     </section>
+  </main>
 
-    <!-- SECTION 9 — TICKET SECTION -->
-    <section id="tickets" class="tickets section-padding bg-cream">
-        <div class="container fade-in-up">
-            <div class="ticket-card text-center">
-                <h3 class="ticket-title">SHEEO COFFEE CONNECT</h3>
-                <ul class="ticket-features">
-                    <li>✔ Networking Experience</li>
-                    <li>✔ Curated Introductions</li>
-                    <li>✔ Coffee & Refreshments</li>
-                    <li>✔ Mindful Makeup Session</li>
-                    <li>✔ Meaningful Connections</li>
-                    <li>✔ Community Access</li>
-                    <li class="highlight-feature">✔ <strong>Bonus:</strong> Book a podcast slot at half price (SheEO Members only)</li>
-                </ul>
-                <div class="ticket-price highlight-price-box">AED 99</div>
-                <a href="https://buy.stripe.com/7sYfZj1OP3tEeMN7K977O0D" class="btn btn-primary btn-large" target="_blank" rel="noopener noreferrer">Reserve My Seat Now</a>
-            </div>
-        </div>
-    </section>
+  <div class="cp-sticky" aria-label="Quick registration">
+    <a class="cp-button cp-button--solid" href="https://buy.stripe.com/dRm7sN3WX3tEawxe8x77O0O" target="_blank" rel="noopener noreferrer">Reserve your seat</a>
+  </div>
 
-    <!-- SECTION 10 — URGENCY -->
-    <section class="urgency-banner fade-in-up">
-        <div class="container text-center">
-            <h2>Only A Few Seats Remain</h2>
-            <p>Don't wait until registrations close.</p>
-            <p class="urgency-desc">Your next collaboration, client, partnership, friendship, or breakthrough conversation could happen in this room.</p>
-        </div>
-    </section>
-
-    <!-- SECTION 11 — FAQ -->
-    <section class="faq section-padding">
-        <div class="container fade-in-up">
-            <h2 class="section-title text-center">Frequently Asked Questions</h2>
-            <div class="accordion">
-                <div class="accordion-item">
-                    <button class="accordion-header">Do I need to be a business owner?</button>
-                    <div class="accordion-content">
-                        <p>No. Growth-minded women from all professional backgrounds are welcome.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">Will there be a personal makeup consultation?</button>
-                    <div class="accordion-content">
-                        <p>The session is educational and interactive, but individual consultations are not guaranteed.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">Is coffee included?</button>
-                    <div class="accordion-content">
-                        <p>Yes, coffee and refreshments are included in your ticket.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">Can I attend alone?</button>
-                    <div class="accordion-content">
-                        <p>Absolutely. Most attendees do! We make sure everyone feels welcome and facilitates meaningful introductions.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">What should I bring?</button>
-                    <div class="accordion-content">
-                        <p>Bring your business cards and an open mind ready for growth and collaboration.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FINAL SECTION -->
-    <section class="final-cta section-padding dark-bg">
-        <div class="container text-center fade-in-up">
-            <h2 class="section-title gold-text">Ready To Join Dubai's Most Meaningful Women's Networking Experience?</h2>
-            <div class="final-details">
-                <p><strong>24 June 2026</strong></p>
-                <p><strong>11 AM – 1 PM</strong></p>
-                <p><strong>Mercure Barsha Heights</strong></p>
-                <p><strong class="highlight-price">AED 99</strong></p>
-            </div>
-            <a href="https://buy.stripe.com/7sYfZj1OP3tEeMN7K977O0D" class="btn btn-primary btn-large" target="_blank" rel="noopener noreferrer">RESERVE MY SEAT</a>
-        </div>
-    </section>
-
-    <footer class="site-footer bg-cream">
-        <div class="container text-center mb-xl">
-            <p class="text-xs uppercase tracking-wide text-dark-blue font-bold mb-xs">Find us on IG</p>
-            <h2 class="font-playfair text-dark-blue mb-lg" style="font-size:3rem;"><a
-                    href="https://www.instagram.com/sheeosummit2026/" target="_blank"
-                    style="text-decoration:none; color:inherit;">@<span class="text-rose">SHEEOSUMMIT</span>2025</a>
-            </h2>
-
-            <div class="ig-slider-container relative mb-xl mx-auto" style="max-width: 1200px; padding: 0 50px;">
-                <button class="ig-slider-btn prev shadow-pink hover-opacity-100 flex-center"
-                    onclick="document.getElementById('ig-track').scrollBy({left: -350, behavior: 'smooth'})"
-                    style="position: absolute; top: 50%; left: -0px; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: #ebd8dd; border: none; z-index: 10; cursor: pointer;">
-                    <i data-lucide="chevron-left" class="icon-sm text-dark-blue"></i>
-                </button>
-
-                <div id="ig-track" class="ig-slider-track flex gap-md"
-                    style="overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none;">
-
-                    <div class="ig-slide"
-                        style="flex: 0 0 clamp(220px, 60vw, 350px); scroll-snap-align: start; display: flex; justify-content: center;">
-                        <div class="ig-embed-wrapper">
-                            <blockquote class="instagram-media"
-                                data-instgrm-permalink="https://www.instagram.com/reel/DVQ9cu0At34/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                data-instgrm-version="14"
-                                style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-                                <div style="padding:16px;"> <a
-                                        href="https://www.instagram.com/reel/DVQ9cu0At34/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                        style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
-                                        target="_blank">
-                                        <div style=" display: flex; flex-direction: row; align-items: center;">
-                                            <div
-                                                style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
-                                            </div>
-                                            <div
-                                                style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="padding: 19% 0;"></div>
-                                        <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
-                                        <div style="padding-top: 8px;">
-                                            <div
-                                                style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
-                                                View this post on Instagram</div>
-                                        </div>
-                                        <div style="padding: 12.5% 0;"></div>
-                                        <div
-                                            style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-                                            <div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: 8px;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: auto;">
-                                                <div
-                                                    style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
-                                            </div>
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <p
-                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
-                                        <a href="https://www.instagram.com/reel/DVQ9cu0At34/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                            style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
-                                            target="_blank">A post shared by Attitude of gratitude podcast
-                                            (@attitude_of_gratitude.ae)</a>
-                                    </p>
-                                </div>
-                            </blockquote>
-                        </div>
-                    </div>
-
-                    <div class="ig-slide"
-                        style="flex: 0 0 clamp(220px, 60vw, 350px); scroll-snap-align: start; display: flex; justify-content: center;">
-                        <div class="ig-embed-wrapper">
-                            <blockquote class="instagram-media"
-                                data-instgrm-permalink="https://www.instagram.com/reel/DUqinRAiS3Y/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                data-instgrm-version="14"
-                                style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-                                <div style="padding:16px;"> <a
-                                        href="https://www.instagram.com/reel/DUqinRAiS3Y/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                        style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
-                                        target="_blank">
-                                        <div style=" display: flex; flex-direction: row; align-items: center;">
-                                            <div
-                                                style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
-                                            </div>
-                                            <div
-                                                style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="padding: 19% 0;"></div>
-                                        <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
-                                        <div style="padding-top: 8px;">
-                                            <div
-                                                style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
-                                                View this post on Instagram</div>
-                                        </div>
-                                        <div style="padding: 12.5% 0;"></div>
-                                        <div
-                                            style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-                                            <div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: 8px;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: auto;">
-                                                <div
-                                                    style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
-                                            </div>
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <p
-                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
-                                        <a href="https://www.instagram.com/reel/DUqinRAiS3Y/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                            style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
-                                            target="_blank">A post shared by Attitude of gratitude podcast
-                                            (@attitude_of_gratitude.ae)</a>
-                                    </p>
-                                </div>
-                            </blockquote>
-                        </div>
-                    </div>
-
-                    <div class="ig-slide"
-                        style="flex: 0 0 clamp(220px, 60vw, 350px); scroll-snap-align: start; display: flex; justify-content: center;">
-                        <div class="ig-embed-wrapper">
-                            <blockquote class="instagram-media"
-                                data-instgrm-permalink="https://www.instagram.com/p/DUTjkHtFXGu/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                data-instgrm-version="14"
-                                style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-                                <div style="padding:16px;"> <a
-                                        href="https://www.instagram.com/p/DUTjkHtFXGu/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                        style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
-                                        target="_blank">
-                                        <div style=" display: flex; flex-direction: row; align-items: center;">
-                                            <div
-                                                style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
-                                            </div>
-                                            <div
-                                                style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="padding: 19% 0;"></div>
-                                        <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
-                                        <div style="padding-top: 8px;">
-                                            <div
-                                                style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
-                                                View this post on Instagram</div>
-                                        </div>
-                                        <div style="padding: 12.5% 0;"></div>
-                                        <div
-                                            style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-                                            <div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: 8px;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: auto;">
-                                                <div
-                                                    style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
-                                            </div>
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <p
-                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
-                                        <a href="https://www.instagram.com/p/DUTjkHtFXGu/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                            style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
-                                            target="_blank">A post shared by Attitude of gratitude podcast
-                                            (@attitude_of_gratitude.ae)</a>
-                                    </p>
-                                </div>
-                            </blockquote>
-                        </div>
-                    </div>
-
-                    <div class="ig-slide"
-                        style="flex: 0 0 clamp(220px, 60vw, 350px); scroll-snap-align: start; display: flex; justify-content: center;">
-                        <div class="ig-embed-wrapper">
-                            <blockquote class="instagram-media"
-                                data-instgrm-permalink="https://www.instagram.com/reel/DTssNzRjz2k/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                data-instgrm-version="14"
-                                style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-                                <div style="padding:16px;"> <a
-                                        href="https://www.instagram.com/reel/DTssNzRjz2k/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                        style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
-                                        target="_blank">
-                                        <div style=" display: flex; flex-direction: row; align-items: center;">
-                                            <div
-                                                style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
-                                            </div>
-                                            <div
-                                                style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="padding: 19% 0;"></div>
-                                        <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"></div>
-                                        <div style="padding-top: 8px;">
-                                            <div
-                                                style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
-                                                View this post on Instagram</div>
-                                        </div>
-                                        <div style="padding: 12.5% 0;"></div>
-                                        <div
-                                            style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-                                            <div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
-                                                </div>
-                                                <div
-                                                    style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: 8px;">
-                                                <div
-                                                    style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: auto;">
-                                                <div
-                                                    style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
-                                                </div>
-                                                <div
-                                                    style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
-                                                </div>
-                                                <div
-                                                    style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
-                                            </div>
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <p
-                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
-                                        <a href="https://www.instagram.com/reel/DTssNzRjz2k/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                            style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
-                                            target="_blank">A post shared by SheEo Summit (@sheeosummit2026)</a>
-                                    </p>
-                                </div>
-                            </blockquote>
-                        </div>
-                    </div>
-
-                </div>
-
-                <button class="ig-slider-btn next shadow-pink hover-opacity-100 flex-center"
-                    onclick="document.getElementById('ig-track').scrollBy({left: 350, behavior: 'smooth'})"
-                    style="position: absolute; top: 50%; right: -0px; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: #ebd8dd; border: none; z-index: 10; cursor: pointer;">
-                    <i data-lucide="chevron-right" class="icon-sm text-dark-blue"></i>
-                </button>
-            </div>
-
-            <script async src="//www.instagram.com/embed.js"></script>
-
-            <div
-                class="footer-bottom-grid grid-2 text-left mt-xl pt-xl border-t border-pink-dark gap-md max-w-lg mx-auto">
-                <div class="newsletter-col">
-                    <h4 class="text-dark-blue font-inter font-bold text-lg mb-sm pr-md">Become A Member</h4>
-                    <a href="https://www.whatsapp.com/channel/0029VbBqRXi8V0twOPec2e3d" target="_blank"
-                        class="btn btn-primary-pink rounded-pill px-xl py-md font-bold tracking-wide mt-md inline-flex align-center gap-xs text-md"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-message-circle">
-                            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
-                        </svg> Join our community</a>
-                </div>
-                <div class="contact-col pl-xl text-right">
-                    <h4 class="text-dark-blue font-inter font-bold text-md mb-sm">Still have a question?<br><a
-                            href="/connect-with-us/" class="text-rose hover-text-dark"
-                            style="text-decoration:none;">Contact Us!</a></h4>
-                    <div class="flex-center text-dark-blue justify-end mt-sm gap-md">
-                        <a href="mailto:sadhna@sheeo-summit.com"
-                            class="text-rose text-sm font-bold hover-text-dark"
-                            style="text-decoration:none;">sadhna@sheeo-summit.com</a>
-                        <a href="tel:+971507091969" class="text-rose text-sm font-bold hover-text-dark"
-                            style="text-decoration:none;">+971 50 7091969</a>
-                    </div>
-                    <div class="flex-center text-dark-blue justify-end mt-sm gap-md">
-                        <a href="https://www.instagram.com/sheeosummit2026/" target="_blank"
-                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="Instagram"><i
-                                data-lucide="instagram" class="icon-sm"></i></a>
-                        <a href="https://www.facebook.com/sadhnarishisharma/" target="_blank"
-                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="Facebook"><i
-                                data-lucide="facebook" class="icon-sm"></i></a>
-                        <a href="https://www.linkedin.com/in/sadhna-sharma-8767b817/" target="_blank"
-                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="LinkedIn"><i
-                                data-lucide="linkedin" class="icon-sm"></i></a>
-                        <a href="https://api.whatsapp.com/send?phone=+971507091969" target="_blank"
-                            class="text-rose hover-text-dark opacity-80 hover-opacity-100" title="WhatsApp">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-message-circle">
-                                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="footer-copyright flex-between text-xs text-dark-blue font-bold font-inter mt-xl pt-lg border-t border-pink-dark">
-                <div class="flex gap-lg">
-                    <a href="/privacy-policy/" class="hover-text-rose uppercase tracking-wide"
-                        style="text-decoration:none; color:inherit;">Privacy Policy</a>
-                    <a href="/terms-and-conditions/" class="hover-text-rose uppercase tracking-wide"
-                        style="text-decoration:none; color:inherit;">Terms & Conditions</a>
-                    <a href="/Business_License.pdf" target="_blank" class="hover-text-rose uppercase tracking-wide"
-                        style="text-decoration:none; color:inherit;">Business License</a>
-                </div>
-                <div class="tracking-wide">© 2026 SHEEO BUSINESS NETWORK DUBAI.<br>ALL RIGHTS RESERVED</div>
-            </div>
-        </div>
-    </footer>
-
-<!-- WhatsApp Floating Icon -->
-<a href="https://wa.me/971507091969" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-    </svg>
-</a>
+  <div data-global-footer></div>
 </body>
 </html>
-
-

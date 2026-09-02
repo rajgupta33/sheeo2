@@ -70,13 +70,11 @@
         U.setBusy(button, true, 'Submitting…');
         try {
           const formData = new FormData(form);
-          const related = members.find((member) => member.id === formData.get('related_member_id'));
           const evidencePath = await window.SheeoApi.uploadClaimEvidence(file);
           const claim = await window.SheeoApi.submitClaim({
             claim_type: formData.get('claim_type'),
             activity_date: formData.get('activity_date'),
             related_member_id: formData.get('related_member_id'),
-            related_member: related?.full_name || '',
             description: formData.get('description'),
             evidence_path: evidencePath
           });

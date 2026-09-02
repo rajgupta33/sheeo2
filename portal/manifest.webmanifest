@@ -1,0 +1,27 @@
+{
+  "id": "/portal/",
+  "name": "SheEO Member Portal",
+  "short_name": "SheEO Members",
+  "description": "Membership, community directory, points and rewards for SheEO members.",
+  "start_url": "/portal/",
+  "scope": "/portal/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fbf7f1",
+  "theme_color": "#7b203b",
+  "categories": ["business", "social"],
+  "icons": [
+    {
+      "src": "/sh-logo.jpeg",
+      "sizes": "1280x1280",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/portal/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -3,7 +3,7 @@
   window.SheeoPages.refer = async ({ root, session }) => {
     const referrals = await window.SheeoApi.getReferrals();
     const code = session.profile.referral_code;
-    const link = `${window.location.origin}/apply-directory/?type=membership&ref=${encodeURIComponent(code)}`;
+    const link = window.SheeoRoutes.public(`/apply-directory/?type=membership&ref=${encodeURIComponent(code)}`);
     const rewarded = referrals.filter((item) => item.status === 'rewarded').length;
     const pending = referrals.filter((item) => ['captured', 'pending', 'qualified'].includes(item.status)).length;
 

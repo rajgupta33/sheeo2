@@ -3,96 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Successful | SheEO Coffee Connect</title>
+    <title>Registration Successful | SheEO Coffee Meetup</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/jpeg" href="/sh-logo.jpeg">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <!-- Icons: the global header/footer inject data-lucide placeholders. -->
+    <script src="https://unpkg.com/lucide@1.39.0"></script>
+    <!-- Site stylesheet: the global header and footer are styled from here. -->
+    <link rel="stylesheet" href="/styles.css">
     <style>
         .success-page {
-            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--clr-cream);
+            padding: 120px 20px 80px;
+            background: var(--bg-cream);
         }
         .success-card {
-            background: var(--clr-white);
-            padding: 60px 40px;
-            border-radius: 12px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            width: 100%;
             max-width: 600px;
+            padding: 48px 28px;
+            border-top: 6px solid var(--text-rose);
+            border-radius: 20px;
+            background: var(--bg-white);
+            box-shadow: var(--shadow-pink);
             text-align: center;
-            border-top: 6px solid var(--clr-gold);
         }
         .success-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            font-size: 3rem;
+            line-height: 1;
+        }
+        .success-card h1 {
+            margin: 0 0 12px;
+            color: var(--text-dark-blue);
+            font-family: var(--font-playfair);
+            font-size: clamp(2rem, 8vw, 2.8rem);
+            line-height: 1.1;
+        }
+        .success-lead {
+            margin: 0 0 24px;
+            color: var(--text-rose);
+            font-family: var(--font-inter);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .success-card p {
+            color: var(--text-dark-blue);
+            font-family: var(--font-inter);
+            font-size: 0.95rem;
+            line-height: 1.7;
         }
         .whatsapp-btn {
-            background-color: #25D366;
-            color: white;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
-            padding: 15px 35px;
+            max-width: 100%;
+            margin-top: 28px;
+            padding: 15px 30px;
             border-radius: 30px;
+            background-color: #25D366;
+            color: #fff;
+            font-family: var(--font-inter);
             font-weight: 600;
-            margin-top: 30px;
-            transition: all 0.3s ease;
+            text-decoration: none;
+            transition: var(--transition);
         }
         .whatsapp-btn:hover {
             background-color: #128C7E;
             transform: translateY(-2px);
-            color: white;
+            color: #fff;
         }
         .whatsapp-icon {
+            flex: 0 0 24px;
             width: 24px;
             height: 24px;
             fill: currentColor;
         }
+        .success-return {
+            margin-top: 28px;
+            font-size: 0.85rem;
+        }
+        .success-return a {
+            color: var(--text-rose);
+            text-decoration: underline;
+        }
+        @media (max-width: 480px) {
+            .success-page { padding: 100px 16px 60px; }
+            .success-card { padding: 36px 20px; }
+        }
     </style>
+  <script defer src="/assets/js/global-shell.js"></script>
 </head>
 <body>
+<div data-global-header></div>
 
-    <div class="success-page section-padding">
-        <div class="success-card fade-in-up">
-            <div class="success-icon">✨</div>
-            <h1 class="section-title">You're In!</h1>
-            <p class="section-subtitle">Your seat at the SheEO Coffee Connect has been reserved.</p>
-            
-            <p class="section-text">We are thrilled to welcome you on <strong>10 June 2026</strong> for a morning of clarity, connections, and curated networking.</p>
-            <p class="section-text">Check your email for the confirmation receipt. Your next step is to join the exclusive WhatsApp group where we will share the final details and where you can introduce yourself to the other incredible women.</p>
-            
-            <a href="https://chat.whatsapp.com/" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
-                <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+    <main class="success-page">
+        <div class="success-card">
+            <div class="success-icon">&#10024;</div>
+            <h1>You're In!</h1>
+            <p class="success-lead">Your seat at the SheEO Coffee Meetup has been reserved.</p>
+
+            <p>We are thrilled to welcome you on <strong>Wednesday, 9 September 2026</strong> at Mercure Dubai Barsha Heights for a morning of clarity, connections and curated networking.</p>
+            <p>Check your email for the confirmation receipt. Your next step is to join our WhatsApp channel, where we share the final details ahead of the meetup.</p>
+
+            <a href="https://www.whatsapp.com/channel/0029VbBqRXi8V0twOPec2e3d" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+                <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
                     <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
                 </svg>
-                Join the WhatsApp Group
+                Join our WhatsApp channel
             </a>
-            
-            <p class="section-text" style="margin-top: 30px; font-size: 0.9rem; color: #888;">
-                <a href="index.html" style="text-decoration: underline;">Return to Landing Page</a>
-            </p>
+
+            <p class="success-return"><a href="/coffee-connect/">Back to the event page</a></p>
         </div>
-    </div>
-    
-    <script>
-        // Simple fade-in animation
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                document.querySelector('.fade-in-up').classList.add('visible');
-            }, 100);
-        });
-    </script>
-<!-- WhatsApp Floating Icon -->
-<a href="https://wa.me/971507091969" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-    </svg>
-</a>
+    </main>
+
+<div data-global-footer></div>
 </body>
 </html>
-
-

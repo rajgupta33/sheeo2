@@ -25,15 +25,45 @@
       </section>`;
   }
 
+  function applicationRow(item) {
+    const actionCell = item.status === 'pending'
+      ? `<div style="display:flex;gap:6px"><button class="portal-button small" data-review-application="${item.id}" data-decision="approved">Approve</button><button class="portal-button secondary small" data-review-application="${item.id}" data-decision="rejected">Reject</button></div>`
+      : U.escapeHtml(item.review_notes || 'Reviewed');
+    return `<tr data-application-row="${item.id}"><td><strong>${U.escapeHtml(item.full_name)}</strong><br><small>${U.escapeHtml(item.email)}</small></td><td>${U.escapeHtml(item.business_name)}</td><td>${U.escapeHtml(item.category)}</td><td>${U.formatDate(item.created_at)}</td><td><span class="status-pill ${item.status}">${U.statusLabel(item.status)}</span></td><td>${actionCell}</td></tr>`;
+  }
+
   async function renderMembers(root) {
     const [members, applications] = await Promise.all([window.SheeoApi.getAdminMembers(), window.SheeoApi.getApplications()]);
     root.innerHTML = `
       <section class="portal-card"><div class="toolbar"><div class="search-field"><i data-lucide="search"></i><input class="portal-input" id="admin-member-search" type="search" placeholder="Search members"></div><button class="portal-button secondary small" disabled>Invite member</button></div>
       <div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Member</th><th>Business</th><th>Category</th><th>Status</th><th>Action</th></tr></thead><tbody id="admin-member-rows">${members.map((member) => `<tr data-member-search="${U.escapeHtml(`${member.full_name} ${member.business_name} ${member.category}`.toLowerCase())}"><td><strong>${U.escapeHtml(member.full_name)}</strong></td><td>${U.escapeHtml(member.business_name)}</td><td>${U.escapeHtml(member.category)}</td><td><span class="status-pill ${member.status}">${U.statusLabel(member.status)}</span></td><td><button class="portal-button secondary small" disabled>View detail</button></td></tr>`).join('')}</tbody></table></div></section>
-      <section class="portal-card" style="margin-top:20px"><div class="card-head"><div><h2>Membership applications</h2><p>Approval does not activate membership or award points by itself.</p></div><span class="queue-count">${applications.filter((item) => item.status === 'pending').length}</span></div><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Applicant</th><th>Business</th><th>Category</th><th>Submitted</th><th>Status</th></tr></thead><tbody>${applications.map((item) => `<tr><td><strong>${U.escapeHtml(item.full_name)}</strong><br><small>${U.escapeHtml(item.email)}</small></td><td>${U.escapeHtml(item.business_name)}</td><td>${U.escapeHtml(item.category)}</td><td>${U.formatDate(item.created_at)}</td><td><span class="status-pill ${item.status}">${U.statusLabel(item.status)}</span></td></tr>`).join('')}</tbody></table></div></section>`;
+      <section class="portal-card" style="margin-top:20px"><div class="card-head"><div><h2>Membership applications</h2><p>Approving activates membership, awards welcome points and pays out any referral automatically.</p></div><span class="queue-count">${applications.filter((item) => item.status === 'pending').length}</span></div><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Applicant</th><th>Business</th><th>Category</th><th>Submitted</th><th>Status</th><th>Decision</th></tr></thead><tbody id="application-review-body">${applications.map(applicationRow).join('')}</tbody></table></div></section>`;
     root.querySelector('#admin-member-search').addEventListener('input', (event) => {
       const query = event.target.value.trim().toLowerCase();
       root.querySelectorAll('[data-member-search]').forEach((row) => { row.hidden = query && !row.dataset.memberSearch.includes(query); });
+    });
+    root.querySelector('#application-review-body').addEventListener('click', async (event) => {
+      const button = event.target.closest('[data-review-application]');
+      if (!button) return;
+      const decision = button.dataset.decision;
+      let reason = '';
+      if (decision === 'rejected') {
+        reason = window.prompt('Rejection reason (shown to the applicant if they have a portal account):', 'Thank you for applying — we are not able to approve this application right now.') || '';
+        if (!reason.trim()) return U.toast('A rejection reason is required.', 'error');
+      }
+      const row = button.closest('tr');
+      row.querySelectorAll('button').forEach((item) => { item.disabled = true; });
+      try {
+        const result = decision === 'approved'
+          ? await window.SheeoApi.approveApplication(button.dataset.reviewApplication)
+          : await window.SheeoApi.rejectApplication(button.dataset.reviewApplication, reason.trim());
+        row.querySelector('td:nth-child(5)').innerHTML = `<span class="status-pill ${result.status}">${U.statusLabel(result.status)}</span>`;
+        row.querySelector('td:nth-child(6)').textContent = result.review_notes || 'Reviewed';
+        U.toast(decision === 'approved' ? 'Application approved. Membership activated and welcome points awarded.' : 'Application rejected.');
+      } catch (error) {
+        row.querySelectorAll('button').forEach((item) => { item.disabled = false; });
+        U.toast(error.message || 'Application review failed.', 'error');
+      }
     });
   }
 
@@ -70,7 +100,7 @@
 
   async function renderRewards(root) {
     const { redemptions } = await window.SheeoApi.getRewards();
-    root.innerHTML = `<section class="portal-card"><div class="card-head"><div><h2>Reward fulfillment</h2><p>Cancellation must create a +100 refund; never delete the original deduction.</p></div><span class="queue-count">${redemptions.filter((item) => ['requested', 'approved', 'scheduled'].includes(item.status)).length}</span></div><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Member</th><th>Reward</th><th>Requested</th><th>Cost</th><th>Status</th><th>Action</th></tr></thead><tbody>${redemptions.map((item) => `<tr><td>${U.escapeHtml(item.member_name || 'Sadhna Sharma')}</td><td><strong>${U.escapeHtml(item.reward_name || item.rewards?.name || 'Reward')}</strong></td><td>${U.formatDate(item.requested_at)}</td><td>-${item.points_cost}</td><td><span class="status-pill ${item.status}">${U.statusLabel(item.status)}</span></td><td><button class="portal-button secondary small" disabled>Open</button></td></tr>`).join('') || '<tr><td colspan="6"><div class="empty-state"><h3>No redemption requests</h3><p>New protected redemption requests will appear here.</p></div></td></tr>'}</tbody></table></div></section>`;
+    root.innerHTML = `<section class="portal-card"><div class="card-head"><div><h2>Reward fulfillment</h2><p>Cancellation must create a +100 refund; never delete the original deduction.</p></div><span class="queue-count">${redemptions.filter((item) => ['requested', 'approved', 'scheduled'].includes(item.status)).length}</span></div><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Member</th><th>Reward</th><th>Requested</th><th>Cost</th><th>Status</th><th>Action</th></tr></thead><tbody>${redemptions.map((item) => `<tr><td>${U.escapeHtml(item.member_name || 'Unknown member')}</td><td><strong>${U.escapeHtml(item.reward_name || item.rewards?.name || 'Reward')}</strong></td><td>${U.formatDate(item.requested_at)}</td><td>-${item.points_cost}</td><td><span class="status-pill ${item.status}">${U.statusLabel(item.status)}</span></td><td><button class="portal-button secondary small" disabled>Open</button></td></tr>`).join('') || '<tr><td colspan="6"><div class="empty-state"><h3>No redemption requests</h3><p>New protected redemption requests will appear here.</p></div></td></tr>'}</tbody></table></div></section>`;
   }
 
   async function renderEvents(root) {
@@ -83,13 +113,20 @@
     root.innerHTML = `<section class="portal-card"><div class="card-head"><div><h2>Recent admin actions</h2><p>Immutable operational trace for sensitive changes.</p></div></div><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Time</th><th>Actor</th><th>Action</th><th>Target</th></tr></thead><tbody>${audit.map((item) => `<tr><td>${U.formatDate(item.created_at, { hour: '2-digit', minute: '2-digit' })}</td><td><strong>${U.escapeHtml(item.actor)}</strong></td><td>${U.statusLabel(item.action)}</td><td>${U.escapeHtml(item.target)}</td></tr>`).join('')}</tbody></table></div></section>`;
   }
 
+  // Every renderer writes `data-lucide` placeholders into the page, so icons have
+  // to be drawn once the markup is in the DOM.
+  const withIcons = (render) => async ({ root }) => {
+    await render(root);
+    U.renderIcons();
+  };
+
   Object.assign(window.SheeoPages, {
-    'admin-dashboard': ({ root }) => renderOverview(root),
-    'admin-members': ({ root }) => renderMembers(root),
-    'admin-claims': ({ root }) => renderClaims(root),
-    'admin-referrals': ({ root }) => renderReferrals(root),
-    'admin-rewards': ({ root }) => renderRewards(root),
-    'admin-events': ({ root }) => renderEvents(root),
-    'admin-audit': ({ root }) => renderAudit(root)
+    'admin-dashboard': withIcons(renderOverview),
+    'admin-members': withIcons(renderMembers),
+    'admin-claims': withIcons(renderClaims),
+    'admin-referrals': withIcons(renderReferrals),
+    'admin-rewards': withIcons(renderRewards),
+    'admin-events': withIcons(renderEvents),
+    'admin-audit': withIcons(renderAudit)
   });
 })();

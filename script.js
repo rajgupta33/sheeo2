@@ -2,43 +2,8 @@
 lucide.createIcons();
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Navbar Scroll Effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
-
-    // Mobile Menu Toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    let isMenuOpen = false;
-
-    mobileMenuBtn.addEventListener('click', () => {
-        isMenuOpen = !isMenuOpen;
-        if (isMenuOpen) {
-            mobileMenu.classList.add('active');
-            mobileMenuBtn.innerHTML = '<i data-lucide="x"></i>';
-        } else {
-            mobileMenu.classList.remove('active');
-            mobileMenuBtn.innerHTML = '<i data-lucide="menu"></i>';
-        }
-        lucide.createIcons();
-    });
-
-    // Close Mobile Menu on Link Click
-    const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-btn');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            isMenuOpen = false;
-            mobileMenu.classList.remove('active');
-            mobileMenuBtn.innerHTML = '<i data-lucide="menu"></i>';
-            lucide.createIcons();
-        });
-    });
+    // Header, footer, mobile menu and navbar scroll are owned by
+    // /assets/js/global-shell.js. Keep page-level behaviour only below.
 
     // Intersection Observer for Scroll Animations
     const observerOptions = {

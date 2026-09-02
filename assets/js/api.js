@@ -64,7 +64,7 @@
 
     async requestPasswordReset(email) {
       if (isMock()) return wait({ email }, 300);
-      const redirectTo = `${window.location.origin}/portal/reset-password.html`;
+      const redirectTo = window.SheeoRoutes.portal('reset-password.html');
       const { error } = await requireClient().auth.resetPasswordForEmail(email, { redirectTo });
       if (error) throw error;
       return { email };
@@ -89,13 +89,33 @@
         });
       }
       const client = requireClient();
-      const [{ data: balanceRow, error: balanceError }, { data: activity, error: activityError }] = await Promise.all([
+      const { data: authData, error: authError } = await client.auth.getSession();
+      if (authError) throw authError;
+      const userId = authData.session?.user?.id;
+      const [
+        { data: balanceRow, error: balanceError },
+        { data: activity, error: activityError },
+        { count: pendingClaims, error: claimsError },
+        { count: referralsRewarded, error: referralsError }
+      ] = await Promise.all([
         client.from('member_point_balances').select('balance').maybeSingle(),
-        client.from('point_transactions').select('id,created_at,description,transaction_type,points').order('created_at', { ascending: false }).limit(5)
+        client.from('point_transactions').select('id,created_at,description,transaction_type,points').order('created_at', { ascending: false }).limit(5),
+        // Explicit user_id filters here (not just RLS) so an admin-who-is-also-a-member sees
+        // their own counts rather than the sitewide totals their admin role's RLS bypass allows.
+        client.from('point_claims').select('id', { count: 'exact', head: true }).eq('status', 'pending').eq('user_id', userId),
+        client.from('referrals').select('id', { count: 'exact', head: true }).eq('status', 'rewarded').eq('referrer_user_id', userId)
       ]);
       if (balanceError) throw balanceError;
       if (activityError) throw activityError;
-      return { session: await this.getSession(), balance: Number(balanceRow?.balance || 0), recentActivity: activity || [], pendingClaims: 0, referralsRewarded: 0 };
+      if (claimsError) throw claimsError;
+      if (referralsError) throw referralsError;
+      return {
+        session: await this.getSession(),
+        balance: Number(balanceRow?.balance || 0),
+        recentActivity: activity || [],
+        pendingClaims: pendingClaims || 0,
+        referralsRewarded: referralsRewarded || 0
+      };
     },
 
     async getPointTransactions() {
@@ -107,11 +127,25 @@
 
     async getClaims({ all = false } = {}) {
       if (isMock()) return wait(all ? state.claims : state.claims.filter((claim) => claim.user_id === state.session.user.id));
-      let query = requireClient().from('point_claims').select('id,user_id,claim_type,activity_date,related_member_id,description,evidence_path,status,rejection_reason,created_at').order('created_at', { ascending: false });
+      const client = requireClient();
+      let query = client.from('point_claims').select('id,user_id,claim_type,activity_date,related_member_id,description,evidence_path,status,rejection_reason,created_at').order('created_at', { ascending: false });
       if (!all) query = query.eq('user_id', (await this.getSession()).user.id);
       const { data, error } = await query;
       if (error) throw error;
-      return data || [];
+      const claims = data || [];
+      if (!all || !claims.length) return claims;
+
+      // Admin queue: point_claims.user_id/related_member_id point at auth.users, which
+      // PostgREST cannot embed directly, so member names are resolved with a second lookup.
+      const profileIds = [...new Set(claims.flatMap((claim) => [claim.user_id, claim.related_member_id]).filter(Boolean))];
+      const { data: profiles, error: profilesError } = await client.from('profiles').select('id,full_name').in('id', profileIds);
+      if (profilesError) throw profilesError;
+      const nameById = new Map((profiles || []).map((profile) => [profile.id, profile.full_name]));
+      return claims.map((claim) => ({
+        ...claim,
+        member_name: nameById.get(claim.user_id) || null,
+        related_member: nameById.get(claim.related_member_id) || null
+      }));
     },
 
     async submitClaim(payload) {
@@ -128,8 +162,14 @@
         return wait(claim, 320);
       }
       const session = await this.getSession();
+      // point_claims has no display-only columns (e.g. related_member name) — only send real table columns.
+      const { claim_type, activity_date, related_member_id, description, evidence_path } = payload;
       const insertPayload = {
-        ...payload,
+        claim_type,
+        activity_date,
+        related_member_id,
+        description,
+        evidence_path,
         user_id: session.user.id,
         membership_id: session.membership?.id,
         status: 'pending'
@@ -183,22 +223,56 @@
 
     async getReferrals({ all = false } = {}) {
       if (isMock()) return wait(state.referrals);
-      let query = requireClient().from('referrals').select('id,referral_code,referred_email,status,qualified_at,rewarded_at,created_at').order('created_at', { ascending: false });
+      const client = requireClient();
+      let query = client.from('referrals').select('id,referral_code,referred_email,referred_user_id,status,qualified_at,rewarded_at,created_at').order('created_at', { ascending: false });
       if (!all) query = query.eq('referrer_user_id', (await this.getSession()).user.id);
       const { data, error } = await query;
       if (error) throw error;
-      return data || [];
+      const referrals = data || [];
+      if (!referrals.length) return referrals;
+
+      const founderIds = [...new Set(referrals.map((referral) => referral.referred_user_id).filter(Boolean))];
+      const referralIds = referrals.map((referral) => referral.id);
+      const [{ data: founders, error: foundersError }, { data: awards, error: awardsError }] = await Promise.all([
+        founderIds.length ? client.from('profiles').select('id,full_name').in('id', founderIds) : { data: [], error: null },
+        client.from('point_transactions').select('source_id,points').eq('transaction_type', 'referral').in('source_id', referralIds)
+      ]);
+      if (foundersError) throw foundersError;
+      if (awardsError) throw awardsError;
+      const founderNameById = new Map((founders || []).map((profile) => [profile.id, profile.full_name]));
+      const pointsBySourceId = new Map((awards || []).map((award) => [award.source_id, award.points]));
+
+      return referrals.map((referral) => ({
+        ...referral,
+        founder_name: founderNameById.get(referral.referred_user_id) || null,
+        points: pointsBySourceId.get(referral.id) || 0
+      }));
     },
 
     async getRewards() {
       if (isMock()) return wait({ rewards: state.rewards, redemptions: state.redemptions });
+      const client = requireClient();
       const [{ data: rewards, error: rewardsError }, { data: redemptions, error: redemptionsError }] = await Promise.all([
-        requireClient().from('rewards').select('id,name,reward_type,points_cost,fulfillment_instructions').eq('active', true),
-        requireClient().from('reward_redemptions').select('id,reward_id,points_cost,status,requested_at,fulfilled_at,rewards(name)').order('requested_at', { ascending: false })
+        client.from('rewards').select('id,name,reward_type,points_cost,fulfillment_instructions').eq('active', true),
+        client.from('reward_redemptions').select('id,user_id,reward_id,points_cost,status,requested_at,fulfilled_at,rewards(name)').order('requested_at', { ascending: false })
       ]);
       if (rewardsError) throw rewardsError;
       if (redemptionsError) throw redemptionsError;
-      return { rewards: rewards || [], redemptions: redemptions || [] };
+      const redemptionRows = redemptions || [];
+
+      // Admin fulfillment queue needs the redeemer's name; reward_redemptions.user_id
+      // points at auth.users, which PostgREST cannot embed, so resolve it separately.
+      const userIds = [...new Set(redemptionRows.map((item) => item.user_id).filter(Boolean))];
+      const nameById = new Map();
+      if (userIds.length) {
+        const { data: profiles, error: profilesError } = await client.from('profiles').select('id,full_name').in('id', userIds);
+        if (profilesError) throw profilesError;
+        (profiles || []).forEach((profile) => nameById.set(profile.id, profile.full_name));
+      }
+      return {
+        rewards: rewards || [],
+        redemptions: redemptionRows.map((item) => ({ ...item, member_name: nameById.get(item.user_id) || null }))
+      };
     },
 
     async redeemReward(rewardId) {
@@ -282,6 +356,33 @@
       const { data, error } = await requireClient().rpc(functionName, args);
       if (error) throw error;
       return { id: claimId, status: decision, rejection_reason: decision === 'rejected' ? reason : null, result: data };
+    },
+
+    async approveApplication(applicationId) {
+      if (isMock()) {
+        const application = state.applications.find((item) => item.id === applicationId);
+        if (!application) throw new Error('Application not found.');
+        application.status = 'approved';
+        state.auditLog.unshift({ id: `audit-${Date.now()}`, actor: state.session.profile.full_name, action: 'approve_application', target: application.id, created_at: new Date().toISOString() });
+        return wait(application, 320);
+      }
+      const { data, error } = await requireClient().rpc('approve_application', { p_application_id: applicationId });
+      if (error) throw error;
+      return { id: applicationId, status: 'approved', membership_id: data };
+    },
+
+    async rejectApplication(applicationId, reason) {
+      if (isMock()) {
+        const application = state.applications.find((item) => item.id === applicationId);
+        if (!application) throw new Error('Application not found.');
+        application.status = 'rejected';
+        application.review_notes = reason;
+        state.auditLog.unshift({ id: `audit-${Date.now()}`, actor: state.session.profile.full_name, action: 'reject_application', target: application.id, created_at: new Date().toISOString() });
+        return wait(application, 320);
+      }
+      const { data, error } = await requireClient().rpc('reject_application', { p_application_id: applicationId, p_reason: reason });
+      if (error) throw error;
+      return { id: applicationId, status: 'rejected', review_notes: reason, result: data };
     }
   };
 })();

@@ -1,10 +1,11 @@
 (function () {
   const U = window.SheeoUtils;
+  const R = window.SheeoRoutes;
 
   function storyMarkup() {
     return `
       <section class="auth-story">
-        <a class="portal-brand" href="/">
+        <a class="portal-brand" href="${R.public('/')}">
           <img src="/sh-logo.jpeg" alt="SheEO">
           <span><strong>SheEO</strong><small>Business Network Dubai</small></span>
         </a>
@@ -30,7 +31,13 @@
               <p id="auth-error" role="alert" style="display:none;color:var(--portal-red);font-size:11px;margin:0"></p>
               <button class="portal-button" type="submit">Sign in</button>
             </form>
-            <div class="auth-links"><a href="/portal/reset-password.html">Forgot password?</a><a href="/apply-directory/?type=membership">Apply for membership</a></div>
+            <div class="auth-links"><a href="${R.portal('reset-password.html')}">Forgot password?</a><a href="${R.public('/apply-directory/?type=membership')}">Apply for membership</a></div>
+            <div class="auth-membership-cta">
+              <span>Not a member yet?</span>
+              <strong>Apply once to create your portal account and join the community.</strong>
+              <a class="portal-button secondary" href="${R.public('/apply-directory/?type=membership')}">Start membership application</a>
+            </div>
+            <button class="portal-button secondary pwa-install-button" type="button" data-pwa-install hidden>Install member app</button>
             ${window.SheeoApi.isMock() ? '<div class="auth-note"><strong>Preview mode:</strong> enter any email and password to open the member dashboard. No credentials are stored.</div>' : ''}
           </div>
         </section>
@@ -52,7 +59,7 @@
               <p id="auth-error" role="alert" style="display:none;color:var(--portal-red);font-size:11px;margin:0"></p>
               <button class="portal-button" type="submit">Send reset instructions</button>
             </form>
-            <div class="auth-links"><a href="/portal/login.html">Back to sign in</a></div>
+            <div class="auth-links"><a href="${R.portal('login.html')}">Back to sign in</a><a href="${R.public('/')}">Public website</a></div>
           </div>
         </section>
       </div>`,
@@ -70,18 +77,37 @@
               <h2 style="font-family:'Playfair Display',serif;margin:16px 0 6px">What happens next?</h2>
               <p style="font-size:12px;color:var(--portal-muted);margin:0">The SheEO team will review your application and contact you with activation instructions. Your account history will remain available.</p>
             </div>
-            <div class="button-row"><a class="portal-button" href="/">Return to website</a><a class="portal-button secondary" href="/connect-with-us/">Contact the team</a></div>
+            <div class="button-row"><a class="portal-button" href="${R.public('/')}">Return to website</a><a class="portal-button secondary" href="${R.public('/connect-with-us/')}">Contact the team</a><button class="portal-button secondary" type="button" data-action="logout">Sign out</button></div>
           </div>
         </section>
       </div>`
   };
 
   window.SheeoAuthPage = {
-    mount(page) {
+    async mount(page) {
       document.getElementById('portal-root').innerHTML = templates[page]?.() || templates.login();
       U.renderIcons();
-      if (page === 'login') this.bindLogin();
+      if (page === 'login') {
+        this.bindLogin();
+        await this.redirectAuthenticated();
+      }
       if (page === 'reset-password') this.bindReset();
+      if (page === 'membership-status') await this.bindMembershipStatus();
+    },
+
+    destinationFor(session) {
+      if (['admin', 'super_admin'].includes(session?.admin_role)) return R.portal('admin/index.html');
+      if (session?.membership?.status === 'active') return R.portal('dashboard.html');
+      return R.portal('membership-status.html');
+    },
+
+    async redirectAuthenticated() {
+      try {
+        const session = await window.SheeoApi.getSession();
+        if (session?.user) window.location.replace(this.destinationFor(session));
+      } catch (error) {
+        console.warn('Existing member session could not be restored.', error);
+      }
     },
 
     bindLogin() {
@@ -95,19 +121,13 @@
         try {
           await window.SheeoAuth.login(form.email.value.trim(), form.password.value);
           const next = new URLSearchParams(window.location.search).get('next');
-          if (next && next.startsWith('/portal/')) {
+          if (next && next.startsWith('/portal/') && !next.startsWith('//')) {
             window.location.href = next;
             return;
           }
 
           const session = await window.SheeoApi.getSession();
-          if (['admin', 'super_admin'].includes(session?.admin_role)) {
-            window.location.href = '/portal/admin/index.html';
-          } else if (session?.membership?.status === 'active') {
-            window.location.href = '/portal/dashboard.html';
-          } else {
-            window.location.href = '/portal/membership-status.html';
-          }
+          window.location.href = this.destinationFor(session);
         } catch (cause) {
           error.textContent = cause.message || 'Sign in failed. Check your details and try again.';
           error.style.display = 'block';
@@ -136,7 +156,7 @@
           if (updateMode) {
             await window.SheeoAuth.updatePassword(form.querySelector('#new-password').value);
             U.toast('Password updated. You can now sign in.');
-            window.setTimeout(() => { window.location.href = '/portal/login.html'; }, 700);
+            window.setTimeout(() => { window.location.href = R.portal('login.html'); }, 700);
           } else {
             await window.SheeoAuth.sendReset(form.querySelector('#reset-email').value.trim());
             form.innerHTML = '<div class="portal-card rose" style="box-shadow:none"><span class="status-pill approved">Email requested</span><h2 style="font-family:Playfair Display,serif">Check your inbox</h2><p style="font-size:12px;color:var(--portal-muted)">If that address belongs to an account, reset instructions are on the way.</p></div>';
@@ -147,6 +167,27 @@
           U.setBusy(button, false);
         }
       });
+    },
+
+    async bindMembershipStatus() {
+      try {
+        const session = await window.SheeoApi.getSession();
+        if (!session?.user) {
+          window.location.replace(R.portal('login.html'));
+          return;
+        }
+        if (session.membership?.status === 'active' || ['admin', 'super_admin'].includes(session.admin_role)) {
+          window.location.replace(this.destinationFor(session));
+          return;
+        }
+        document.querySelector('[data-action="logout"]')?.addEventListener('click', () => window.SheeoAuth.logout());
+      } catch (error) {
+        const message = document.getElementById('auth-error');
+        if (message) {
+          message.textContent = 'We could not load your membership status. Please try signing in again.';
+          message.style.display = 'block';
+        }
+      }
     }
   };
 })();

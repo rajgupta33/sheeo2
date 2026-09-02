@@ -27,8 +27,66 @@
     document.head.append(script);
   });
 
+  function enablePwa() {
+    const viewport = document.querySelector('meta[name="viewport"]');
+    if (viewport && !viewport.content.includes('viewport-fit')) viewport.content += ',viewport-fit=cover';
+
+    const manifest = document.createElement('link');
+    manifest.rel = 'manifest';
+    manifest.href = '/portal/manifest.webmanifest';
+    document.head.append(manifest);
+
+    const touchIcon = document.createElement('link');
+    touchIcon.rel = 'apple-touch-icon';
+    touchIcon.href = '/sh-logo.jpeg';
+    document.head.append(touchIcon);
+
+    const theme = document.createElement('meta');
+    theme.name = 'theme-color';
+    theme.content = '#7b203b';
+    document.head.append(theme);
+
+    const mobileCapable = document.createElement('meta');
+    mobileCapable.name = 'apple-mobile-web-app-capable';
+    mobileCapable.content = 'yes';
+    document.head.append(mobileCapable);
+
+    let installPrompt = null;
+    window.SheeoPwa = {
+      get canInstall() { return Boolean(installPrompt); },
+      async install() {
+        if (!installPrompt) return false;
+        installPrompt.prompt();
+        const choice = await installPrompt.userChoice;
+        if (choice.outcome === 'accepted') installPrompt = null;
+        document.querySelectorAll('[data-pwa-install]').forEach((button) => { button.hidden = !installPrompt; });
+        return choice.outcome === 'accepted';
+      }
+    };
+    document.addEventListener('click', (event) => {
+      if (event.target.closest('[data-pwa-install]')) window.SheeoPwa.install();
+    });
+
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
+      installPrompt = event;
+      document.querySelectorAll('[data-pwa-install]').forEach((button) => { button.hidden = false; });
+    });
+    window.addEventListener('appinstalled', () => {
+      installPrompt = null;
+      document.querySelectorAll('[data-pwa-install]').forEach((button) => { button.hidden = true; });
+    });
+
+    if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+      navigator.serviceWorker.register('/portal/sw.js', { scope: '/portal/' }).catch((error) => {
+        console.warn('SheEO portal offline support could not start.', error);
+      });
+    }
+  }
+
   async function boot() {
     try {
+      enablePwa();
       await load('/assets/js/mock-data.js');
       if (window.SHEEO_CONFIG?.MOCK_MODE !== true && !String(window.SHEEO_CONFIG?.SUPABASE_URL || '').startsWith('__')) {
         await load('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');

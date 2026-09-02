@@ -813,6 +813,23 @@ img {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
 }
 
+/* Pages whose first section is not a full .hero must still clear the fixed navbar */
+.pt-nav {
+    padding-top: 128px !important;
+}
+
+@media (max-width: 768px) {
+    .pt-nav {
+        padding-top: 104px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .pt-nav {
+        padding-top: 92px !important;
+    }
+}
+
 .nav-content {
     display: flex;
     justify-content: space-between;
@@ -852,7 +869,7 @@ img {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 24px;
 }
 
 .nav-link {
@@ -867,6 +884,29 @@ img {
 
 .nav-link:hover {
     color: var(--text-rose);
+}
+
+.nav-auth-link {
+    padding: 9px 15px;
+    border: 1px solid var(--pink-border);
+    border-radius: 999px;
+}
+
+.hero-auth-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.footer-channel-link {
+    color: var(--text-rose);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.footer-channel-link:hover {
+    color: var(--text-dark-blue);
 }
 
 /* Dropdown */
@@ -2337,10 +2377,21 @@ img {
         justify-content: flex-start !important;
     }
 
+    /* The handwritten "Don't miss out!" note overlaps the events heading once
+       the column narrows — sit it above, aligned with the section. */
+    .events-note {
+        position: static !important;
+        display: block;
+        margin: 0 0 4px !important;
+        text-align: left;
+    }
+
     .footer-copyright {
         flex-direction: column;
         gap: 16px;
         text-align: center;
+        /* Clear the floating WhatsApp button so it never sits on the copyright. */
+        padding-bottom: 64px;
     }
 
     .footer-copyright .flex {
@@ -2410,6 +2461,16 @@ img {
 
     .hero-desc {
         font-size: 13px;
+    }
+
+    .hero-auth-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .hero-auth-actions .btn {
+        width: 100%;
+        min-height: 50px;
     }
 
     .section-title {
