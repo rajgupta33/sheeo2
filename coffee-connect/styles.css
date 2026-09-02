@@ -153,10 +153,12 @@
 @media (max-width: 700px) {
   .coffee-page { padding-top: 68px; }
   .cp-shell { width: min(100% - 30px, 620px); }
-  .cp-hero { min-height: 840px; }
-  .cp-hero__media img { object-position: center bottom; }
+  /* Height comes from the content. Forcing 840px left a dead stretch of
+     background between the venue line and the countdown card. */
+  .cp-hero { min-height: 0; }
+  .cp-hero__media img { object-position: center top; }
   .cp-hero__media::after { background: linear-gradient(180deg, rgba(255,250,247,.06) 0%, rgba(255,250,247,.2) 46%, transparent 70%); }
-  .cp-hero__layout { min-height: 840px; padding: 52px 0 24px; }
+  .cp-hero__layout { min-height: 0; padding: 52px 0 34px; }
   .cp-hero__copy { width: 100%; }
   .cp-eyebrow { font-size: 10px; letter-spacing: .16em; }
   .cp-hero h1 { max-width: 500px; margin-bottom: 17px; font-size: clamp(45px, 13vw, 66px); line-height: .99; }
@@ -165,7 +167,7 @@
   .cp-actions { display: grid; max-width: 300px; gap: 10px; margin-bottom: 19px; }
   .cp-button { width: 100%; min-height: 46px; padding: 12px 20px; font-size: 12px; }
   .cp-hero__meta { max-width: 380px; gap: 6px; font-size: 11px; }
-  .cp-countdown { position: absolute; left: 15px; right: 15px; bottom: 24px; width: auto; margin-top: 0; padding: 17px 12px 14px; border-radius: 16px; }
+  .cp-countdown { width: 100%; margin-top: 26px; padding: 17px 12px 14px; border-radius: 16px; }
   .cp-countdown__grid strong { font-size: 27px; }
   .cp-countdown__note { letter-spacing: .08em; }
   .cp-value-strip__grid { grid-template-columns: repeat(2, 1fr); padding-block: 14px; }

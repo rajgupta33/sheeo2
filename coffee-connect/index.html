@@ -32,8 +32,8 @@
   <main class="coffee-page">
     <section class="cp-hero" id="top">
       <picture class="cp-hero__media">
-        <source media="(max-width: 700px)" srcset="mobile bg.png">
-        <img src="desktop bg.png" alt="Coffee, roses and a notebook overlooking the Dubai skyline">
+        <source media="(max-width: 700px)" srcset="hero-mobile.jpg">
+        <img src="hero-desktop.jpg" alt="Coffee, roses and a notebook overlooking the Dubai skyline" fetchpriority="high">
       </picture>
       <div class="cp-shell cp-hero__layout">
         <div class="cp-hero__copy cp-reveal is-visible">
@@ -156,7 +156,7 @@
           <p class="cp-event__availability">Limited · Curated · Advance registration required</p>
         </div>
         <div class="cp-event__visual cp-reveal" aria-hidden="true">
-          <img src="desktop bg.png" alt="">
+          <img src="hero-desktop.jpg" alt="" loading="lazy">
         </div>
       </div>
     </section>

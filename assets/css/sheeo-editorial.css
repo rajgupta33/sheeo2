@@ -361,8 +361,9 @@ body.editorial-page {
 }
 
 @media (max-width: 700px) {
+  /* Just enough to clear the fixed navbar (about 70px at this width). */
   .editorial-page main {
-    padding-top: 84px;
+    padding-top: 76px;
   }
 
   .sheeo-container {

@@ -697,8 +697,10 @@
 }
 
 @media (max-width: 900px) {
+  /* main already clears the fixed navbar, so the hero only needs a little
+     breathing room on top — 58px read as an empty band. */
   .directory-hero {
-    padding-top: 58px;
+    padding-top: 34px;
   }
 
   .directory-hero__grid,
@@ -743,6 +745,10 @@
   .why-section,
   .testimonial-section {
     padding-block: 54px;
+  }
+
+  .directory-hero {
+    padding-top: 16px;
   }
 
   .trust-row {
