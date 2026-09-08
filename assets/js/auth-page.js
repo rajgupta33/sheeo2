@@ -141,6 +141,7 @@
       const updateMode = window.location.hash.includes('access_token') || new URLSearchParams(window.location.search).get('mode') === 'update';
       if (updateMode) {
         form.querySelector('[data-reset-email]').hidden = true;
+        form.querySelector('#reset-email').required = false;
         form.querySelector('[data-new-password]').hidden = false;
         form.querySelector('#new-password').required = true;
         form.querySelector('button').textContent = 'Update password';
