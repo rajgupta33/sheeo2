@@ -21,6 +21,8 @@
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@1.39.0"></script>
     <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/assets/css/home-event.css?v=1">
+    <script defer src="/assets/js/home-event.js?v=1"></script>
     <link rel="icon" type="image/jpeg" href="/sh-logo.jpeg">
     <script defer src="/assets/js/global-shell.js"></script>
 </head>
@@ -251,21 +253,22 @@
                 <!-- Event 1 -->
                 <div class="event-row flex-between py-md border-b border-pink-dark">
                     <div class="event-date text-rose font-playfair flex flex-col align-center min-w-100 justify-center">
-                        <span class="date-num" style="font-size: 2.5rem; line-height: 1;">09</span>
+                        <span class="date-num" style="font-size: 2.5rem; line-height: 1;">23</span>
                         <span class="date-month uppercase font-inter font-bold text-xs tracking-wide" style="margin-top: 4px;">SEP</span>
                     </div>
                     <div class="event-details flex-grow pl-xl pr-md">
                         <div class="flex-between align-center w-100 mb-xs">
-                            <h4 class="event-title text-rose font-playfair italic text-xl m-0 font-normal">SheEO Coffee Meetup</h4>
+                            <h4 class="event-title text-rose font-playfair italic text-xl m-0 font-normal">Design Your Destiny</h4>
                             <span class="badge uppercase tracking-wide bg-pink-light text-rose text-xs font-bold px-sm py-xs rounded-pill">Open</span>
                         </div>
-                        <div class="text-dark-blue font-bold tracking-wide text-sm mb-sm">Business conversations &amp; a reflective session with Meher Rupa</div>
+                        <div class="text-dark-blue font-bold tracking-wide text-sm mb-sm">Ekaa Radiance × SheEO Summit · Vision Board Workshop &amp; Curated Women’s Networking with Mehak Marwaha</div>
                         <div class="event-meta flex gap-md text-sm text-dark-blue font-bold tracking-wide flex-wrap">
-                            <span><i data-lucide="calendar" class="icon-xs inline-icon text-dark-blue"></i> 9 September 2026, 9:30 AM</span>
-                            <span><i data-lucide="map-pin" class="icon-xs inline-icon text-dark-blue"></i> Mercure Dubai Barsha Heights</span>
+                            <span><i data-lucide="calendar" class="icon-xs inline-icon text-dark-blue"></i> 23 September 2026, 11:00 AM Dubai time</span>
+                            <span><i data-lucide="map-pin" class="icon-xs inline-icon text-dark-blue"></i> Hotel Mercure, Sheikh Zayed Road, Dubai</span>
+                            <span>AED 120 · All premium materials included · Take your board home</span>
                         </div>
                     </div>
-                    <a href="/coffee-connect/" class="btn-circle-outline"><i data-lucide="arrow-right" class="icon-sm"></i></a>
+                    <a href="/coffee-connect/" class="btn-circle-outline" aria-label="View Design Your Destiny event and reserve your seat"><i data-lucide="arrow-right" class="icon-sm"></i></a>
                 </div>
                 <!-- Event 2 -->
                 <div class="event-row flex-between py-md border-b border-pink-dark">
@@ -713,8 +716,16 @@
             });
         });
     </script>
+    <aside class="home-event" id="home-event" aria-labelledby="home-event-title" hidden>
+        <button class="home-event__close" type="button" aria-label="Dismiss event announcement">×</button>
+        <p class="home-event__eyebrow">Ekaa Radiance × SheEO Summit</p>
+        <h2 id="home-event-title">Design Your Destiny</h2>
+        <p>Vision board workshop &amp; curated women’s networking with Mehak Marwaha.</p>
+        <p class="home-event__details">23 September 2026 · 11 AM Dubai time<br>Hotel Mercure, Sheikh Zayed Road, Dubai</p>
+        <p class="home-event__price">AED 120 · All premium materials included</p>
+        <a class="home-event__link" href="/coffee-connect/">Explore &amp; Reserve Your Seat <span aria-hidden="true">→</span></a>
+    </aside>
     <script src="/script.js"></script>
 </body>
 
 </html>
-
