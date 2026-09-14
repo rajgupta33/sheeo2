@@ -172,6 +172,35 @@
     }
   }
 
+  function showStartupError() {
+    const root = document.getElementById('portal-root');
+    if (!root) return;
+    root.innerHTML = `
+      <main style="min-height:100vh;display:grid;place-items:center;padding:24px">
+        <section class="portal-card" style="width:min(100%,440px)">
+          <div class="empty-state">
+            <i data-lucide="triangle-alert"></i>
+            <h3>We couldn't open the portal</h3>
+            <p>This is usually a brief hiccup. Please try again in a moment.</p>
+            <div class="button-row" style="justify-content:center">
+              <button class="portal-button" type="button" data-startup-retry>Try again</button>
+              ${publicPages.includes(page) ? '' : '<button class="portal-button secondary" type="button" data-startup-signin>Sign in again</button>'}
+            </div>
+          </div>
+        </section>
+      </main>`;
+    root.querySelector('[data-startup-retry]').addEventListener('click', () => window.location.reload());
+    root.querySelector('[data-startup-signin]')?.addEventListener('click', async () => {
+      try {
+        await window.SheeoSupabase?.client?.auth.signOut({ scope: 'local' });
+      } catch (error) {
+        console.warn('Local sign-out failed; continuing to the login page.', error);
+      }
+      window.location.href = window.SheeoRoutes?.portal('login.html') || '/portal/login.html';
+    });
+    window.lucide?.createIcons?.();
+  }
+
   async function boot() {
     try {
       enablePwa();
@@ -195,8 +224,8 @@
       await load(`/assets/js/${pageScriptMap[page] || 'dashboard.js'}`);
       await window.SheeoPortal.mount();
     } catch (error) {
-      const root = document.getElementById('portal-root');
-      if (root) root.innerHTML = `<main style="padding:40px;font-family:system-ui"><h1>Portal unavailable</h1><p>${String(error.message || error)}</p></main>`;
+      console.error('SheEO portal could not start.', error);
+      showStartupError();
     }
   }
 

@@ -5,6 +5,18 @@
   const isMock = () => !window.SheeoSupabase?.configured || window.SHEEO_CONFIG?.MOCK_MODE === true;
   const wait = (value, delay = 90) => new Promise((resolve) => window.setTimeout(() => resolve(clone(value)), delay));
 
+  // A freshly issued Supabase token can briefly read as "issued at future" to the database; waiting clears it.
+  const isClockSkewError = (error) => /issued at future/i.test(error?.message || '');
+  const retryWhileClockSkewed = async (run, delays = [1000, 2000]) => {
+    let results = await run();
+    for (const delay of delays) {
+      if (!results.some((result) => isClockSkewError(result.error))) break;
+      await new Promise((resolve) => window.setTimeout(resolve, delay));
+      results = await run();
+    }
+    return results;
+  };
+
   const signedProfilePhoto = async (path) => {
     if (!path || path.startsWith('/') || /^https?:\/\//i.test(path)) return path;
     const { data, error } = await requireClient().storage.from('profile-photos').createSignedUrl(path, 3600);
@@ -27,11 +39,11 @@
       const { data, error } = await client.auth.getSession();
       if (error) throw error;
       if (!data.session) return null;
-      const [profileResult, membershipResult, adminRoleResult] = await Promise.all([
+      const [profileResult, membershipResult, adminRoleResult] = await retryWhileClockSkewed(() => Promise.all([
         client.from('profiles').select('id,full_name,business_name,title,category,services,bio,city,website,instagram,phone,profile_photo_path,directory_visible,referral_code').eq('id', data.session.user.id).single(),
         client.from('memberships').select('id,status,start_date,end_date,payment_status,membership_plans(name)').eq('user_id', data.session.user.id).order('start_date', { ascending: false }).limit(1).maybeSingle(),
         client.from('admin_roles').select('role').eq('user_id', data.session.user.id).eq('active', true).maybeSingle()
-      ]);
+      ]));
       if (profileResult.error) throw profileResult.error;
       if (membershipResult.error) throw membershipResult.error;
       if (adminRoleResult.error) throw adminRoleResult.error;
