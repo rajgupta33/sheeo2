@@ -1,6 +1,8 @@
 window.SheeoUtils = {
-  escapeHtml(value = '') {
-    return String(value).replace(/[&<>'"]/g, (character) => ({
+  // Nullish coalescing rather than a default parameter: defaults only fire on
+  // undefined, so a null column from Supabase used to render as the text "null".
+  escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>'"]/g, (character) => ({
       '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
     })[character]);
   },
@@ -12,12 +14,12 @@ window.SheeoUtils = {
     }).format(new Date(value));
   },
 
-  statusLabel(value = '') {
-    return String(value).replaceAll('_', ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
+  statusLabel(value) {
+    return String(value ?? '').replaceAll('_', ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
   },
 
-  initials(name = '') {
-    return name.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase();
+  initials(name) {
+    return String(name ?? '').split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase();
   },
 
   qs(selector, root = document) { return root.querySelector(selector); },

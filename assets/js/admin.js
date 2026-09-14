@@ -1,6 +1,9 @@
 (function () {
   const U = window.SheeoUtils;
 
+  const cell = (value) => U.escapeHtml(value) || '—';
+  const joinParts = (parts, separator) => parts.filter(Boolean).map((part) => U.escapeHtml(part)).join(separator);
+
   const metricCard = (label, value, icon, note, href) => `<article class="portal-card metric-card"><div style="display:flex;justify-content:space-between"><span class="metric-label">${label}</span><div class="metric-icon"><i data-lucide="${icon}"></i></div></div><div><div class="metric-value">${value}</div><p class="metric-note">${note}</p>${href ? `<a href="${href}" style="font-size:10px;color:var(--portal-burgundy);font-weight:700">Open queue →</a>` : ''}</div></article>`;
 
   function claimRows(claims) {
@@ -20,7 +23,7 @@
         ${metricCard('Upcoming events', data.upcomingEvents, 'calendar-days', 'Published or draft', '/portal/admin/events.html')}
       </section>
       <section class="portal-grid portal-grid-2" style="margin-top:20px">
-        <article class="portal-card"><div class="card-head"><div><h2>Pending applications</h2><p>Curated application review queue.</p></div><span class="queue-count">${data.pendingApplications}</span></div><div class="activity-list">${data.applications.filter((item) => item.status === 'pending').map((item) => `<div class="activity-row"><div class="activity-icon"><i data-lucide="user-round"></i></div><div class="activity-copy"><strong>${U.escapeHtml(item.full_name)}</strong><small>${U.escapeHtml(item.business_name)} · ${U.escapeHtml(item.category)}</small></div><span class="status-pill pending">Pending</span></div>`).join('')}</div></article>
+        <article class="portal-card"><div class="card-head"><div><h2>Pending applications</h2><p>Curated application review queue.</p></div><span class="queue-count">${data.pendingApplications}</span></div><div class="activity-list">${data.applications.filter((item) => item.status === 'pending').map((item) => `<div class="activity-row"><div class="activity-icon"><i data-lucide="user-round"></i></div><div class="activity-copy"><strong>${U.escapeHtml(item.full_name)}</strong><small>${joinParts([item.business_name, item.category], ' · ') || '—'}</small></div><span class="status-pill pending">Pending</span></div>`).join('')}</div></article>
         <article class="portal-card"><div class="card-head"><div><h2>Recent protected actions</h2><p>Audit trail summary.</p></div><a href="/portal/admin/audit.html" style="font-size:10px;color:var(--portal-burgundy);font-weight:700">View all</a></div><div class="activity-list">${data.auditLog.slice(0, 4).map((item) => `<div class="activity-row"><div class="activity-icon"><i data-lucide="shield-check"></i></div><div class="activity-copy"><strong>${U.statusLabel(item.action)}</strong><small>${U.escapeHtml(item.actor)} · ${U.escapeHtml(item.target)}</small></div><small style="color:var(--portal-muted)">${U.formatDate(item.created_at)}</small></div>`).join('')}</div></article>
       </section>`;
   }
@@ -29,14 +32,14 @@
     const actionCell = item.status === 'pending'
       ? `<div style="display:flex;gap:6px"><button class="portal-button small" data-review-application="${item.id}" data-decision="approved">Approve</button><button class="portal-button secondary small" data-review-application="${item.id}" data-decision="rejected">Reject</button></div>`
       : U.escapeHtml(item.review_notes || 'Reviewed');
-    return `<tr data-application-row="${item.id}"><td><strong>${U.escapeHtml(item.full_name)}</strong><br><small>${U.escapeHtml(item.email)}</small></td><td>${U.escapeHtml(item.business_name)}</td><td>${U.escapeHtml(item.category)}</td><td>${U.formatDate(item.created_at)}</td><td><span class="status-pill ${item.status}">${U.statusLabel(item.status)}</span></td><td>${actionCell}</td></tr>`;
+    return `<tr data-application-row="${item.id}"><td><strong>${U.escapeHtml(item.full_name)}</strong><br><small>${U.escapeHtml(item.email)}</small></td><td>${cell(item.business_name)}</td><td>${cell(item.category)}</td><td>${U.formatDate(item.created_at)}</td><td><span class="status-pill ${item.status}">${U.statusLabel(item.status)}</span></td><td>${actionCell}</td></tr>`;
   }
 
   async function renderMembers(root) {
     const [members, applications] = await Promise.all([window.SheeoApi.getAdminMembers(), window.SheeoApi.getApplications()]);
     root.innerHTML = `
       <section class="portal-card"><div class="toolbar"><div class="search-field"><i data-lucide="search"></i><input class="portal-input" id="admin-member-search" type="search" placeholder="Search members"></div><button class="portal-button secondary small" disabled>Invite member</button></div>
-      <div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Member</th><th>Business</th><th>Category</th><th>Status</th><th>Action</th></tr></thead><tbody id="admin-member-rows">${members.map((member) => `<tr data-member-search="${U.escapeHtml(`${member.full_name} ${member.business_name} ${member.category}`.toLowerCase())}"><td><strong>${U.escapeHtml(member.full_name)}</strong></td><td>${U.escapeHtml(member.business_name)}</td><td>${U.escapeHtml(member.category)}</td><td><span class="status-pill ${member.status}">${U.statusLabel(member.status)}</span></td><td><button class="portal-button secondary small" disabled>View detail</button></td></tr>`).join('')}</tbody></table></div></section>
+      <div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Member</th><th>Business</th><th>Category</th><th>Status</th><th>Action</th></tr></thead><tbody id="admin-member-rows">${members.map((member) => `<tr data-member-search="${U.escapeHtml([member.full_name, member.business_name, member.category].filter(Boolean).join(' ').toLowerCase())}"><td><strong>${U.escapeHtml(member.full_name)}</strong></td><td>${cell(member.business_name)}</td><td>${cell(member.category)}</td><td><span class="status-pill ${member.status}">${U.statusLabel(member.status)}</span></td><td><button class="portal-button secondary small" disabled>View detail</button></td></tr>`).join('')}</tbody></table></div></section>
       <section class="portal-card" style="margin-top:20px"><div class="card-head"><div><h2>Membership applications</h2><p>Approving activates membership, awards welcome points and pays out any referral automatically.</p></div><span class="queue-count">${applications.filter((item) => item.status === 'pending').length}</span></div><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Applicant</th><th>Business</th><th>Category</th><th>Submitted</th><th>Status</th><th>Decision</th></tr></thead><tbody id="application-review-body">${applications.map(applicationRow).join('')}</tbody></table></div></section>`;
     root.querySelector('#admin-member-search').addEventListener('input', (event) => {
       const query = event.target.value.trim().toLowerCase();
