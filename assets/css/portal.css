@@ -482,6 +482,31 @@ img { max-width: 100%; }
 .search-field svg { position: absolute; left: 13px; top: 50%; width: 16px; color: var(--portal-muted); transform: translateY(-50%); }
 .search-field .portal-input { padding-left: 40px; }
 
+.password-field { position: relative; }
+.password-field .portal-input { padding-right: 48px; }
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--portal-muted);
+  cursor: pointer;
+}
+.password-toggle:hover, .password-toggle:focus-visible { color: var(--portal-burgundy); }
+.password-toggle svg { width: 17px; height: 17px; pointer-events: none; }
+.password-toggle .icon-hide { display: none; }
+.password-toggle[aria-pressed="true"] .icon-show { display: none; }
+.password-toggle[aria-pressed="true"] .icon-hide { display: inline-flex; }
+
 .earn-grid, .reward-grid, .member-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .earn-card, .reward-card, .member-card { overflow: hidden; border: 1px solid var(--portal-line); border-radius: 18px; background: rgba(255, 255, 255, 0.7); }
 .earn-card { display: flex; flex-direction: column; padding: 20px; }
@@ -528,7 +553,8 @@ img { max-width: 100%; }
   padding: 18px;
   background: rgba(32, 22, 26, 0.5);
 }
-.portal-modal { width: min(100%, 600px); max-height: min(92vh, 760px); overflow: auto; padding: 26px; border-radius: 22px; background: var(--portal-paper); box-shadow: 0 30px 90px rgba(30, 14, 20, 0.3); }
+.portal-modal { width: min(calc(100vw - 32px), 600px); max-height: min(92vh, 760px); overflow: auto; padding: 26px; border-radius: 22px; color: var(--portal-ink); background: var(--portal-paper); box-shadow: 0 30px 90px rgba(30, 14, 20, 0.3); }
+.portal-modal::backdrop { background: rgba(32, 22, 26, 0.55); }
 .portal-modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
 .portal-modal-head h2 { margin: 0; font-family: 'Playfair Display', serif; }
 .portal-modal-close { border: 0; background: transparent; cursor: pointer; }
@@ -574,6 +600,11 @@ img { max-width: 100%; }
 .auth-membership-cta strong { font-family: 'Playfair Display', serif; font-size: 17px; line-height: 1.35; }
 .auth-membership-cta .portal-button { margin-top: 6px; }
 .pwa-install-button { margin-top: 10px !important; }
+.pwa-install-button svg { width: 15px; height: 15px; margin-right: 6px; vertical-align: -2px; }
+.auth-install { display: grid; gap: 6px; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--portal-line); }
+.auth-install small { color: var(--portal-muted); font-size: 10px; line-height: 1.5; }
+.pwa-steps { margin: 0; padding-left: 20px; display: grid; gap: 10px; color: var(--portal-ink); font-size: 12px; line-height: 1.55; }
+.pwa-steps li::marker { color: var(--portal-burgundy); font-weight: 700; }
 
 :focus-visible { outline: 3px solid rgba(189, 153, 96, .65); outline-offset: 3px; }
 

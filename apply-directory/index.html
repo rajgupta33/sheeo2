@@ -57,6 +57,31 @@
             border-color: var(--rose);
             box-shadow: 0 0 0 3px rgba(225, 42, 107, 0.1);
         }
+        .password-field { position: relative; }
+        .password-field .form-control { padding-right: 48px; }
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 4px;
+            transform: translateY(-50%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--dark-blue);
+            opacity: 0.55;
+            cursor: pointer;
+        }
+        .password-toggle:hover, .password-toggle:focus-visible { opacity: 1; }
+        .password-toggle svg { width: 17px; height: 17px; pointer-events: none; }
+        .password-toggle .icon-hide { display: none; }
+        .password-toggle[aria-pressed="true"] .icon-show { display: none; }
+        .password-toggle[aria-pressed="true"] .icon-hide { display: inline-flex; }
         .radio-group, .checkbox-group {
             display: flex;
             align-items: flex-start;
@@ -275,11 +300,17 @@
                     <div class="grid-2 gap-md">
                         <div class="form-group">
                             <label class="form-label">Password *</label>
-                            <input type="password" class="form-control" id="portal-password" minlength="8" autocomplete="new-password" required>
+                            <div class="password-field">
+                                <input type="password" class="form-control" id="portal-password" minlength="8" autocomplete="new-password" required>
+                                <button class="password-toggle" type="button" aria-label="Show password" aria-pressed="false"><i data-lucide="eye" class="icon-show"></i><i data-lucide="eye-off" class="icon-hide"></i></button>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Confirm Password *</label>
-                            <input type="password" class="form-control" id="portal-password-confirm" minlength="8" autocomplete="new-password" required>
+                            <div class="password-field">
+                                <input type="password" class="form-control" id="portal-password-confirm" minlength="8" autocomplete="new-password" required>
+                                <button class="password-toggle" type="button" aria-label="Show password" aria-pressed="false"><i data-lucide="eye" class="icon-show"></i><i data-lucide="eye-off" class="icon-hide"></i></button>
+                            </div>
                         </div>
                     </div>
                     <span class="form-text">At least 8 characters. Never shared with the review team — used only for your portal login.</span>
@@ -315,6 +346,17 @@
 <div data-global-footer></div>
 <!-- Script -->
     <script>
+        document.addEventListener('click', (event) => {
+            const toggle = event.target.closest('.password-toggle');
+            if (!toggle) return;
+            const input = toggle.closest('.password-field')?.querySelector('input');
+            if (!input) return;
+            const reveal = input.type === 'password';
+            input.type = reveal ? 'text' : 'password';
+            toggle.setAttribute('aria-pressed', String(reveal));
+            toggle.setAttribute('aria-label', reveal ? 'Hide password' : 'Show password');
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             // Icons
             lucide.createIcons();

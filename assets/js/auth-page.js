@@ -27,7 +27,7 @@
             <p>Sign in to see your SheEO Points, community and rewards.</p>
             <form class="auth-form" id="login-form">
               <div class="portal-field"><label for="email">Email address</label><input class="portal-input" id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
-              <div class="portal-field"><label for="password">Password</label><input class="portal-input" id="password" name="password" type="password" autocomplete="current-password" placeholder="Your password" required></div>
+              <div class="portal-field"><label for="password">Password</label><div class="password-field"><input class="portal-input" id="password" name="password" type="password" autocomplete="current-password" placeholder="Your password" required><button class="password-toggle" type="button" aria-label="Show password" aria-pressed="false"><i data-lucide="eye" class="icon-show"></i><i data-lucide="eye-off" class="icon-hide"></i></button></div></div>
               <p id="auth-error" role="alert" style="display:none;color:var(--portal-red);font-size:11px;margin:0"></p>
               <button class="portal-button" type="submit">Sign in</button>
             </form>
@@ -37,7 +37,10 @@
               <strong>Apply once to create your portal account and join the community.</strong>
               <a class="portal-button secondary" href="${R.public('/apply-directory/?type=membership')}">Start membership application</a>
             </div>
-            <button class="portal-button secondary pwa-install-button" type="button" data-pwa-install hidden>Install member app</button>
+            <div class="auth-install">
+              <button class="portal-button secondary pwa-install-button" type="button" data-pwa-install><i data-lucide="download"></i> Install member app</button>
+              <small>Add SheEO to your home screen for one-tap access on iPhone and Android.</small>
+            </div>
             ${window.SheeoApi.isMock() ? '<div class="auth-note"><strong>Preview mode:</strong> enter any email and password to open the member dashboard. No credentials are stored.</div>' : ''}
           </div>
         </section>
@@ -54,7 +57,7 @@
             <form class="auth-form" id="reset-form">
               <div class="portal-field" data-reset-email><label for="reset-email">Email address</label><input class="portal-input" id="reset-email" type="email" autocomplete="email" required></div>
               <div data-new-password hidden>
-                <div class="portal-field"><label for="new-password">New password</label><input class="portal-input" id="new-password" type="password" autocomplete="new-password" minlength="8"></div>
+                <div class="portal-field"><label for="new-password">New password</label><div class="password-field"><input class="portal-input" id="new-password" type="password" autocomplete="new-password" minlength="8"><button class="password-toggle" type="button" aria-label="Show password" aria-pressed="false"><i data-lucide="eye" class="icon-show"></i><i data-lucide="eye-off" class="icon-hide"></i></button></div></div>
               </div>
               <p id="auth-error" role="alert" style="display:none;color:var(--portal-red);font-size:11px;margin:0"></p>
               <button class="portal-button" type="submit">Send reset instructions</button>
@@ -87,6 +90,7 @@
     async mount(page) {
       document.getElementById('portal-root').innerHTML = templates[page]?.() || templates.login();
       U.renderIcons();
+      window.SheeoPwa?.syncInstallButtons?.();
       if (page === 'login') {
         this.bindLogin();
         await this.redirectAuthenticated();
@@ -142,9 +146,10 @@
       if (updateMode) {
         form.querySelector('[data-reset-email]').hidden = true;
         form.querySelector('#reset-email').required = false;
+        form.querySelector('#reset-email').disabled = true;
         form.querySelector('[data-new-password]').hidden = false;
         form.querySelector('#new-password').required = true;
-        form.querySelector('button').textContent = 'Update password';
+        form.querySelector('button[type="submit"]').textContent = 'Update password';
         document.getElementById('reset-intro').textContent = 'Choose a new password with at least eight characters.';
       }
       form.addEventListener('submit', async (event) => {

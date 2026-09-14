@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sheeo-portal-v2';
+const CACHE_NAME = 'sheeo-portal-v3';
 const APP_SHELL = [
   '/portal/',
   '/portal/index.html',

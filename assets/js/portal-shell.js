@@ -83,7 +83,7 @@
                 <div><strong>${U.escapeHtml(profile.full_name || 'SheEO Member')}</strong><small>${U.escapeHtml(profile.business_name || this.session.user.email)}</small></div>
               </div>
               <button class="portal-button secondary small" data-action="logout" style="width:100%; margin-top:14px; color:#fff; border-color:rgba(255,255,255,.25)"><i data-lucide="log-out"></i> Sign out</button>
-              <button class="portal-install-link" type="button" data-pwa-install data-action="install" ${window.SheeoPwa?.canInstall ? '' : 'hidden'}><i data-lucide="download"></i> Install member app</button>
+              <button class="portal-install-link" type="button" data-pwa-install><i data-lucide="download"></i> Install member app</button>
             </div>
           </aside>
           <button class="mobile-overlay" aria-label="Close navigation" data-action="close-nav"></button>
@@ -125,6 +125,7 @@
       });
 
       U.renderIcons();
+      window.SheeoPwa?.syncInstallButtons?.();
       const renderer = window.SheeoPages?.[this.page];
       if (!renderer) return this.showError(new Error(`No renderer registered for ${this.page}.`));
       try { await renderer({ session: this.session, root: document.getElementById('portal-content') }); }

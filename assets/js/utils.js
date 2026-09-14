@@ -54,3 +54,14 @@ window.SheeoUtils = {
     if (window.lucide?.createIcons) window.lucide.createIcons();
   }
 };
+
+document.addEventListener('click', (event) => {
+  const toggle = event.target.closest('.password-toggle');
+  if (!toggle) return;
+  const input = toggle.closest('.password-field')?.querySelector('input');
+  if (!input) return;
+  const reveal = input.type === 'password';
+  input.type = reveal ? 'text' : 'password';
+  toggle.setAttribute('aria-pressed', String(reveal));
+  toggle.setAttribute('aria-label', reveal ? 'Hide password' : 'Show password');
+});

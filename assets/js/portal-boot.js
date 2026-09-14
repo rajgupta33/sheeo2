@@ -51,15 +51,102 @@
     mobileCapable.content = 'yes';
     document.head.append(mobileCapable);
 
+    const appleTitle = document.createElement('meta');
+    appleTitle.name = 'apple-mobile-web-app-title';
+    appleTitle.content = 'SheEO';
+    document.head.append(appleTitle);
+
+    const appleStatusBar = document.createElement('meta');
+    appleStatusBar.name = 'apple-mobile-web-app-status-bar-style';
+    appleStatusBar.content = 'default';
+    document.head.append(appleStatusBar);
+
     let installPrompt = null;
+
+    const isInstalled = () => window.matchMedia('(display-mode: standalone)').matches
+      || window.matchMedia('(display-mode: minimal-ui)').matches
+      || window.navigator.standalone === true;
+
+    // Safari on iOS never fires beforeinstallprompt, so a prompt-only button is
+    // invisible forever on iPhone/iPad. Detect the platform and fall back to the
+    // manual Add-to-Home-Screen steps for anything that cannot prompt.
+    const platform = () => {
+      const agent = navigator.userAgent;
+      const isApple = /iPad|iPhone|iPod/.test(agent)
+        || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      if (isApple) return /CriOS|FxiOS|EdgiOS|OPiOS/.test(agent) ? 'ios-browser' : 'ios-safari';
+      if (/Android/.test(agent)) return 'android';
+      return 'desktop';
+    };
+
+    const INSTALL_STEPS = {
+      'ios-safari': {
+        title: 'Add SheEO to your Home Screen',
+        steps: [
+          'Tap the Share button in Safari — the square with an arrow pointing up.',
+          'Scroll down the share list and tap "Add to Home Screen".',
+          'Tap "Add". SheEO now opens full screen, just like a normal app.'
+        ]
+      },
+      'ios-browser': {
+        title: 'Open this page in Safari first',
+        steps: [
+          'On iPhone and iPad, only Safari can add an app to the Home Screen.',
+          'Tap your browser’s menu and choose "Open in Safari".',
+          'In Safari, tap Share, then "Add to Home Screen".'
+        ]
+      },
+      android: {
+        title: 'Install the SheEO member app',
+        steps: [
+          'Tap your browser’s menu button — the three dots at the top right.',
+          'Tap "Install app", or "Add to Home screen" if you do not see it.',
+          'Confirm, and SheEO installs like any other Android app.'
+        ]
+      },
+      desktop: {
+        title: 'Install the SheEO member app',
+        steps: [
+          'Look for the install icon at the right-hand end of the address bar.',
+          'Or open the browser menu and choose "Install SheEO Member Portal".',
+          'The portal then opens in its own window, without browser tabs.'
+        ]
+      }
+    };
+
+    function showInstallHelp() {
+      const guide = INSTALL_STEPS[platform()] || INSTALL_STEPS.desktop;
+      const dialog = document.createElement('dialog');
+      dialog.className = 'portal-modal';
+      dialog.style.border = '0';
+      dialog.innerHTML = `<div class="portal-modal-head"><div><p class="portal-kicker">Member app</p><h2>${guide.title}</h2></div><button class="portal-modal-close" type="button" aria-label="Close">Close</button></div><ol class="pwa-steps">${guide.steps.map((step) => `<li>${step}</li>`).join('')}</ol>`;
+      document.body.append(dialog);
+      dialog.querySelector('.portal-modal-close').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('close', () => dialog.remove(), { once: true });
+      dialog.showModal();
+    }
+
+    // beforeinstallprompt can fire before a page renders its button, so buttons
+    // sync themselves on mount rather than waiting only for the event.
+    const syncInstallButtons = () => {
+      const installed = isInstalled();
+      document.querySelectorAll('[data-pwa-install]').forEach((button) => { button.hidden = installed; });
+    };
+
     window.SheeoPwa = {
       get canInstall() { return Boolean(installPrompt); },
+      isInstalled,
+      platform,
+      syncInstallButtons,
       async install() {
-        if (!installPrompt) return false;
+        if (!installPrompt) {
+          showInstallHelp();
+          return false;
+        }
         installPrompt.prompt();
         const choice = await installPrompt.userChoice;
         if (choice.outcome === 'accepted') installPrompt = null;
-        document.querySelectorAll('[data-pwa-install]').forEach((button) => { button.hidden = !installPrompt; });
+        syncInstallButtons();
         return choice.outcome === 'accepted';
       }
     };
@@ -70,12 +157,13 @@
     window.addEventListener('beforeinstallprompt', (event) => {
       event.preventDefault();
       installPrompt = event;
-      document.querySelectorAll('[data-pwa-install]').forEach((button) => { button.hidden = false; });
+      syncInstallButtons();
     });
     window.addEventListener('appinstalled', () => {
       installPrompt = null;
-      document.querySelectorAll('[data-pwa-install]').forEach((button) => { button.hidden = true; });
+      syncInstallButtons();
     });
+    window.matchMedia('(display-mode: standalone)').addEventListener('change', syncInstallButtons);
 
     if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
       navigator.serviceWorker.register('/portal/sw.js', { scope: '/portal/' }).catch((error) => {
