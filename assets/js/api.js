@@ -180,6 +180,15 @@
       return data;
     },
 
+    async getClaimEvidenceUrl(path) {
+      if (!path) throw new Error('No evidence was attached to this claim.');
+      if (isMock()) throw new Error('Evidence previews are unavailable in preview mode.');
+      const { data, error } = await requireClient().storage.from('claim-evidence').createSignedUrl(path, 300);
+      if (error) throw error;
+      if (!data?.signedUrl) throw new Error('Evidence could not be opened. Please try again.');
+      return data.signedUrl;
+    },
+
     async uploadClaimEvidence(file) {
       if (isMock()) return `pending/${file.name}`;
       const session = await this.getSession();

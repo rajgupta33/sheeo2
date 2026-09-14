@@ -4,7 +4,7 @@
   const metricCard = (label, value, icon, note, href) => `<article class="portal-card metric-card"><div style="display:flex;justify-content:space-between"><span class="metric-label">${label}</span><div class="metric-icon"><i data-lucide="${icon}"></i></div></div><div><div class="metric-value">${value}</div><p class="metric-note">${note}</p>${href ? `<a href="${href}" style="font-size:10px;color:var(--portal-burgundy);font-weight:700">Open queue →</a>` : ''}</div></article>`;
 
   function claimRows(claims) {
-    return claims.map((claim) => `<tr data-claim-row="${claim.id}"><td><strong>${U.escapeHtml(claim.member_name || claim.user_id)}</strong></td><td>${U.statusLabel(claim.claim_type)}<br><small style="color:var(--portal-muted)">${U.formatDate(claim.activity_date)}</small></td><td>${U.escapeHtml(claim.related_member || '—')}</td><td><span class="status-pill ${claim.status}">${U.statusLabel(claim.status)}</span></td><td>${claim.status === 'pending' ? `<div style="display:flex;gap:6px"><button class="portal-button small" data-review-claim="${claim.id}" data-decision="approved">Approve</button><button class="portal-button secondary small" data-review-claim="${claim.id}" data-decision="rejected">Reject</button></div>` : U.escapeHtml(claim.rejection_reason || 'Reviewed')}</td></tr>`).join('');
+    return claims.map((claim) => `<tr data-claim-row="${claim.id}"><td><strong>${U.escapeHtml(claim.member_name || claim.user_id)}</strong></td><td>${U.statusLabel(claim.claim_type)}<br><small style="color:var(--portal-muted)">${U.formatDate(claim.activity_date)}</small></td><td>${U.escapeHtml(claim.related_member || '—')}</td><td><span class="status-pill ${claim.status}">${U.statusLabel(claim.status)}</span></td><td><button class="portal-button secondary small" data-view-evidence="${claim.id}">View evidence</button></td><td>${claim.status === 'pending' ? `<div style="display:flex;gap:6px"><button class="portal-button small" data-review-claim="${claim.id}" data-decision="approved">Approve</button><button class="portal-button secondary small" data-review-claim="${claim.id}" data-decision="rejected">Reject</button></div>` : U.escapeHtml(claim.rejection_reason || 'Reviewed')}</td></tr>`).join('');
   }
 
   async function renderOverview(root) {
@@ -67,10 +67,65 @@
     });
   }
 
+  async function viewClaimEvidence(claim, trigger) {
+    const dialog = document.createElement('dialog');
+    dialog.className = 'portal-modal';
+    dialog.style.border = '0';
+    dialog.setAttribute('aria-labelledby', 'evidence-title');
+    dialog.innerHTML = `<div class="portal-modal-head"><div><p class="portal-kicker">Private claim evidence</p><h2 id="evidence-title">${U.escapeHtml(U.statusLabel(claim.claim_type))}</h2></div><button class="portal-modal-close" type="button" aria-label="Close evidence">Close</button></div><p><strong>${U.escapeHtml(claim.member_name || claim.user_id)}</strong> &middot; ${U.formatDate(claim.activity_date)}</p><p>Related member: ${U.escapeHtml(claim.related_member || 'Not specified')}</p><p style="white-space:pre-wrap;overflow-wrap:anywhere">${U.escapeHtml(claim.description || 'No description provided.')}</p><div data-evidence-content role="status">Loading evidence...</div>`;
+    document.body.append(dialog);
+    dialog.querySelector('button').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('close', () => { dialog.remove(); trigger.focus(); }, { once: true });
+    dialog.showModal();
+    const content = dialog.querySelector('[data-evidence-content]');
+    try {
+      const url = await window.SheeoApi.getClaimEvidenceUrl(claim.evidence_path);
+      if (!dialog.isConnected) return;
+      content.textContent = '';
+      const link = document.createElement('a');
+      link.href = url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.className = 'portal-button secondary small';
+      link.textContent = 'Open evidence in new tab';
+      content.append(link);
+      const isPdf = /\.pdf$/i.test(claim.evidence_path);
+      const preview = document.createElement(isPdf ? 'iframe' : 'img');
+      preview.referrerPolicy = 'no-referrer';
+      preview.style.cssText = 'display:block;width:100%;margin-top:16px;border:0;object-fit:contain;';
+      if (isPdf) {
+        preview.title = 'Claim evidence PDF';
+        preview.style.height = '55vh';
+      } else {
+        preview.alt = 'Evidence submitted for this claim';
+        preview.style.maxHeight = '55vh';
+      }
+      preview.addEventListener('error', () => {
+        preview.remove();
+        const message = document.createElement('p');
+        message.textContent = 'Preview unavailable. Use the link above, or close and reopen this claim to refresh access.';
+        content.append(message);
+      });
+      preview.src = url;
+      content.append(preview);
+      const note = document.createElement('p');
+      note.textContent = 'If the preview is blank, open the evidence in a new tab. Access expires after five minutes; reopen this claim for a fresh link.';
+      content.append(note);
+    } catch (error) {
+      if (dialog.isConnected) content.textContent = error.message || 'Evidence could not be loaded. Close and reopen to try again.';
+    }
+  }
+
   async function renderClaims(root) {
     const claims = await window.SheeoApi.getClaims({ all: true });
-    root.innerHTML = `<section class="portal-card"><div class="card-head"><div><h2>Evidence review queue</h2><p>Approval invokes atomic server logic; evidence must remain private.</p></div><span class="queue-count">${claims.filter((item) => item.status === 'pending').length}</span></div><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Member</th><th>Claim</th><th>Related member</th><th>Status</th><th>Decision</th></tr></thead><tbody id="claim-review-body">${claimRows(claims)}</tbody></table></div></section>`;
+    root.innerHTML = `<section class="portal-card"><div class="card-head"><div><h2>Evidence review queue</h2><p>Approval invokes atomic server logic; evidence must remain private.</p></div><span class="queue-count">${claims.filter((item) => item.status === 'pending').length}</span></div><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Member</th><th>Claim</th><th>Related member</th><th>Status</th><th>Evidence</th><th>Decision</th></tr></thead><tbody id="claim-review-body">${claimRows(claims)}</tbody></table></div></section>`;
     root.addEventListener('click', async (event) => {
+      const evidenceButton = event.target.closest('[data-view-evidence]');
+      if (evidenceButton) {
+        const claim = claims.find((item) => item.id === evidenceButton.dataset.viewEvidence);
+        if (claim) await viewClaimEvidence(claim, evidenceButton);
+        return;
+      }
       const button = event.target.closest('[data-review-claim]');
       if (!button) return;
       const decision = button.dataset.decision;
@@ -80,11 +135,11 @@
         if (!reason.trim()) return U.toast('A rejection reason is required.', 'error');
       }
       const row = button.closest('tr');
-      row.querySelectorAll('button').forEach((item) => { item.disabled = true; });
+      row.querySelectorAll('[data-review-claim]').forEach((item) => { item.disabled = true; });
       try {
         const claim = await window.SheeoApi.reviewClaim(button.dataset.reviewClaim, decision, reason.trim());
         row.querySelector('td:nth-child(4)').innerHTML = `<span class="status-pill ${claim.status}">${U.statusLabel(claim.status)}</span>`;
-        row.querySelector('td:nth-child(5)').textContent = claim.rejection_reason || 'Reviewed';
+        row.querySelector('td:nth-child(6)').textContent = claim.rejection_reason || 'Reviewed';
         U.toast(`Claim ${decision}. ${decision === 'approved' ? 'The protected award function is the only path that may add points.' : 'No points were awarded.'}`);
       } catch (error) {
         row.querySelectorAll('button').forEach((item) => { item.disabled = false; });
