@@ -8,6 +8,22 @@
     { type: 'meetup', points: 5, title: '1-on-1 member meetup', description: 'Submit the meetup date, member and private evidence for review.', icon: 'coffee', action: 'meetup', note: 'Submit claim' }
   ];
 
+  // public.point_claims enforces char_length(description) between 10 and 2000.
+  const DESCRIPTION_MIN = 10;
+  const DESCRIPTION_MAX = 750;
+
+  // Database check constraints are not member-readable — translate the known ones.
+  function claimErrorMessage(error) {
+    const raw = error?.message || '';
+    if (/point_claims_description_check/.test(raw)) {
+      return `Please describe what happened in ${DESCRIPTION_MIN}–${DESCRIPTION_MAX} characters.`;
+    }
+    if (/violates check constraint|violates row-level security|duplicate key/.test(raw)) {
+      return 'We could not submit this claim. Please review the details and try again.';
+    }
+    return raw || 'Claim submission failed.';
+  }
+
   function claimModal(type, members) {
     const title = type === 'collaboration' ? 'Submit collaboration' : 'Claim a member meetup';
     return `
@@ -18,7 +34,7 @@
             <input type="hidden" name="claim_type" value="${type}">
             <div class="portal-field"><label for="activity-date">Activity date</label><input class="portal-input" id="activity-date" name="activity_date" type="date" max="${new Date().toISOString().slice(0, 10)}" required></div>
             <div class="portal-field"><label for="related-member">Related member</label><select class="portal-select" id="related-member" name="related_member_id" required><option value="">Select a member</option>${members.map((member) => `<option value="${member.id}">${U.escapeHtml(member.full_name)} · ${U.escapeHtml(member.business_name)}</option>`).join('')}</select></div>
-            <div class="portal-field portal-span-full"><label for="claim-description">What happened?</label><textarea class="portal-textarea" id="claim-description" name="description" maxlength="750" placeholder="Briefly describe the completed activity and outcome." required></textarea></div>
+            <div class="portal-field portal-span-full"><label for="claim-description">What happened?</label><textarea class="portal-textarea" id="claim-description" name="description" minlength="${DESCRIPTION_MIN}" maxlength="${DESCRIPTION_MAX}" placeholder="Briefly describe the completed activity and outcome." required></textarea><small id="claim-description-hint">At least ${DESCRIPTION_MIN} characters so admins can review the activity.</small></div>
             <div class="portal-field portal-span-full"><label for="claim-evidence">Private evidence</label><input class="portal-input" id="claim-evidence" name="evidence" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" required><small>JPG, PNG, WebP or PDF · maximum 10 MB. Evidence remains private to you and authorized admins.</small></div>
             <div class="portal-span-full admin-alert">Submitting creates a pending claim only. Points are awarded through protected approval logic after evidence review.</div>
             <div class="portal-span-full button-row" style="justify-content:flex-end"><button class="portal-button secondary" type="button" data-close-modal>Cancel</button><button class="portal-button" type="submit">Submit for review</button></div>
@@ -61,28 +77,48 @@
       const modal = root.querySelector('[data-modal]');
       modal.querySelectorAll('[data-close-modal]').forEach((button) => button.addEventListener('click', closeModal));
       modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(); });
+      const descriptionField = modal.querySelector('#claim-description');
+      const descriptionHint = modal.querySelector('#claim-description-hint');
+      const syncDescriptionHint = () => {
+        const length = descriptionField.value.trim().length;
+        descriptionHint.textContent = length >= DESCRIPTION_MIN
+          ? `${length} of ${DESCRIPTION_MAX} characters.`
+          : `At least ${DESCRIPTION_MIN} characters so admins can review the activity — ${DESCRIPTION_MIN - length} to go.`;
+      };
+      descriptionField.addEventListener('input', syncDescriptionHint);
       modal.querySelector('#claim-form').addEventListener('submit', async (event) => {
         event.preventDefault();
         const form = event.currentTarget;
         const button = form.querySelector('button[type="submit"]');
         const file = form.evidence.files[0];
-        if (file && file.size > 10 * 1024 * 1024) return U.toast('Evidence must be 10 MB or smaller.', 'error');
+        const description = (form.description.value || '').trim();
+        if (description.length < DESCRIPTION_MIN) {
+          form.description.focus();
+          return U.toast(`Please describe what happened in at least ${DESCRIPTION_MIN} characters.`, 'error');
+        }
+        if (description.length > DESCRIPTION_MAX) {
+          form.description.focus();
+          return U.toast(`Please keep the description under ${DESCRIPTION_MAX} characters.`, 'error');
+        }
+        if (!file) return U.toast('Please attach private evidence for this claim.', 'error');
+        if (file.size > 10 * 1024 * 1024) return U.toast('Evidence must be 10 MB or smaller.', 'error');
         U.setBusy(button, true, 'Submitting…');
         try {
           const formData = new FormData(form);
+          // Upload only after validation so a rejected claim never leaves an orphaned evidence file.
           const evidencePath = await window.SheeoApi.uploadClaimEvidence(file);
           const claim = await window.SheeoApi.submitClaim({
             claim_type: formData.get('claim_type'),
             activity_date: formData.get('activity_date'),
             related_member_id: formData.get('related_member_id'),
-            description: formData.get('description'),
+            description,
             evidence_path: evidencePath
           });
           root.querySelector('#claims-body').insertAdjacentHTML('afterbegin', `<tr><td>${U.formatDate(claim.created_at)}</td><td><strong>${U.statusLabel(claim.claim_type)}</strong></td><td>${U.formatDate(claim.activity_date)}</td><td><span class="status-pill pending">Pending</span></td><td>—</td></tr>`);
           closeModal();
           U.toast('Claim submitted for private admin review.');
         } catch (error) {
-          U.toast(error.message || 'Claim submission failed.', 'error');
+          U.toast(claimErrorMessage(error), 'error');
           U.setBusy(button, false);
         }
       });
