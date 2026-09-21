@@ -3,7 +3,7 @@
   const activities = [
     { type: 'welcome', points: 50, title: 'Membership activation', description: 'Awarded automatically once per active membership period.', icon: 'gem', action: null, note: 'Automatic' },
     { type: 'referral', points: 20, title: 'Successful founder referral', description: 'Awarded after the referred founder is approved and activated.', icon: 'user-plus', href: '/portal/refer.html', note: 'Share link' },
-    { type: 'collaboration', points: 10, title: 'Member collaboration', description: 'Submit evidence of a completed collaboration for admin review.', icon: 'handshake', action: 'collaboration', note: 'Submit claim' },
+    { type: 'collaboration', points: 10, title: 'Member collaboration', description: 'Submit the collaboration date, who you worked with and private evidence for review.', icon: 'handshake', action: 'collaboration', note: 'Submit claim' },
     { type: 'event', points: 5, title: 'SheEO event attendance', description: 'Awarded from an approved attendance list or secure event check-in.', icon: 'calendar-check', action: null, note: 'Automatic' },
     { type: 'meetup', points: 5, title: '1-on-1 member meetup', description: 'Submit the meetup date, the name of who you met and private evidence for review.', icon: 'coffee', action: 'meetup', note: 'Submit claim' }
   ];
@@ -25,8 +25,9 @@
     return raw || 'Claim submission failed.';
   }
 
-  function claimModal(type, members) {
-    const title = type === 'collaboration' ? 'Submit collaboration' : 'Claim a member meetup';
+  function claimModal(type) {
+    const isCollaboration = type === 'collaboration';
+    const title = isCollaboration ? 'Submit collaboration' : 'Claim a member meetup';
     return `
       <div class="portal-modal-backdrop" data-modal>
         <section class="portal-modal" role="dialog" aria-modal="true" aria-labelledby="claim-title">
@@ -34,9 +35,7 @@
           <form id="claim-form" class="portal-form-grid">
             <input type="hidden" name="claim_type" value="${type}">
             <div class="portal-field"><label for="activity-date">Activity date</label><input class="portal-input" id="activity-date" name="activity_date" type="date" max="${new Date().toISOString().slice(0, 10)}" required></div>
-            ${type === 'meetup'
-              ? `<div class="portal-field"><label for="related-member-name">Who did you meet?</label><input class="portal-input" id="related-member-name" name="related_member_name" type="text" maxlength="${NAME_MAX}" autocomplete="off" placeholder="Enter their name" required></div>`
-              : `<div class="portal-field"><label for="related-member">Related member</label><select class="portal-select" id="related-member" name="related_member_id" required><option value="">Select a member</option>${members.map((member) => `<option value="${member.id}">${U.escapeHtml(member.full_name)} · ${U.escapeHtml(member.business_name)}</option>`).join('')}</select></div>`}
+            <div class="portal-field"><label for="related-member-name">${isCollaboration ? 'Who did you collaborate with?' : 'Who did you meet?'}</label><input class="portal-input" id="related-member-name" name="related_member_name" type="text" maxlength="${NAME_MAX}" autocomplete="off" placeholder="Enter their name" required></div>
             <div class="portal-field portal-span-full"><label for="claim-description">What happened?</label><textarea class="portal-textarea" id="claim-description" name="description" minlength="${DESCRIPTION_MIN}" maxlength="${DESCRIPTION_MAX}" placeholder="Briefly describe the completed activity and outcome." required></textarea><small id="claim-description-hint">At least ${DESCRIPTION_MIN} characters so admins can review the activity.</small></div>
             <div class="portal-field portal-span-full"><label for="claim-evidence">Private evidence</label><input class="portal-input" id="claim-evidence" name="evidence" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" required><small>JPG, PNG, WebP or PDF · maximum 10 MB. Evidence remains private to you and authorized admins.</small></div>
             <div class="portal-span-full admin-alert">Submitting creates a pending claim only. Points are awarded through protected approval logic after evidence review.</div>
@@ -47,7 +46,7 @@
   }
 
   window.SheeoPages['earn-points'] = async ({ root }) => {
-    const [claims, members] = await Promise.all([window.SheeoApi.getClaims(), window.SheeoApi.getMembers()]);
+    const claims = await window.SheeoApi.getClaims();
 
     root.innerHTML = `
       <section class="portal-card rose">
@@ -74,7 +73,7 @@
       document.body.classList.remove('portal-locked');
     };
     const openModal = (type) => {
-      root.insertAdjacentHTML('beforeend', claimModal(type, members.filter((member) => member.id !== 'user-sadhna')));
+      root.insertAdjacentHTML('beforeend', claimModal(type));
       document.body.classList.add('portal-locked');
       U.renderIcons();
       const modal = root.querySelector('[data-modal]');
@@ -106,7 +105,7 @@
         const relatedName = (form.related_member_name?.value || '').trim();
         if (form.related_member_name && relatedName.length < 2) {
           form.related_member_name.focus();
-          return U.toast('Please enter the name of the person you met.', 'error');
+          return U.toast(form.claim_type.value === 'collaboration' ? 'Please enter the name of the person you collaborated with.' : 'Please enter the name of the person you met.', 'error');
         }
         if (!file) return U.toast('Please attach private evidence for this claim.', 'error');
         if (file.size > 10 * 1024 * 1024) return U.toast('Evidence must be 10 MB or smaller.', 'error');

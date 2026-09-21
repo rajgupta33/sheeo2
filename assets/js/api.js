@@ -137,10 +137,10 @@
       return data || [];
     },
 
-    // Meetup claims name the person met as free text. point_claims has no column for it,
-    // so it is stored as a leading "Met with:" line in the description and split back out here.
+    // Claims name the other member as free text. point_claims has no column for it, so it is stored
+    // as a leading "Met with:" / "Collaborated with:" line in the description and split back out here.
     withRelatedName(claim) {
-      const match = /^Met with: (.+)\n\n/.exec(claim.description || '');
+      const match = /^(?:Met|Collaborated) with: (.+)\n\n/.exec(claim.description || '');
       if (!match) return claim;
       return { ...claim, related_member: match[1], description: claim.description.slice(match[0].length) };
     },
@@ -189,7 +189,9 @@
         claim_type,
         activity_date,
         related_member_id: related_member_id || null,
-        description: related_member_name ? `Met with: ${related_member_name.replace(/\s+/g, ' ').trim()}\n\n${description}` : description,
+        description: related_member_name
+          ? `${claim_type === 'collaboration' ? 'Collaborated with' : 'Met with'}: ${related_member_name.replace(/\s+/g, ' ').trim()}\n\n${description}`
+          : description,
         evidence_path,
         user_id: session.user.id,
         membership_id: session.membership?.id,
