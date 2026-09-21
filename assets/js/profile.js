@@ -8,7 +8,7 @@
           <div class="member-photo" style="width:112px;height:112px;margin-bottom:18px">${profile.profile_photo_url || profile.profile_photo_path ? `<img src="${U.escapeHtml(profile.profile_photo_url || profile.profile_photo_path)}" alt="">` : U.initials(profile.full_name)}</div>
           <h2 style="font-family:'Playfair Display',serif;margin:0">${U.escapeHtml(profile.full_name)}</h2>
           <p style="color:var(--portal-muted);font-size:11px;margin:5px 0 18px">${U.escapeHtml(profile.business_name || '')}</p>
-          <div class="portal-field"><label for="profile-photo">Profile photo</label><input class="portal-input" id="profile-photo" type="file" accept="image/jpeg,image/png,image/webp"><small>Image upload will use the profile-photo Storage bucket once Supabase is connected.</small></div>
+          <div class="portal-field"><label for="profile-photo">Profile photo</label><input class="portal-input" id="profile-photo" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG or WebP, up to 5 MB. Saved when you click Save profile.</small></div>
           <label style="display:flex;align-items:flex-start;gap:10px;margin-top:20px;font-size:11px"><input name="directory_visible" type="checkbox" ${profile.directory_visible ? 'checked' : ''}> <span><strong>Show me in the member directory</strong><br><span style="color:var(--portal-muted)">Only approved business fields are shared.</span></span></label>
         </aside>
         <section class="portal-card portal-span-2">

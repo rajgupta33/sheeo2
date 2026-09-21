@@ -28,7 +28,7 @@
       <section class="portal-card" style="margin-top:20px">
         <div class="card-head"><div><h2>Referral status</h2><p>Applicant information is intentionally limited for privacy.</p></div></div>
         <div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Founder</th><th>Captured</th><th>Status</th><th>Qualified</th><th>Points</th></tr></thead><tbody>
-          ${referrals.map((item) => `<tr><td><strong>${U.escapeHtml(item.founder_name || item.referred_email)}</strong><br><small style="color:var(--portal-muted)">${U.escapeHtml(item.referred_email || '')}</small></td><td>${U.formatDate(item.created_at)}</td><td><span class="status-pill ${item.status}">${U.statusLabel(item.status)}</span></td><td>${U.formatDate(item.qualified_at)}</td><td class="${item.points ? 'points-positive' : ''}">${item.points ? `+${item.points}` : '—'}</td></tr>`).join('')}
+          ${referrals.map((item) => `<tr><td><strong>${U.escapeHtml(item.founder_name || item.referred_email)}</strong><br><small style="color:var(--portal-muted)">${U.escapeHtml(item.referred_email || '')}</small></td><td>${U.formatDate(item.created_at)}</td><td><span class="status-pill ${item.status}">${U.statusLabel(item.status)}</span></td><td>${U.formatDate(item.qualified_at)}</td><td class="${item.points ? 'points-positive' : ''}">${item.points ? `+${item.points}` : '—'}</td></tr>`).join('') || '<tr><td colspan="5"><div class="empty-state"><h3>No referrals yet</h3><p>Share your link above; founders who apply with it will appear here.</p></div></td></tr>'}
         </tbody></table></div>
       </section>`;
 
