@@ -72,14 +72,29 @@
     "https://www.instagram.com/reel/DTssNzRjz2k/"
   ];
 
-  const igSlides = igPermalinks.map((url) => `
-            <div class="ig-slide" style="flex:0 0 clamp(220px,60vw,350px);scroll-snap-align:start;display:flex;justify-content:center">
-              <div class="ig-embed-wrapper" style="width:100%">
-                <blockquote class="instagram-media" data-instgrm-permalink="${url}?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:240px;padding:0;width:100%">
-                  <div style="padding:16px"><a href="${url}?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank" rel="noopener" style="background:#FFFFFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%">View this post on Instagram</a></div>
+  const IG_PROFILE_URL = "https://www.instagram.com/sheeosummit2026/";
+
+  const igSlides = igPermalinks.map((url, i) => `
+            <div class="ig-slide" role="group" aria-roledescription="slide" aria-label="Instagram post ${i + 1} of ${igPermalinks.length}">
+              <div class="ig-embed-wrapper">
+                <blockquote class="instagram-media" data-instgrm-permalink="${url}?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
+                  <a class="ig-embed-placeholder" href="${url}" target="_blank" rel="noopener">
+                    <span class="ig-embed-placeholder__icon"><i data-lucide="instagram"></i></span>
+                    <span>View this post on Instagram</span>
+                  </a>
                 </blockquote>
               </div>
             </div>`).join("");
+
+  const igFollowSlide = `
+            <div class="ig-slide ig-slide--cta" role="group" aria-roledescription="slide" aria-label="Follow SheEO on Instagram">
+              <a class="ig-follow-card" href="${IG_PROFILE_URL}" target="_blank" rel="noopener">
+                <span class="ig-avatar ig-avatar--lg"><img src="/sh-logo.jpeg" alt="" width="96" height="96" loading="lazy"></span>
+                <span class="ig-follow-card__eyebrow">There's more where that came from</span>
+                <span class="ig-follow-card__title">Event recaps, member spotlights &amp; behind-the-scenes</span>
+                <span class="ig-follow-card__btn"><i data-lucide="instagram" class="icon-sm"></i> Follow @sheeosummit2026</span>
+              </a>
+            </div>`;
 
   const footer = `
     <footer class="site-footer bg-cream">
@@ -87,15 +102,25 @@
         <div class="container max-w-lg mx-auto"><i data-lucide="heart" class="text-rose icon-sm mb-sm"></i><h4 class="font-playfair text-xl text-dark-blue mb-xs">Built With Vision By SheEO Summit</h4><p class="text-rose text-xs uppercase tracking-wide font-bold">Empowering Women Through Visibility, Community &amp; Collaboration.</p></div>
       </div>
       <div class="container text-center pt-xl mb-xl">
-        <p class="text-xs uppercase tracking-wide text-dark-blue font-bold mb-xs">Find us on IG</p>
-        <h2 class="font-playfair text-dark-blue mb-lg" style="font-size:3rem"><a href="https://www.instagram.com/sheeosummit2026/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">@<span class="text-rose">SHEEOSUMMIT</span>2026</a></h2>
-
-        <div class="ig-slider-container relative mb-xl mx-auto" style="max-width:1200px;padding:0 44px">
-          <button class="ig-slider-btn prev shadow-pink flex-center" type="button" aria-label="Previous" onclick="document.getElementById('ig-track').scrollBy({left:-350,behavior:'smooth'})" style="position:absolute;top:50%;left:0;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:#ebd8dd;border:none;z-index:10;cursor:pointer"><i data-lucide="chevron-left" class="icon-sm text-dark-blue"></i></button>
-          <div id="ig-track" class="ig-slider-track flex gap-md" style="overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none">${igSlides}
+        <section class="ig-feed" aria-labelledby="ig-feed-title">
+          <div class="ig-feed__head">
+            <a class="ig-avatar" href="${IG_PROFILE_URL}" target="_blank" rel="noopener" aria-label="SheEO on Instagram"><img src="/sh-logo.jpeg" alt="" width="96" height="96" loading="lazy"></a>
+            <div class="ig-feed__intro">
+              <p class="ig-feed__eyebrow"><i data-lucide="instagram" class="icon-xs"></i> Find us on Instagram</p>
+              <h2 id="ig-feed-title" class="ig-feed__handle"><a href="${IG_PROFILE_URL}" target="_blank" rel="noopener">@<span>sheeosummit</span>2026</a></h2>
+              <p class="ig-feed__lede">Real moments from our events, meetups and the women building businesses in Dubai.</p>
+            </div>
+            <a class="ig-feed__follow" href="${IG_PROFILE_URL}" target="_blank" rel="noopener"><i data-lucide="instagram" class="icon-sm"></i> Follow us</a>
           </div>
-          <button class="ig-slider-btn next shadow-pink flex-center" type="button" aria-label="Next" onclick="document.getElementById('ig-track').scrollBy({left:350,behavior:'smooth'})" style="position:absolute;top:50%;right:0;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:#ebd8dd;border:none;z-index:10;cursor:pointer"><i data-lucide="chevron-right" class="icon-sm text-dark-blue"></i></button>
-        </div>
+
+          <div class="ig-slider-container" aria-roledescription="carousel" aria-label="Latest Instagram posts">
+            <button class="ig-slider-btn prev" type="button" aria-label="Previous posts" data-ig-dir="-1"><i data-lucide="chevron-left" class="icon-sm"></i></button>
+            <div id="ig-track" class="ig-slider-track" tabindex="0">${igSlides}${igFollowSlide}
+            </div>
+            <button class="ig-slider-btn next" type="button" aria-label="Next posts" data-ig-dir="1"><i data-lucide="chevron-right" class="icon-sm"></i></button>
+          </div>
+          <div class="ig-dots" aria-hidden="true"></div>
+        </section>
 
         <div class="footer-bottom-grid grid-2 text-left mt-xl pt-xl border-t border-pink-dark gap-md max-w-lg mx-auto">
           <div class="newsletter-col"><h4 class="text-dark-blue font-inter font-bold text-lg mb-sm pr-md">Become A Member</h4><a href="${JOIN_URL}" class="btn btn-primary-pink rounded-pill px-xl py-md font-bold tracking-wide mt-md inline-flex align-center gap-xs text-md">Apply for membership</a><br><a href="https://www.whatsapp.com/channel/0029VbBqRXi8V0twOPec2e3d" target="_blank" rel="noopener" class="footer-channel-link mt-md inline-flex align-center gap-xs text-sm"><i data-lucide="message-circle" class="icon-sm"></i> Follow our WhatsApp channel</a></div>
@@ -126,13 +151,94 @@
     document.body.insertAdjacentHTML("beforeend", whatsappFloat);
   }
 
-  // Instagram embed processor for the footer reel strip.
-  if (hasFooter && !document.querySelector('script[src*="instagram.com/embed.js"]')) {
+  // ---- Instagram feed ------------------------------------------------------
+  // Embeds are heavy (one iframe each), so they only load once the feed is
+  // close to the viewport. If embed.js is already on the page (the homepage
+  // loads it for the testimonial reel) we ask it to process the new slides.
+  function loadInstagramEmbeds() {
+    if (window.instgrm && window.instgrm.Embeds) return window.instgrm.Embeds.process();
+    const existing = document.querySelector('script[src*="instagram.com/embed.js"]');
+    if (existing) {
+      existing.addEventListener("load", () => window.instgrm && window.instgrm.Embeds.process());
+      return;
+    }
     const s = document.createElement("script");
     s.async = true;
     s.src = "https://www.instagram.com/embed.js";
     document.body.appendChild(s);
   }
+
+  function initInstagramFeed() {
+    const feed = document.querySelector(".ig-feed");
+    const track = document.getElementById("ig-track");
+    if (!feed || !track) return;
+
+    if ("IntersectionObserver" in window) {
+      const lazy = new IntersectionObserver((entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        lazy.disconnect();
+        loadInstagramEmbeds();
+      }, { rootMargin: "800px 0px" });
+      lazy.observe(feed);
+    } else {
+      loadInstagramEmbeds();
+    }
+
+    const slides = [...track.querySelectorAll(".ig-slide")];
+    const prev = feed.querySelector(".ig-slider-btn.prev");
+    const next = feed.querySelector(".ig-slider-btn.next");
+    const dotsEl = feed.querySelector(".ig-dots");
+
+    const step = () => (slides[1] ? slides[1].offsetLeft - slides[0].offsetLeft : track.clientWidth);
+
+    // One dot per reachable scroll stop, so the last dot lights up at the end
+    // even when several cards are visible at once.
+    function sync() {
+      const max = track.scrollWidth - track.clientWidth;
+      const stops = Math.max(1, Math.ceil((max - 4) / step()) + 1);
+      if (dotsEl.children.length !== stops) {
+        dotsEl.innerHTML = Array.from({ length: stops }, (_, i) => `<button type="button" class="ig-dot" tabindex="-1" data-ig-index="${i}"></button>`).join("");
+      }
+      const active = track.scrollLeft >= max - 4 ? stops - 1 : Math.round(track.scrollLeft / step());
+      [...dotsEl.children].forEach((d, i) => d.classList.toggle("is-active", i === active));
+      prev.disabled = track.scrollLeft <= 4;
+      next.disabled = track.scrollLeft >= max - 4;
+      // When everything fits there is nothing to page through.
+      feed.classList.toggle("ig-feed--static", max <= 4);
+    }
+
+    track.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", sync, { passive: true });
+    // Step from the card we're heading to, not the mid-animation position, so
+    // quick repeated clicks each advance a full card.
+    let pending = null;
+    let pendingTimer = 0;
+    function go(index) {
+      const max = track.scrollWidth - track.clientWidth;
+      pending = Math.max(0, Math.min(index, Math.ceil(max / step())));
+      clearTimeout(pendingTimer);
+      pendingTimer = setTimeout(() => { pending = null; }, 700);
+      track.scrollTo({ left: Math.min(pending * step(), max), behavior: "smooth" });
+    }
+    const current = () => (pending !== null ? pending : Math.round(track.scrollLeft / step()));
+
+    [prev, next].forEach((b) => b.addEventListener("click", () => go(current() + Number(b.dataset.igDir))));
+    dotsEl.addEventListener("click", (e) => {
+      const dot = e.target.closest(".ig-dot");
+      if (dot) go(Number(dot.dataset.igIndex));
+    });
+    // Instagram iframes change height as they load; keep the arrows honest.
+    if ("ResizeObserver" in window) new ResizeObserver(sync).observe(track);
+    track.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        e.preventDefault();
+        go(current() + (e.key === "ArrowRight" ? 1 : -1));
+      }
+    });
+    sync();
+  }
+
+  if (hasFooter) initInstagramFeed();
 
   // ---- Mobile navigation ----------------------------------------------------
   const btn = document.getElementById("mobile-menu-btn");

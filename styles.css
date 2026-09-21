@@ -167,12 +167,13 @@ img {
     font-size: 1.5rem;
 }
 
+/* Fluid so big headings stay proportionate on phones; unchanged on desktop. */
 .text-3xl {
-    font-size: 2.5rem;
+    font-size: clamp(1.75rem, 5vw + 0.5rem, 2.5rem);
 }
 
 .text-4xl {
-    font-size: 3.5rem;
+    font-size: clamp(2.1rem, 6vw + 0.6rem, 3.5rem);
 }
 
 .text-center {
@@ -301,6 +302,10 @@ img {
     margin-top: 48px;
 }
 
+.mt-xxl {
+    margin-top: 80px;
+}
+
 .mb-0 {
     margin-bottom: 0;
 }
@@ -333,6 +338,10 @@ img {
     margin-left: 32px;
 }
 
+.ml-auto {
+    margin-left: auto;
+}
+
 .mr-md {
     margin-right: 24px;
 }
@@ -358,8 +367,29 @@ img {
     padding: 24px;
 }
 
+.p-lg {
+    padding: 32px;
+}
+
 .p-xl {
     padding: 40px;
+}
+
+/* These were used in the markup but never defined. */
+.pt-sm {
+    padding-top: 16px;
+}
+
+.pt-md {
+    padding-top: 24px;
+}
+
+.pb-sm {
+    padding-bottom: 16px;
+}
+
+.pr-sm {
+    padding-right: 16px;
 }
 
 .py-xs {
@@ -474,6 +504,10 @@ img {
     width: 100%;
 }
 
+.max-w-sm {
+    max-width: 520px;
+}
+
 .max-w-md {
     max-width: 650px;
 }
@@ -562,10 +596,26 @@ img {
     gap: 32px;
 }
 
+.gap-xl {
+    gap: 48px;
+}
+
 .grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 48px;
+}
+
+/* Let grid columns shrink below their longest word (emails, URLs) instead of
+   pushing the page wider than the phone. */
+.grid-2 > *,
+.grid-3 > * {
+    min-width: 0;
+}
+
+.social-link-card > span {
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .grid-3 {
@@ -1880,50 +1930,447 @@ img {
     padding: 64px 0 32px;
 }
 
+/* ---- Instagram feed (footer, every page) ---- */
+.ig-feed {
+    --ig-ring: conic-gradient(from 210deg, #f9c56b, #f58a4b, #ea4876, #b8367e, #f9c56b);
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto 8px;
+    padding: 40px 0 28px;
+    border-radius: 32px;
+    background:
+        radial-gradient(ellipse 55% 70% at 0% 0%, rgba(249, 197, 107, 0.18), transparent 65%),
+        radial-gradient(ellipse 50% 70% at 100% 100%, rgba(234, 72, 118, 0.16), transparent 65%),
+        linear-gradient(180deg, #fff 0%, #fff7f9 100%);
+    box-shadow: 0 24px 60px rgba(234, 72, 118, 0.10);
+    border: 1px solid var(--pink-light);
+}
+
+.ig-feed__head {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 48px 28px;
+    text-align: left;
+}
+
+.ig-feed__intro {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.ig-avatar {
+    flex: 0 0 auto;
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    padding: 4px;
+    background: var(--ig-ring);
+    transition: transform 0.35s ease;
+}
+
+.ig-avatar::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid rgba(234, 72, 118, 0.35);
+    animation: ig-pulse 2.6s ease-out infinite;
+    pointer-events: none;
+}
+
+.ig-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    background: #fff;
+}
+
+.ig-avatar:hover {
+    transform: scale(1.05) rotate(-4deg);
+}
+
+@keyframes ig-pulse {
+    0% { transform: scale(0.94); opacity: 0.9; }
+    80%, 100% { transform: scale(1.18); opacity: 0; }
+}
+
+.ig-feed__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-rose);
+    margin-bottom: 4px;
+}
+
+.ig-feed__handle {
+    font-family: var(--font-playfair);
+    font-size: clamp(1.7rem, 4.2vw, 2.9rem);
+    line-height: 1.1;
+    color: var(--text-dark-blue);
+    overflow-wrap: anywhere;
+}
+
+.ig-feed__handle a {
+    color: inherit;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.ig-feed__handle span {
+    color: var(--text-rose);
+}
+
+.ig-feed__handle a:hover span {
+    background: linear-gradient(90deg, #f58a4b, #ea4876, #b8367e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.ig-feed__lede {
+    margin-top: 6px;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--text-dark-blue);
+    opacity: 0.8;
+    max-width: 52ch;
+}
+
+.ig-feed__follow,
+.ig-follow-card__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-family: var(--font-inter);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    color: #fff;
+    background: linear-gradient(100deg, #f58a4b 0%, #ea4876 50%, #b8367e 100%);
+    background-size: 200% 100%;
+    box-shadow: 0 12px 28px rgba(234, 72, 118, 0.28);
+    transition: background-position 0.5s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ig-feed__follow {
+    flex: 0 0 auto;
+}
+
+.ig-feed__follow:hover {
+    background-position: 100% 0;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px rgba(234, 72, 118, 0.36);
+}
+
 .ig-slider-container {
     position: relative;
-    padding: 0 56px;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 0 48px;
 }
 
 .ig-slider-track {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    display: flex;
-    gap: 20px;
+    /* Room for the hover lift and card shadows. */
+    padding: 12px 4px 24px;
+    outline: none;
 }
 
 .ig-slider-track::-webkit-scrollbar {
     display: none;
 }
 
+.ig-slider-track:focus-visible {
+    outline: 2px solid var(--text-rose);
+    outline-offset: 4px;
+    border-radius: 16px;
+}
+
 .ig-slide {
-    flex: 0 0 clamp(260px, 55vw, 340px);
+    flex: 0 0 clamp(260px, 28vw, 330px);
     scroll-snap-align: start;
-    display: flex;
-    justify-content: center;
 }
 
 .ig-embed-wrapper {
-    max-width: 100%;
     width: 100%;
-    border-radius: 20px;
+    min-height: 420px;
+    border-radius: 22px;
     overflow: hidden;
-    background: linear-gradient(135deg, #fff5f7, #fffdf8);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    /* Shimmers while Instagram's iframe loads; the embed paints over it. */
+    background: linear-gradient(110deg, #fff5f8 30%, #fde8ed 50%, #fff5f8 70%);
+    background-size: 250% 100%;
+    animation: ig-shimmer 1.6s linear infinite;
+    border: 1px solid var(--pink-light);
+    box-shadow: 0 14px 34px rgba(28, 51, 74, 0.08);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-.ig-embed-wrapper blockquote.instagram-media {
+.ig-slide:hover .ig-embed-wrapper {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 44px rgba(234, 72, 118, 0.18);
+}
+
+.ig-embed-wrapper blockquote.instagram-media,
+.ig-embed-wrapper iframe.instagram-media {
     background: transparent !important;
-    border-radius: 20px !important;
+    border: 0 !important;
+    border-radius: 22px !important;
     box-shadow: none !important;
     margin: 0 !important;
-    min-width: unset !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
     width: 100% !important;
+    padding: 0 !important;
+}
+
+/* Shown until Instagram swaps the blockquote for its iframe. */
+.ig-embed-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-height: 420px;
+    padding: 24px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-rose);
+    text-decoration: none;
+    background: linear-gradient(110deg, #fff5f8 30%, #fde8ed 50%, #fff5f8 70%);
+    background-size: 250% 100%;
+    animation: ig-shimmer 1.6s linear infinite;
+}
+
+.ig-embed-placeholder__icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    color: #fff;
+    background: var(--ig-ring);
+}
+
+@keyframes ig-shimmer {
+    to { background-position: -150% 0; }
+}
+
+.ig-slide--cta {
+    align-self: stretch;
+}
+
+.ig-follow-card {
+    height: 100%;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 32px 24px;
+    border-radius: 22px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background:
+        radial-gradient(circle at 20% 15%, rgba(249, 197, 107, 0.45), transparent 45%),
+        radial-gradient(circle at 85% 90%, rgba(184, 54, 126, 0.55), transparent 50%),
+        linear-gradient(160deg, #ea4876 0%, #cc3662 55%, #1c334a 130%);
+    box-shadow: 0 14px 34px rgba(234, 72, 118, 0.25);
+    transition: transform 0.35s ease;
+}
+
+.ig-follow-card:hover {
+    transform: translateY(-6px);
+}
+
+.ig-avatar--lg {
+    width: 96px;
+    height: 96px;
+    background: conic-gradient(from 210deg, #fff, #fde8ed, #f9c56b, #fff);
+}
+
+.ig-avatar--lg::after {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.ig-follow-card__eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+.ig-follow-card__title {
+    font-family: var(--font-playfair);
+    font-size: 1.45rem;
+    line-height: 1.25;
+}
+
+.ig-follow-card__btn {
+    margin-top: 6px;
+    color: var(--text-rose);
+    background: #fff;
+    box-shadow: 0 10px 24px rgba(28, 51, 74, 0.18);
+    white-space: normal;
+}
+
+.ig-follow-card:hover .ig-follow-card__btn {
+    transform: translateY(-2px);
+}
+
+.ig-slider-btn {
+    position: absolute;
+    top: calc(50% - 6px);
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--pink-light);
+    background: #fff;
+    color: var(--text-dark-blue);
+    box-shadow: 0 10px 24px rgba(234, 72, 118, 0.18);
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: background 0.25s ease, color 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+}
+
+.ig-slider-btn.prev { left: 0; }
+.ig-slider-btn.next { right: 0; }
+
+.ig-slider-btn:hover:not(:disabled) {
+    background: var(--text-rose);
+    color: #fff;
+    transform: translateY(-50%) scale(1.06);
+}
+
+.ig-slider-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.ig-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.ig-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: var(--pink-dark);
+    opacity: 0.5;
+    cursor: pointer;
+    transition: width 0.3s ease, opacity 0.3s ease, background 0.3s ease;
+}
+
+.ig-dot.is-active {
+    width: 26px;
+    opacity: 1;
+    background: var(--text-rose);
+}
+
+.ig-feed--static .ig-slider-btn,
+.ig-feed--static .ig-dots {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .ig-feed__head {
+        padding: 0 32px 24px;
+    }
+
+    .ig-slider-container {
+        padding: 0 32px;
+    }
+
+    .ig-slide {
+        flex-basis: clamp(260px, 42vw, 330px);
+    }
+}
+
+@media (max-width: 768px) {
+    .ig-feed {
+        padding: 28px 0 20px;
+        border-radius: 24px;
+    }
+
+    .ig-feed__head {
+        flex-direction: column;
+        text-align: center;
+        gap: 14px;
+        padding: 0 20px 16px;
+    }
+
+    .ig-feed__lede {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 0.88rem;
+    }
+
+    .ig-avatar {
+        width: 76px;
+        height: 76px;
+    }
+
+    .ig-slider-container {
+        padding: 0;
+    }
+
+    .ig-slider-track {
+        gap: 14px;
+        padding: 10px 20px 20px;
+        scroll-padding-inline: 20px;
+    }
+
+    .ig-slide {
+        flex-basis: min(78vw, 320px);
+    }
+
+    /* Swiping is the natural gesture on touch screens; the dots show position. */
+    .ig-slider-btn {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ig-avatar::after,
+    .ig-embed-wrapper,
+    .ig-embed-placeholder {
+        animation: none;
+    }
+
+    .ig-slider-track {
+        scroll-behavior: auto;
+    }
 }
 
 .footer-bottom-grid {
@@ -2090,10 +2537,6 @@ img {
         padding-left: 0;
     }
 
-    /* Footer */
-    .ig-slider-container {
-        padding: 0 40px;
-    }
 
     .footer-bottom-grid {
         gap: 32px;
@@ -2337,31 +2780,6 @@ img {
         padding: 48px 0 24px;
     }
 
-    .site-footer h2 {
-        font-size: 2rem !important;
-    }
-
-    .ig-slider-container {
-        padding: 0 12px;
-    }
-
-    .ig-slide {
-        flex: 0 0 82vw;
-        max-width: 340px;
-    }
-
-    .ig-slider-btn {
-        display: flex !important;
-        background-color: var(--pink-dark) !important;
-        width: 36px !important;
-        height: 36px !important;
-        opacity: 0.9 !important;
-    }
-
-    .ig-slider-btn i {
-        width: 20px !important;
-        height: 20px !important;
-    }
 
     .footer-bottom-grid {
         grid-template-columns: 1fr !important;
@@ -2544,9 +2962,6 @@ img {
         padding: 12px 12px !important;
     }
 
-    .ig-slide {
-        flex: 0 0 88vw;
-    }
 
     .footer-copyright .flex {
         gap: 10px;
