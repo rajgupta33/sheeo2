@@ -5,12 +5,13 @@
     { type: 'referral', points: 20, title: 'Successful founder referral', description: 'Awarded after the referred founder is approved and activated.', icon: 'user-plus', href: '/portal/refer.html', note: 'Share link' },
     { type: 'collaboration', points: 10, title: 'Member collaboration', description: 'Submit evidence of a completed collaboration for admin review.', icon: 'handshake', action: 'collaboration', note: 'Submit claim' },
     { type: 'event', points: 5, title: 'SheEO event attendance', description: 'Awarded from an approved attendance list or secure event check-in.', icon: 'calendar-check', action: null, note: 'Automatic' },
-    { type: 'meetup', points: 5, title: '1-on-1 member meetup', description: 'Submit the meetup date, member and private evidence for review.', icon: 'coffee', action: 'meetup', note: 'Submit claim' }
+    { type: 'meetup', points: 5, title: '1-on-1 member meetup', description: 'Submit the meetup date, the name of who you met and private evidence for review.', icon: 'coffee', action: 'meetup', note: 'Submit claim' }
   ];
 
   // public.point_claims enforces char_length(description) between 10 and 2000.
   const DESCRIPTION_MIN = 10;
   const DESCRIPTION_MAX = 750;
+  const NAME_MAX = 120;
 
   // Database check constraints are not member-readable — translate the known ones.
   function claimErrorMessage(error) {
@@ -33,7 +34,9 @@
           <form id="claim-form" class="portal-form-grid">
             <input type="hidden" name="claim_type" value="${type}">
             <div class="portal-field"><label for="activity-date">Activity date</label><input class="portal-input" id="activity-date" name="activity_date" type="date" max="${new Date().toISOString().slice(0, 10)}" required></div>
-            <div class="portal-field"><label for="related-member">Related member</label><select class="portal-select" id="related-member" name="related_member_id" required><option value="">Select a member</option>${members.map((member) => `<option value="${member.id}">${U.escapeHtml(member.full_name)} · ${U.escapeHtml(member.business_name)}</option>`).join('')}</select></div>
+            ${type === 'meetup'
+              ? `<div class="portal-field"><label for="related-member-name">Who did you meet?</label><input class="portal-input" id="related-member-name" name="related_member_name" type="text" maxlength="${NAME_MAX}" autocomplete="off" placeholder="Enter their name" required></div>`
+              : `<div class="portal-field"><label for="related-member">Related member</label><select class="portal-select" id="related-member" name="related_member_id" required><option value="">Select a member</option>${members.map((member) => `<option value="${member.id}">${U.escapeHtml(member.full_name)} · ${U.escapeHtml(member.business_name)}</option>`).join('')}</select></div>`}
             <div class="portal-field portal-span-full"><label for="claim-description">What happened?</label><textarea class="portal-textarea" id="claim-description" name="description" minlength="${DESCRIPTION_MIN}" maxlength="${DESCRIPTION_MAX}" placeholder="Briefly describe the completed activity and outcome." required></textarea><small id="claim-description-hint">At least ${DESCRIPTION_MIN} characters so admins can review the activity.</small></div>
             <div class="portal-field portal-span-full"><label for="claim-evidence">Private evidence</label><input class="portal-input" id="claim-evidence" name="evidence" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" required><small>JPG, PNG, WebP or PDF · maximum 10 MB. Evidence remains private to you and authorized admins.</small></div>
             <div class="portal-span-full admin-alert">Submitting creates a pending claim only. Points are awarded through protected approval logic after evidence review.</div>
@@ -100,6 +103,11 @@
           form.description.focus();
           return U.toast(`Please keep the description under ${DESCRIPTION_MAX} characters.`, 'error');
         }
+        const relatedName = (form.related_member_name?.value || '').trim();
+        if (form.related_member_name && relatedName.length < 2) {
+          form.related_member_name.focus();
+          return U.toast('Please enter the name of the person you met.', 'error');
+        }
         if (!file) return U.toast('Please attach private evidence for this claim.', 'error');
         if (file.size > 10 * 1024 * 1024) return U.toast('Evidence must be 10 MB or smaller.', 'error');
         U.setBusy(button, true, 'Submitting…');
@@ -110,7 +118,8 @@
           const claim = await window.SheeoApi.submitClaim({
             claim_type: formData.get('claim_type'),
             activity_date: formData.get('activity_date'),
-            related_member_id: formData.get('related_member_id'),
+            related_member_id: formData.get('related_member_id') || null,
+            related_member_name: relatedName || null,
             description,
             evidence_path: evidencePath
           });

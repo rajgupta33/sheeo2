@@ -137,6 +137,14 @@
       return data || [];
     },
 
+    // Meetup claims name the person met as free text. point_claims has no column for it,
+    // so it is stored as a leading "Met with:" line in the description and split back out here.
+    withRelatedName(claim) {
+      const match = /^Met with: (.+)\n\n/.exec(claim.description || '');
+      if (!match) return claim;
+      return { ...claim, related_member: match[1], description: claim.description.slice(match[0].length) };
+    },
+
     async getClaims({ all = false } = {}) {
       if (isMock()) return wait(all ? state.claims : state.claims.filter((claim) => claim.user_id === state.session.user.id));
       const client = requireClient();
@@ -144,7 +152,7 @@
       if (!all) query = query.eq('user_id', (await this.getSession()).user.id);
       const { data, error } = await query;
       if (error) throw error;
-      const claims = data || [];
+      const claims = (data || []).map((claim) => this.withRelatedName(claim));
       if (!all || !claims.length) return claims;
 
       // Admin queue: point_claims.user_id/related_member_id point at auth.users, which
@@ -156,7 +164,7 @@
       return claims.map((claim) => ({
         ...claim,
         member_name: nameById.get(claim.user_id) || null,
-        related_member: nameById.get(claim.related_member_id) || null
+        related_member: claim.related_member || nameById.get(claim.related_member_id) || null
       }));
     },
 
@@ -168,19 +176,20 @@
           member_name: state.session.profile.full_name,
           status: 'pending',
           created_at: new Date().toISOString(),
-          ...payload
+          ...payload,
+          related_member: payload.related_member_name || payload.related_member
         };
         state.claims.unshift(claim);
         return wait(claim, 320);
       }
       const session = await this.getSession();
       // point_claims has no display-only columns (e.g. related_member name) — only send real table columns.
-      const { claim_type, activity_date, related_member_id, description, evidence_path } = payload;
+      const { claim_type, activity_date, related_member_id, related_member_name, description, evidence_path } = payload;
       const insertPayload = {
         claim_type,
         activity_date,
-        related_member_id,
-        description,
+        related_member_id: related_member_id || null,
+        description: related_member_name ? `Met with: ${related_member_name.replace(/\s+/g, ' ').trim()}\n\n${description}` : description,
         evidence_path,
         user_id: session.user.id,
         membership_id: session.membership?.id,
@@ -189,7 +198,7 @@
       if (!insertPayload.membership_id) throw new Error('An active membership is required to submit a claim.');
       const { data, error } = await requireClient().from('point_claims').insert(insertPayload).select().single();
       if (error) throw error;
-      return data;
+      return this.withRelatedName(data);
     },
 
     async getClaimEvidenceUrl(path) {
