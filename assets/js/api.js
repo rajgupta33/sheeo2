@@ -350,7 +350,10 @@
       ]);
       if (profileError) throw profileError;
       if (membershipError) throw membershipError;
-      return (profiles || []).map((profile) => ({ ...profile, status: memberships?.find((membership) => membership.user_id === profile.id)?.status || 'applicant' }));
+      return (profiles || []).map((profile) => {
+        const membership = memberships?.find((item) => item.user_id === profile.id);
+        return { ...profile, status: membership?.status || 'applicant', start_date: membership?.start_date, end_date: membership?.end_date };
+      });
     },
     async getEvents() {
       if (isMock()) return wait(state.events);
@@ -360,9 +363,20 @@
     },
     async getAuditLog() {
       if (isMock()) return wait(state.auditLog);
-      const { data, error } = await requireClient().from('audit_log').select('id,actor_user_id,action,target_type,target_id,created_at').order('created_at', { ascending: false }).limit(100);
+      const client = requireClient();
+      const { data, error } = await client.from('audit_log').select('id,actor_user_id,action,target_type,target_id,created_at').order('created_at', { ascending: false }).limit(100);
       if (error) throw error;
-      return (data || []).map((item) => ({ ...item, actor: item.actor_user_id || 'System', target: `${item.target_type} ${item.target_id || ''}`.trim() }));
+      // Resolve actor ids to names so the log reads like the overview's summary.
+      const actorIds = [...new Set((data || []).map((item) => item.actor_user_id).filter(Boolean))];
+      const { data: actors } = actorIds.length
+        ? await client.from('profiles').select('id,full_name').in('id', actorIds)
+        : { data: [] };
+      const actorName = (id) => (actors || []).find((profile) => profile.id === id)?.full_name;
+      return (data || []).map((item) => ({
+        ...item,
+        actor: item.actor_user_id ? actorName(item.actor_user_id) || item.actor_user_id : 'System',
+        target: `${item.target_type}${item.target_id ? ` #${String(item.target_id).slice(0, 8)}` : ''}`
+      }));
     },
     async getApplications() {
       if (isMock()) return wait(state.applications);

@@ -39,8 +39,13 @@
     const [members, applications] = await Promise.all([window.SheeoApi.getAdminMembers(), window.SheeoApi.getApplications()]);
     root.innerHTML = `
       <section class="portal-card"><div class="toolbar"><div class="search-field"><i data-lucide="search"></i><input class="portal-input" id="admin-member-search" type="search" placeholder="Search members"></div><button class="portal-button secondary small" disabled>Invite member</button></div>
-      <div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Member</th><th>Business</th><th>Category</th><th>Status</th><th>Action</th></tr></thead><tbody id="admin-member-rows">${members.map((member) => `<tr data-member-search="${U.escapeHtml([member.full_name, member.business_name, member.category].filter(Boolean).join(' ').toLowerCase())}"><td><strong>${U.escapeHtml(member.full_name)}</strong></td><td>${cell(member.business_name)}</td><td>${cell(member.category)}</td><td><span class="status-pill ${member.status}">${U.statusLabel(member.status)}</span></td><td><button class="portal-button secondary small" disabled>View detail</button></td></tr>`).join('')}</tbody></table></div></section>
+      <div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Member</th><th>Business</th><th>Category</th><th>Status</th><th>Action</th></tr></thead><tbody id="admin-member-rows">${members.map((member) => `<tr data-member-search="${U.escapeHtml([member.full_name, member.business_name, member.category].filter(Boolean).join(' ').toLowerCase())}"><td><strong>${U.escapeHtml(member.full_name)}</strong></td><td>${cell(member.business_name)}</td><td>${cell(member.category)}</td><td><span class="status-pill ${member.status}">${U.statusLabel(member.status)}</span></td><td><button class="portal-button secondary small" data-member-detail="${member.id}">View detail</button></td></tr>`).join('')}</tbody></table></div></section>
       <section class="portal-card" style="margin-top:20px"><div class="card-head"><div><h2>Membership applications</h2><p>Approving activates membership, awards welcome points and pays out any referral automatically.</p></div><span class="queue-count">${applications.filter((item) => item.status === 'pending').length}</span></div><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Applicant</th><th>Business</th><th>Category</th><th>Submitted</th><th>Status</th><th>Decision</th></tr></thead><tbody id="application-review-body">${applications.map(applicationRow).join('')}</tbody></table></div></section>`;
+    root.querySelector('#admin-member-rows').addEventListener('click', (event) => {
+      const button = event.target.closest('[data-member-detail]');
+      const member = button && members.find((item) => item.id === button.dataset.memberDetail);
+      if (member) viewMemberDetail(member, button);
+    });
     root.querySelector('#admin-member-search').addEventListener('input', (event) => {
       const query = event.target.value.trim().toLowerCase();
       root.querySelectorAll('[data-member-search]').forEach((row) => { row.hidden = query && !row.dataset.memberSearch.includes(query); });
@@ -68,6 +73,24 @@
         U.toast(error.message || 'Application review failed.', 'error');
       }
     });
+  }
+
+  function viewMemberDetail(member, trigger) {
+    const dialog = document.createElement('dialog');
+    dialog.className = 'portal-modal';
+    dialog.style.border = '0';
+    dialog.setAttribute('aria-labelledby', 'member-detail-title');
+    const row = (label, value) => `<p><strong>${label}:</strong> ${cell(value)}</p>`;
+    dialog.innerHTML = `<div class="portal-modal-head"><div><p class="portal-kicker">Member detail</p><h2 id="member-detail-title">${U.escapeHtml(member.full_name)}</h2></div><button class="portal-modal-close" type="button" aria-label="Close member detail">Close</button></div>
+      <p><span class="status-pill ${member.status}">${U.statusLabel(member.status)}</span></p>
+      ${row('Business', member.business_name)}${row('Title', member.title)}${row('Category', member.category)}${row('City', member.city)}
+      ${row('Services', (member.services || []).join(', '))}
+      ${row('Membership start', member.start_date && U.formatDate(member.start_date))}${row('Membership end', member.end_date && U.formatDate(member.end_date))}
+      ${row('Shown in directory', member.directory_visible ? 'Yes' : 'No')}`;
+    document.body.append(dialog);
+    dialog.querySelector('button').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('close', () => { dialog.remove(); trigger.focus(); }, { once: true });
+    dialog.showModal();
   }
 
   async function viewClaimEvidence(claim, trigger) {
@@ -153,7 +176,7 @@
 
   async function renderReferrals(root) {
     const referrals = await window.SheeoApi.getReferrals({ all: true });
-    root.innerHTML = `<section class="portal-card"><div class="card-head"><div><h2>Referral qualification</h2><p>Reward only after approved and activated/paid membership.</p></div></div><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Founder</th><th>Email</th><th>Captured</th><th>Status</th><th>Points</th><th>Story entitlement</th></tr></thead><tbody>${referrals.map((item) => `<tr><td><strong>${U.escapeHtml(item.founder_name)}</strong></td><td>${U.escapeHtml(item.referred_email)}</td><td>${U.formatDate(item.created_at)}</td><td><span class="status-pill ${item.status}">${U.statusLabel(item.status)}</span></td><td>${item.points ? `+${item.points}` : '—'}</td><td>${item.status === 'rewarded' ? '<span class="status-pill pending">Pending scheduling</span>' : '—'}</td></tr>`).join('')}</tbody></table></div></section>`;
+    root.innerHTML = `<section class="portal-card"><div class="card-head"><div><h2>Referral qualification</h2><p>Reward only after approved and activated/paid membership.</p></div></div><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Founder</th><th>Email</th><th>Captured</th><th>Status</th><th>Points</th><th>Story entitlement</th></tr></thead><tbody>${referrals.map((item) => `<tr><td><strong>${U.escapeHtml(item.founder_name)}</strong></td><td>${U.escapeHtml(item.referred_email)}</td><td>${U.formatDate(item.created_at)}</td><td><span class="status-pill ${item.status}">${U.statusLabel(item.status)}</span></td><td>${item.points ? `+${item.points}` : '—'}</td><td>${item.status === 'rewarded' ? '<span class="status-pill pending">Pending scheduling</span>' : '—'}</td></tr>`).join('') || '<tr><td colspan="6"><div class="empty-state"><h3>No referrals yet</h3><p>Referrals captured from member invite links will appear here.</p></div></td></tr>'}</tbody></table></div></section>`;
   }
 
   async function renderRewards(root) {
@@ -163,7 +186,7 @@
 
   async function renderEvents(root) {
     const events = await window.SheeoApi.getEvents();
-    root.innerHTML = `<section class="portal-card"><div class="card-head"><div><h2>Events & attendance</h2><p>One attendance award per member per event, enforced server-side.</p></div><button class="portal-button small" disabled>Create event</button></div><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Event</th><th>Date</th><th>Venue</th><th>Status</th><th>Points</th><th>Attendance</th></tr></thead><tbody>${events.map((item) => `<tr><td><strong>${U.escapeHtml(item.title)}</strong></td><td>${U.formatDate(item.event_date)}</td><td>${U.escapeHtml(item.venue)}</td><td><span class="status-pill ${item.status}">${U.statusLabel(item.status)}</span></td><td>${item.points_enabled ? `+${item.attendance_points}` : 'Off'}</td><td><button class="portal-button secondary small" disabled>Manage</button></td></tr>`).join('')}</tbody></table></div></section><div class="admin-alert" style="margin-top:20px">QR check-in remains optional for MVP. The primary launch path supports admin-approved attendance lists.</div>`;
+    root.innerHTML = `<section class="portal-card"><div class="card-head"><div><h2>Events & attendance</h2><p>One attendance award per member per event, enforced server-side.</p></div><button class="portal-button small" disabled>Create event</button></div><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Event</th><th>Date</th><th>Venue</th><th>Status</th><th>Points</th><th>Attendance</th></tr></thead><tbody>${events.map((item) => `<tr><td><strong>${U.escapeHtml(item.title)}</strong></td><td>${U.formatDate(item.event_date)}</td><td>${U.escapeHtml(item.venue)}</td><td><span class="status-pill ${item.status}">${U.statusLabel(item.status)}</span></td><td>${item.points_enabled ? `+${item.attendance_points}` : 'Off'}</td><td><button class="portal-button secondary small" disabled>Manage</button></td></tr>`).join('') || '<tr><td colspan="6"><div class="empty-state"><h3>No events yet</h3><p>Published and draft events will appear here.</p></div></td></tr>'}</tbody></table></div></section><div class="admin-alert" style="margin-top:20px">QR check-in remains optional for MVP. The primary launch path supports admin-approved attendance lists.</div>`;
   }
 
   async function renderAudit(root) {
