@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="/styles.css?v=20260922">
     <link rel="stylesheet" href="/assets/css/home-event.css?v=1">
     <script defer src="/assets/js/home-event.js?v=1"></script>
+    <link rel="stylesheet" href="/assets/css/reviews.css?v=2">
+    <script defer src="/assets/js/reviews.js?v=2"></script>
     <link rel="icon" type="image/jpeg" href="/sh-logo.jpeg">
     <script defer src="/assets/js/global-shell.js?v=20260922"></script>
 </head>
@@ -471,6 +473,96 @@
                 <i data-lucide="sparkle" class="absolute text-pink-dark icon-lg hidden-mobile"
                     style="top:-20px; right:-20px; opacity:0.5; z-index: -1;"></i>
             </div>
+        </div>
+    </section>
+
+    <!-- Community Reviews (Google Sheet via Apps Script, see /google-apps-script/reviews.gs) -->
+    <section class="reviews-section" id="reviews" aria-labelledby="reviews-title"
+        data-endpoint="https://script.google.com/macros/s/AKfycbxtbC-X8uHuotbKML597ca_igldIuRLqh6esCIcChAY2ZHi0IXADYU1GAJPq5gys5zH/exec">
+        <div class="container reviews-shell">
+            <div class="reviews-head">
+                <div>
+                    <p class="section-tag mb-xs text-rose uppercase tracking-wide font-bold">Community Reviews</p>
+                    <h2 id="reviews-title" class="section-title uppercase text-dark-blue line-height-tight">
+                        In <span class="italic text-rose lowercase">their</span> words
+                    </h2>
+                    <p class="reviews-lede">Honest experiences from the women who attend our events, meetups and workshops.</p>
+                </div>
+                <div class="reviews-summary" data-reviews-summary hidden>
+                    <span class="reviews-summary__score" data-reviews-average>5.0</span>
+                    <span class="reviews-summary__meta">
+                        <span class="review-stars review-stars--lg" data-reviews-stars aria-hidden="true"></span>
+                        <span data-reviews-count>0 reviews</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="reviews-grid" data-reviews-list aria-live="polite">
+                <div class="review-card review-card--skeleton" aria-hidden="true"></div>
+                <div class="review-card review-card--skeleton" aria-hidden="true"></div>
+                <div class="review-card review-card--skeleton" aria-hidden="true"></div>
+            </div>
+            <p class="reviews-empty" data-reviews-empty hidden>No reviews yet. Be the first to share your SheEO experience.</p>
+
+            <div class="reviews-actions">
+                <button type="button" class="btn btn-secondary rounded-pill reviews-more" data-reviews-more hidden>Show more reviews</button>
+                <button type="button" class="btn btn-primary-pink btn-lg rounded-pill tracking-wide shadow-pink" data-review-open
+                    aria-expanded="false" aria-controls="review-form">Write a review</button>
+            </div>
+
+            <form class="review-form" id="review-form" data-review-form hidden novalidate>
+                <h3 class="review-form__title">Share your experience</h3>
+                <p class="review-form__note">Reviews appear on the site once our team has checked them.</p>
+
+                <fieldset class="review-rating">
+                    <legend>Your rating <span aria-hidden="true">*</span></legend>
+                    <div class="review-rating__stars">
+                        <input type="radio" id="rr5" name="rating" value="5" checked><label for="rr5" title="5 stars">★<span class="sr-only">5 stars</span></label>
+                        <input type="radio" id="rr4" name="rating" value="4"><label for="rr4" title="4 stars">★<span class="sr-only">4 stars</span></label>
+                        <input type="radio" id="rr3" name="rating" value="3"><label for="rr3" title="3 stars">★<span class="sr-only">3 stars</span></label>
+                        <input type="radio" id="rr2" name="rating" value="2"><label for="rr2" title="2 stars">★<span class="sr-only">2 stars</span></label>
+                        <input type="radio" id="rr1" name="rating" value="1"><label for="rr1" title="1 star">★<span class="sr-only">1 star</span></label>
+                    </div>
+                </fieldset>
+
+                <div class="review-form__grid">
+                    <label class="review-field">
+                        <span>Your name *</span>
+                        <input type="text" name="name" required minlength="2" maxlength="60" autocomplete="name">
+                    </label>
+                    <label class="review-field">
+                        <span>Role or business</span>
+                        <input type="text" name="role" maxlength="80" placeholder="e.g. Founder, Bloom Studio">
+                    </label>
+                </div>
+
+                <label class="review-field">
+                    <span>Your review *</span>
+                    <textarea name="review" rows="5" required minlength="20" maxlength="800"
+                        placeholder="What did you get from SheEO? An event, a connection, a moment that stayed with you…"></textarea>
+                    <small class="review-field__count" data-review-count>0 / 800</small>
+                </label>
+
+                <label class="review-field">
+                    <span>Email <em>(optional, never shown)</em></span>
+                    <input type="email" name="email" maxlength="120" autocomplete="email">
+                </label>
+
+                <!-- Honeypot: hidden from people, filled by bots. -->
+                <label class="review-hp" aria-hidden="true">Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+
+                <label class="review-consent">
+                    <input type="checkbox" name="consent" required>
+                    <span>I agree SheEO can show my name, role and review on this website.</span>
+                </label>
+
+                <p class="review-form__status" data-review-status role="status"></p>
+
+                <div class="review-form__actions">
+                    <button type="submit" class="btn btn-primary-pink btn-lg rounded-pill tracking-wide shadow-pink">Submit review</button>
+                    <button type="button" class="review-form__cancel" data-review-cancel>Cancel</button>
+                </div>
+            </form>
         </div>
     </section>
 
