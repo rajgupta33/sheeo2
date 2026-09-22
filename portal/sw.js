@@ -32,6 +32,7 @@ const APP_SHELL = [
   '/assets/js/points.js',
   '/assets/js/claims.js',
   '/assets/js/directory.js',
+  '/assets/js/directory-listings.js',
   '/assets/js/profile.js',
   '/assets/js/referrals.js',
   '/assets/js/rewards.js',

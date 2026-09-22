@@ -221,6 +221,7 @@
       window.SheeoPages = {};
       await load('/assets/js/route-guard.js');
       await load('/assets/js/portal-shell.js');
+      if (page === 'directory') await load('/assets/js/directory-listings.js');
       await load(`/assets/js/${pageScriptMap[page] || 'dashboard.js'}`);
       await window.SheeoPortal.mount();
     } catch (error) {

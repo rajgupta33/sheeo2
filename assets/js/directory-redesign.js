@@ -1,13 +1,5 @@
 (() => {
-  const businesses = [
-    { name: "Sadhna Sharma", business: "Business Growth Strategy", role: "Business Growth Strategist", category: "Business Strategy", services: "business growth sales coaching founder positioning scaling roadmaps", location: "Dubai, UAE", image: "/founder-sadhna.jpg", url: "/sheeo-member/sadhna-sharma/" },
-    { name: "Nitasha Saxena", business: "Mindful Make-Up", role: "Mindful Beauty Educator", category: "Beauty & Wellness", services: "mindful makeup beauty education skincare workshops teens tweens women", location: "Dubai, UAE", image: "/sheeo-member/nitasha.jpeg", url: "/sheeo-member/nitasha-saxena/" },
-    { name: "Mehak Marwaha", business: "Ekaa", role: "Holistic Clarity Coach & Career Guidance Expert", category: "Coaching & Wellness", services: "career guidance holistic healing clarity coaching life transitions", location: "Dubai, UAE", image: "/sheeo-member/mehak.jpeg", url: "/sheeo-member/mehak-marwaha/" },
-    { name: "Meher Rupa", business: "Meher Rupa Coaching", role: "Business & Personal Transformation Coach", category: "Coaching & Wellness", services: "NLP transformation coaching peak performance business personal coaching", location: "Dubai, UAE", image: "/sheeo-member/meher rupaa.jpeg", url: "/sheeo-member/meher-rupa/" },
-    { name: "Rashi", business: "Milagro by Rashi · Mohaul", role: "Founder, Creative Entrepreneur & Lifestyle Brand Curator", category: "Home & Lifestyle", services: "luxury handcrafted candles curated gifting fashion apparel intentional living", location: "Dubai, UAE", image: "/sheeo-member/rashimonga.jpeg", url: "/sheeo-member/rashi/" },
-    { name: "Raina Desai Lalchand", business: "Emarkiz Web Solutions", role: "Marketplace Growth Strategist & E-Commerce Enabler", category: "Digital & E-Commerce", services: "ecommerce marketplace expansion digital marketing online business growth", location: "Dubai, UAE", image: "/sheeo-member/RAINA DESAI.jpeg", url: "/sheeo-member/raina/" },
-    { name: "SABR", business: "SABR", role: "SheEO Premium Brand", category: "Fashion", services: "luxury modest streetwear limited releases UAE clothing", location: "Dubai, UAE", image: "/assets/images/sabr/desert-ivory-front.jpg", url: "/sheeo-member/sabr/", premium: true }
-  ];
+  const businesses = window.SHEEO_DIRECTORY_LISTINGS || [];
 
   const state = { query: "", category: "All categories" };
   const input = document.querySelector("#directory-search");
