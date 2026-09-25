@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const eventTime = new Date("2026-09-23T11:00:00+04:00").getTime();
+  const eventTime = new Date("2026-10-10T12:00:00+04:00").getTime();
 
   function updateCountdown() {
     const distance = eventTime - Date.now();
     const countdown = document.getElementById("countdown");
     if (!countdown) return;
     if (distance <= 0) {
-      countdown.innerHTML = "<p class=\"cp-countdown__closed\">Registration is now closed</p>";
+      countdown.innerHTML = '<p class="cp-countdown__closed">This event has now taken place</p>';
       return;
     }
     const units = {
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
     revealItems.forEach((item) => observer.observe(item));
   } else {
     revealItems.forEach((item) => item.classList.add("is-visible"));
@@ -50,8 +50,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const sticky = document.querySelector(".cp-sticky");
   const hero = document.querySelector(".cp-hero");
   if (sticky && hero) {
-    const toggleSticky = () => sticky.classList.toggle("is-visible", window.scrollY > hero.offsetHeight * .72);
+    const toggleSticky = () => sticky.classList.toggle("is-visible", window.scrollY > hero.offsetHeight * 0.65);
     window.addEventListener("scroll", toggleSticky, { passive: true });
     toggleSticky();
   }
+
+  if (window.lucide) window.lucide.createIcons();
 });
