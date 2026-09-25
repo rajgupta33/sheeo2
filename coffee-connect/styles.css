@@ -23,6 +23,9 @@
 .coffee-page h1, .coffee-page h2, .coffee-page h3 { font-family: var(--cp-serif); color: var(--cp-ink); }
 .coffee-page img { display: block; max-width: 100%; }
 .cp-shell { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+.cp-shell > *, .cp-value-strip article > div { min-width: 0; }
+.coffee-page h1, .coffee-page h2, .coffee-page h3 { overflow-wrap: anywhere; }
+.cp-button:focus-visible, .cp-faq__question:focus-visible { outline: 3px solid var(--cp-pink-dark); outline-offset: 4px; }
 
 .cp-eyebrow {
   display: flex;
@@ -218,14 +221,20 @@
   .cp-gallery { gap: 14px; }
 }
 
+@media (min-width: 701px) and (max-width: 980px) {
+  .cp-hero__layout, .cp-split, .cp-topic, .cp-event { grid-template-columns: minmax(0, 1fr); gap: 38px; }
+  .cp-hero__poster, .cp-editorial, .cp-event__visual { width: min(100%, 480px); margin-inline: auto; }
+  .cp-topic__copy { order: -1; }
+}
+
 @media (max-width: 700px) {
   .coffee-page { padding-top: 68px; }
-  .cp-shell { width: min(100% - 30px, 620px); }
+  .cp-shell { width: min(calc(100% - 30px), 620px); }
   .cp-hero { padding: 45px 0 30px; }
   .cp-hero__layout { grid-template-columns: 1fr; gap: 32px; }
   .cp-hero__copy { padding: 0; }
   .cp-eyebrow { font-size: 9px; letter-spacing: .13em; }
-  .cp-hero h1 { margin-bottom: 19px; font-size: clamp(49px, 15vw, 68px); }
+  .cp-hero h1 { margin-bottom: 19px; font-size: clamp(40px, 12vw, 64px); }
   .cp-hero__intro { font-size: 18px; }
   .cp-hero__body { font-size: 13px; line-height: 1.65; }
   .cp-actions { display: grid; }
@@ -240,7 +249,7 @@
   .cp-icon { flex-basis: 43px; height: 43px; }
   .cp-icon svg { width: 21px; height: 21px; }
   .cp-value-strip strong { font-size: 13px; }
-  .cp-value-strip p { font-size: 8px; }
+  .cp-value-strip p { font-size: 11px; letter-spacing: .02em; text-transform: none; }
   .cp-section { padding: 72px 0; }
   .cp-split, .cp-topic, .cp-event { grid-template-columns: 1fr; gap: 37px; }
   .cp-topic__copy { order: -1; }
@@ -251,19 +260,26 @@
   .cp-heading { margin-bottom: 32px; }
   .cp-heading > p:last-child { font-size: 13px; }
   .cp-feature-grid { grid-template-columns: 1fr; gap: 10px; }
-  .cp-feature-card { min-height: 0; display: grid; grid-template-columns: 48px 130px 1fr; align-items: center; gap: 12px; padding: 16px; text-align: left; }
+  .cp-feature-card { min-height: 0; display: grid; grid-template-columns: 48px minmax(0, 1fr); align-items: center; gap: 8px 14px; padding: 18px; text-align: left; }
   .cp-feature-card .cp-icon { margin: 0; }
-  .cp-feature-card h3 { margin: 0; font-family: var(--cp-sans); font-size: 13px; }
-  .cp-feature-card p { font-size: 11px; }
+  .cp-feature-card h3 { margin: 0; font-family: var(--cp-sans); font-size: 16px; }
+  .cp-feature-card p { grid-column: 2; font-size: 14px; }
   .cp-gallery { grid-template-columns: 1fr; gap: 15px; }
   .cp-gallery figure { width: min(100%, 420px); margin-inline: auto; }
   .cp-gallery figure:nth-child(2) { transform: none; }
   .cp-final { padding: 80px 0 105px; }
   .cp-final h2 { font-size: 47px; }
-  .cp-sticky { position: fixed; z-index: 90; right: 78px; bottom: 12px; left: 12px; display: block; transform: translateY(140%); transition: transform .25s ease; }
-  .cp-sticky.is-visible { transform: none; }
+  .cp-sticky { position: fixed; z-index: 90; right: 82px; bottom: max(12px, env(safe-area-inset-bottom)); left: 12px; display: block; visibility: hidden; transform: translateY(calc(140% + env(safe-area-inset-bottom))); transition: transform .25s ease, visibility .25s ease; }
+  .cp-sticky.is-visible { visibility: visible; transform: none; }
   .cp-sticky .cp-button { box-shadow: 0 12px 35px rgba(33,20,23,.3); font-family: var(--cp-sans); }
   .site-footer .footer-copyright { padding-bottom: 120px; }
+}
+
+@media (max-width: 380px) {
+  .cp-value-strip__grid { grid-template-columns: minmax(0, 1fr); }
+  .cp-value-strip article + article { border-left: 0; border-top: 1px dashed var(--cp-line); }
+  .cp-split__copy h2, .cp-topic__copy h2, .cp-event__copy h2, .cp-heading h2 { font-size: 34px; }
+  .cp-final h2 { font-size: 39px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
