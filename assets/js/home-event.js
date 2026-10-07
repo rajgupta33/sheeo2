@@ -2,7 +2,7 @@
     const announcement = document.getElementById('home-event');
     if (!announcement) return;
 
-    const eventTime = new Date('2026-09-23T11:00:00+04:00').getTime();
+    const eventTime = new Date('2026-10-10T12:00:00+04:00').getTime();
     let previousFocus = null;
 
     function dismiss() {
